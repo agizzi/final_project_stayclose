@@ -4,11 +4,11 @@ from rest_framework import routers
 from stay_close import api
 
 router = routers.DefaultRouter()
-router.register(r'users', api.UserViewSet)
-router.register(r'circles', api.CircleViewSet)
-router.register(r'content', api.ContentViewSet)
-router.register(r'comments', api.CommentsViewSet)
-router.register(r'invites', api.InviteViewSet)
+router.register(r'users', api.UserViewSet, basename='User')
+router.register(r'circles', api.CircleViewSet, basename='Circle')
+router.register(r'content', api.ContentViewSet, basename='Content')
+router.register(r'comments', api.CommentsViewSet, basename='Comments')
+router.register(r'invites', api.InviteViewSet, basename='Invites')
 
 
 urlpatterns = [

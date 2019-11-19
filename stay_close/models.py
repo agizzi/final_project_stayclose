@@ -25,7 +25,7 @@ class Circle(models.Model):
 
   def __str__(self):
     return self.name
-  
+
 class Content(models.Model):
   member = models.ForeignKey(to="User", related_name="posts", on_delete=models.CASCADE)
   text_post = fields.EncryptedTextField(blank=True, null=True)

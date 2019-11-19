@@ -1,10 +1,12 @@
-import { GET_CIRCLES } from "../actions/types.js";
+import { Component } from 'react';
+import { GET_CIRCLES } from "../actions/types";
 
 const initialSate = {
-    circles = []
+    circles: []
 }
 
-export default function(state = initialSate, action){
+
+export default function (state = initialSate, action){
     switch(action.type) {
         case GET_CIRCLES:
             return {
