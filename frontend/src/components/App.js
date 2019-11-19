@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import Login from './Login';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 import store from '../store';
 
 class App extends Component {
+  constructor(){
+    super();
+  }
   render() {
-    return (<Provider store={store}><h1>React App</h1></Provider>)
+    return (
+      <div><Login /></div>
+    );
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+export default App;

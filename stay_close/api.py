@@ -34,6 +34,7 @@ class ContentViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows content to be viewed or edited.
   """
+  queryset = Content.objects.all()
   serializer_class = ContentSerializer
   permission_classes = [
     permissions.IsAuthenticated
@@ -46,6 +47,7 @@ class CommentsViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows comments to be viewed or edited.
   """
+  queryset = Comments.objects.all()
   serializer_class = CommentsSerializer
   permission_classes = [
     permissions.IsAuthenticated
@@ -58,6 +60,7 @@ class InviteViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows invites to be viewed or edited.
   """
+  queryset = Invite.objects.all()
   serializer_class = InviteSerializer
   permission_classes = [
     permissions.IsAuthenticated
