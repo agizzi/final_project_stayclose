@@ -40,11 +40,11 @@ class RegistrationForm extends Component {
                     </label>
                     <label>
                         Password:
-                    <input type='text' name='pass1' value={this.state.pass} onChange={(e) => this.setState({ pass1: e.target.value })} />
+                    <input type='password' name='pass1' value={this.state.pass} onChange={(e) => this.setState({ pass1: e.target.value })} />
                     </label>
                     <label>
                         Re-enter Password:
-                    <input type='text' name='pass2' value={this.state.pass} onChange={(e) => this.setState({ pass2: e.target.value })} />
+                    <input type='password' name='pass2' value={this.state.pass} onChange={(e) => this.setState({ pass2: e.target.value })} />
                     </label>
                     <label>
                         Email:
