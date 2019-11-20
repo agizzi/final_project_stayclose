@@ -11,12 +11,6 @@ class LoginForm extends Component {
         };
     }
 
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
     handleSubmit = (event) => {
         event.preventDefault();
         axios.post('http://127.0.0.1:8000/api/rest-auth/login/', {
@@ -36,7 +30,7 @@ class LoginForm extends Component {
                     </label>
                     <label>
                         Password:
-                    <input type='text' name='pass' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
+                    <input type='password' name='pass' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
                     </label>
                     <input type='submit' value='submit' />
                 </form>
