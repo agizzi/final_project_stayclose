@@ -9,10 +9,10 @@ class NavBar extends Component {
     render() {
         return (
             <div className = "navbar">
-                <h1 className = "nav"> StayClose </h1>
+                <h1 className = "nav"> Hi {this.props.name}! Welcome back to StayClose. </h1>
                 <nav>
                     <ul>
-                        <li className = "nav"> My Account </li>
+                        <li className = "nav"> {this.props.name}'s Account </li>
                         <li className = "nav"> Add Circle </li>
                         <li className = "nav"> Notifications </li>
                     </ul>
