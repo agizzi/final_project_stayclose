@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import querystring from 'querystring';
+import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
 
 class LoginForm extends Component {
@@ -40,9 +40,15 @@ class LoginForm extends Component {
                     </label>
                     <input type='submit' value='submit' />
                 </form>
+                <p>
+                    Not a Member?
+                </p>
+                <p>
+                    <Link to="/register">Register</Link>
+                </p>
             </div>
         );
     }
 }
 
-export default LoginForm;
+export default withRouter(LoginForm);
