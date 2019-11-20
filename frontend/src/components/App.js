@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Login from './Login';
+import LoginForm from './Login';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
@@ -11,7 +11,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div><Login /></div>
+      <div><LoginForm /></div>
     );
   }
 }
