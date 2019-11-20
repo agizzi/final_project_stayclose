@@ -19,4 +19,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
     path('', include('frontend.urls')),
+    path('register/', include('frontend.urls')),
+    path('profile/', include('frontend.urls')),
 ]
