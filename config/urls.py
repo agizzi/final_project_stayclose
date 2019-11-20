@@ -12,10 +12,11 @@ router.register(r'invites', api.InviteViewSet, basename='Invites')
 
 
 urlpatterns = [
-    path('', include('frontend.urls')),
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api/auth', include('knox.urls')),
     path('api/rest-auth/', include('rest_auth.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
+    path('', include('frontend.urls')),
 ]

@@ -14,7 +14,8 @@ django-encrypted-model-fields = "*"
 psycopg2 = "*"
 pillow = "*"
 django-encrypted-filefield = "*"
-django-rest-auth = "*"
+django-rest-auth = {extras = ["with-social"],version = "*"}
+django-allauth = "*"
 
 [requires]
 python_version = "3.7"

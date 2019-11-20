@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import LoginForm from './Login';
-import ReactDOM from 'react-dom';
+import RegistrationForm from './Registration';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import store from '../store';
@@ -11,7 +12,12 @@ class App extends Component {
   }
   render() {
     return (
-      <div><LoginForm /></div>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/register" component={RegistrationForm} />
+          <Route path = "" component={LoginForm} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
