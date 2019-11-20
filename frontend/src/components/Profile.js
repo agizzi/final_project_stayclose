@@ -11,7 +11,6 @@ class ProfilePage extends Component {
         return (
         <body>
             <NavBar />
-            
         </body>
         );
     }

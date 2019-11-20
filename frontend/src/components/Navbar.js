@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Notification from './Notifications'
 import {Link} from 'react-router-dom';
 
 class NavBar extends Component {
@@ -17,6 +18,7 @@ class NavBar extends Component {
                         <li className = "nav"> Notifications </li>
                     </ul>
                 </nav>
+                <Notification />
             </div>
         )
     }
