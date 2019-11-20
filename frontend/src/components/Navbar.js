@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Link, withRouter } from 'react-router-dom';
+import Notification from './Notifications'
+import {Link} from 'react-router-dom';
 
 class NavBar extends Component {
     constructor(props) {
@@ -17,8 +18,10 @@ class NavBar extends Component {
                         <li className = "nav"> Notifications </li>
                     </ul>
                 </nav>
+                <Notification />
             </div>
         )
     }
 }
-export default withRouter(NavBar);
+
+export default NavBar;

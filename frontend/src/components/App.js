@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import LoginForm from './Login';
 import RegistrationForm from './Registration';
+import ProfilePage from './Profile';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-
-import { Provider } from 'react-redux';
-import store from '../store';
 
 class App extends Component {
   constructor(){
@@ -15,6 +13,7 @@ class App extends Component {
       <BrowserRouter>
         <Switch>
           <Route exact path="/register" component={RegistrationForm} />
+          <Route exact path="/profile" component={ProfilePage} />
           <Route path = "" component={LoginForm} />
         </Switch>
       </BrowserRouter>
