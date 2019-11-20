@@ -14,7 +14,7 @@ django-encrypted-model-fields = "*"
 psycopg2 = "*"
 pillow = "*"
 django-encrypted-filefield = "*"
-
+django-rest-auth = "*"
 
 [requires]
 python_version = "3.7"

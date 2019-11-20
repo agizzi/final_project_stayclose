@@ -39,10 +39,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'stay_close',
     'rest_framework',
+    'rest_framework.authtoken',
     'frontend',
     'encrypted_fields',
     'encrypted_model_fields',
+    'knox',
+    'rest_auth',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+}
 
 # A list of hex-encoded 32 byte keys
 # Keep until we use rotating keys

@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7f7be525378cc8a89abf32346f98101d2a04aa11b45aa2b5a54390824e49ed8b"
+            "sha256": "207945350a9c93acf26205c693c7bf430653f71a781817aa5ecb1f168fe87a27"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -118,12 +118,12 @@
             "index": "pypi",
             "version": "==0.5.8"
         },
-        "django-fernet-fields": {
+        "django-rest-auth": {
             "hashes": [
-                "sha256:7f7e03c86d9473a42031ebade2b15be1484aad18ef5576ddab156c4667e04c4a"
+                "sha256:f11e12175dafeed772f50d740d22caeab27e99a3caca24ec65e66a8d6de16571"
             ],
             "index": "pypi",
-            "version": "==0.6"
+            "version": "==0.9.5"
         },
         "django-rest-knox": {
             "hashes": [
