@@ -6,11 +6,13 @@ class UserViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows users to be viewed or edited.
   """
-  queryset = User.objects.all()
   serializer_class = UserSerializer
   permission_classes = [
     permissions.IsAuthenticated
   ]
+
+  def get_queryset(self):
+    return User.objects.filter(id=self.request.user.id)
 
   def perform_create(self, serializer_class):
     serializer_class.save(owner=self.request.user)
