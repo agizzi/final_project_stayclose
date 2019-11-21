@@ -11,15 +11,17 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')){
             return (
                 <div className = "navbar">
-                    <h1 className = "nav"> Hi {this.props.name}! Welcome back to StayClose. </h1>
-                    <nav>
-                        <ul>
-                            <li className = "nav"> {this.props.name}'s Account </li>
-                            <li className = "nav"> Add Circle </li>
-                            <li className = "nav"> Notifications </li>
-                        </ul>
-                    </nav>
-                    <Notification />
+                    <h1 className = "nav"> {this.props.name}'s StayClose. </h1>
+                    <ul className = "links">
+                        <li><button type = "button" className = "add"><Link className = "nav"> {this.props.name}'s Account </Link></button></li>
+                        <li><button type = "button" className = "add"><Link className = "nav">Logout </Link></button></li>
+                        <li><button type = "button" className = "add"><Link className = "nav"> + Circle </Link></button></li>
+                        <li><Link to = "/notification" className = "nav">
+                            <div className = "sandwich"></div>
+                            <div className = "sandwich"></div>
+                            <div className = "sandwich"></div>
+                        </Link></li>
+                    </ul>
                 </div>
             )
         } else {
