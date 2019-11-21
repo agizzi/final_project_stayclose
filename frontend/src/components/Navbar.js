@@ -13,8 +13,8 @@ class NavBar extends Component {
                 <div className = "navbar">
                     <h1 className = "nav"> {this.props.name}'s StayClose. </h1>
                     <ul className = "links">
-                        <li><Link className = "nav"> {this.props.name}'s Account </Link></li>
-                        <li><Link className = "nav">Logout </Link></li>
+                        <li><button type = "button" className = "add"><Link className = "nav"> {this.props.name}'s Account </Link></button></li>
+                        <li><button type = "button" className = "add"><Link className = "nav">Logout </Link></button></li>
                         <li><button type = "button" className = "add"><Link className = "nav"> + Circle </Link></button></li>
                         <li><Link to = "/notification" className = "nav">
                             <div className = "sandwich"></div>
