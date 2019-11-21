@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import LoginForm from './Login';
 import RegistrationForm from './Registration';
 import ProfilePage from './Profile';
-import PrivateRoute from './helpers/PrivateRoute';
+import PrivateRoute from './helpers/PrivateRoute'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 
 class App extends Component {
   constructor() {
