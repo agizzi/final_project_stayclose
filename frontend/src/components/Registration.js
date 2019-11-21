@@ -21,7 +21,7 @@ class RegistrationForm extends Component {
             password1: this.state.pass1,
             password2: this.state.pass2
         }).then(res => {
-            this.props.history.push("/login");
+            this.props.history.push("/");
         }).catch(function(error){
             alert("registration unsuccessful, try again")
         })

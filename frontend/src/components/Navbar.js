@@ -8,7 +8,7 @@ class NavBar extends Component {
     }
 
     render() {
-        if (localStorage.getItem('auth_key')){
+        if (localStorage.getItem('access_key')){
             return (
                 <div className = "navbar">
                     <h1 className = "nav"> Hi {this.props.name}! Welcome back to StayClose. </h1>

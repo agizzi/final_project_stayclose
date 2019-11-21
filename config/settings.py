@@ -55,7 +55,7 @@ SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
@@ -155,3 +155,5 @@ DEFF_SALT = "a>4:-nc{U'4*Kz$T`8t%FN_Jj&a^(:$,.;z;zsj8"
 DEFF_PASSWORD = ",tZ;WFVP$R?ELye9>zmx6xtY(6S<G&P)!v[>ZB(K"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
+
+REST_USE_JWT = True

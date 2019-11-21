@@ -6,7 +6,7 @@ const PrivateRoute = ({ component: Component, ...props }) => {
       <Route
         {...props}
         render={innerProps =>
-          localStorage.getItem('auth_key') ?
+          localStorage.getItem('access_key') ?
               <Component {...innerProps} />
               :
               <Redirect to="/login" />
