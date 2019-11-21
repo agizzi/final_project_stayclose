@@ -8,15 +8,15 @@ class NavBar extends Component {
     }
 
     render() {
-        if (localStorage.getItem('access_key')){
+        if (localStorage.getItem('access_key')) {
             return (
-                <div className = "navbar">
-                    <h1 className = "nav"> Hi {this.props.name}! Welcome back to StayClose. </h1>
+                <div className="navbar">
+                    <h1 className="nav"> Hi {this.props.username}! Welcome back to StayClose. </h1>
                     <nav>
                         <ul>
-                            <li className = "nav"> {this.props.name}'s Account </li>
-                            <li className = "nav"> Add Circle </li>
-                            <li className = "nav"> Notifications </li>
+                            <li className="nav"> {this.props.username}'s Account </li>
+                            <li className="nav"> Add Circle </li>
+                            <li className="nav"> Notifications </li>
                         </ul>
                     </nav>
                     <Notification />
@@ -24,12 +24,12 @@ class NavBar extends Component {
             )
         } else {
             return (
-                <div className = "navbar">
-                    <h1 className = "nav"> Hi! Welcome back to StayClose. </h1>
+                <div className="navbar">
+                    <h1 className="nav"> Hi! Welcome back to StayClose. </h1>
                     <nav>
                         <ul>
-                            <li className = "nav"> <Link to="/login"> Login </Link> </li>
-                            <li className = "nav"> <Link to="/register"> Register </Link> </li>
+                            <li className="nav"> <Link to="/login"> Login </Link> </li>
+                            <li className="nav"> <Link to="/register"> Register </Link> </li>
                         </ul>
                     </nav>
                     <Notification />
