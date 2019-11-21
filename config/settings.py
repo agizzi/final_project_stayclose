@@ -150,3 +150,5 @@ AUTH_USER_MODEL = 'stay_close.User'
 
 DEFF_SALT = "a>4:-nc{U'4*Kz$T`8t%FN_Jj&a^(:$,.;z;zsj8"
 DEFF_PASSWORD = ",tZ;WFVP$R?ELye9>zmx6xtY(6S<G&P)!v[>ZB(K"
+
+ACCOUNT_EMAIL_VERIFICATION = "none"

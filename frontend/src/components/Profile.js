@@ -9,9 +9,9 @@ class ProfilePage extends Component {
 
     render() {
         return (
-        <body>
-            <NavBar />
-        </body>
+            <body>
+                <NavBar />
+            </body>
         );
     }
 
