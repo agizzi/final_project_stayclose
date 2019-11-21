@@ -54,7 +54,9 @@ INSTALLED_APPS = [
 SITE_ID = 1
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
 }
 
 # A list of hex-encoded 32 byte keys

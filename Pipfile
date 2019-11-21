@@ -16,6 +16,7 @@ pillow = "*"
 django-encrypted-filefield = "*"
 django-rest-auth = {extras = ["with-social"],version = "*"}
 django-allauth = "*"
+httpie = "*"
 
 [requires]
 python_version = "3.7"
