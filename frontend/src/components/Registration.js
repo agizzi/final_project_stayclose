@@ -13,12 +13,6 @@ class RegistrationForm extends Component {
         };
     }
 
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
-
     handleSubmit = (event) => {
         event.preventDefault();
         axios.post('http://127.0.0.1:8000/api/rest-auth/registration/', {
@@ -27,7 +21,9 @@ class RegistrationForm extends Component {
             password1: this.state.pass1,
             password2: this.state.pass2
         }).then(res => {
-            console.log(res)
+            this.props.history.push("/login");
+        }).catch(function(error){
+            alert("registration unsuccessful, try again")
         })
     }
     render() {
