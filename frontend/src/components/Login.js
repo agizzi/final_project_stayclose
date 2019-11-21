@@ -17,7 +17,8 @@ class LoginForm extends Component {
             username: this.state.user,
             password: this.state.pass
         }).then(res => {
-            localStorage.setItem('auth_key', res.data.key);
+            localStorage.setItem('access_key', res.data.access);
+            localStorage.setItem('refresh_key', res.data.refresh);
             this.props.history.push("/profile");
         }).catch(function(error) {
             alert('login unsuccessful, try again')

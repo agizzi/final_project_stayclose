@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from stay_close import api
+from rest_framework_simplejwt import views as jwt_views
 
 router = routers.DefaultRouter()
 router.register(r'users', api.UserViewSet, basename='User')
@@ -14,7 +15,8 @@ router.register(r'invites', api.InviteViewSet, basename='Invites')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/auth', include('knox.urls')),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
     path('api/rest-auth/', include('rest_auth.urls')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/rest-auth/registration/', include('rest_auth.registration.urls')),
