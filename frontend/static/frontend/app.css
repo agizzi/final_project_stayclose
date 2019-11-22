@@ -10,13 +10,13 @@ body {
     justify-content: space-evenly;
 }
 
-ul {
-    list-style-type: none;
-}
-
 .links {
     display: flex;
     justify-content: space-evenly;
+}
+
+ul {
+    list-style-type: none;
 }
 
 li {
@@ -41,4 +41,27 @@ li {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    margin-top: 15px; 
+}
+
+.notification {
+    margin-top: 15px; 
+}
+
+a:-webkit-any-link {
+    color: #CBDFDF;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:-webkit-any-link:hover {
+    color: rgb(164, 176, 176);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+h1 {
+    color: #79BFC0; 
+    margin-right: 40%; 
+    font-size: 30pt; 
 }

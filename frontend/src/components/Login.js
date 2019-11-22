@@ -40,10 +40,7 @@ class LoginForm extends Component {
                     <input type='submit' value='submit' />
                 </form>
                 <p>
-                    Not a Member?
-                </p>
-                <p>
-                    <Link to="/register">Register</Link>
+                    Not a Member? <Link to="/register"> Click Here to Register</Link>
                 </p>
             </div>
         );
