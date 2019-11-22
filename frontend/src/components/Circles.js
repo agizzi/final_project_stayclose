@@ -23,7 +23,7 @@ class Circles extends Component {
     }).then(res => {
       console.log(res)
       for (let i = 0; i < res.data.length; i++) {
-        this.state.circles.push(<Link key={i}> {res.data[i].name} </Link>)
+        this.state.circles.push(<Link className="circle" key={i}> {res.data[i].name} </Link>)
       }
     })
   }
