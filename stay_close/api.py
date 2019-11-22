@@ -14,23 +14,15 @@ class UserViewSet(viewsets.ModelViewSet):
   def get_queryset(self):
     return User.objects.filter(id=self.request.user.id)
 
-  def perform_create(self, serializer_class):
-    serializer_class.save(owner=self.request.user)
-
 class CircleViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows circles to be viewed or edited.
   """
+  queryset = Circle.objects.all()
   permission_classes = [
     permissions.AllowAny
   ]
   serializer_class = CircleSerializer
-
-  def get_queryset(self):
-    return self.request.user.Circle.all()
-
-  def perform_create(self, serializer_class):
-    serializer_class.save(owner=self.request.user)
 
 class ContentViewSet(viewsets.ModelViewSet):
   """
@@ -42,8 +34,6 @@ class ContentViewSet(viewsets.ModelViewSet):
     permissions.IsAuthenticated
   ]
 
-  def perform_create(self, serializer_class):
-    serializer_class.save(owner=self.request.user)
 
 class CommentsViewSet(viewsets.ModelViewSet):
   """
@@ -55,9 +45,6 @@ class CommentsViewSet(viewsets.ModelViewSet):
     permissions.AllowAny
   ]
 
-  def perform_create(self, serializer_class):
-    serializer_class.save(owner=self.request.user)
-
 class InviteViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows invites to be viewed or edited.
@@ -67,6 +54,3 @@ class InviteViewSet(viewsets.ModelViewSet):
   permission_classes = [
     permissions.AllowAny
   ]
-
-  def perform_create(self, serializer_class):
-    serializer_class.save(owner=self.request.user)

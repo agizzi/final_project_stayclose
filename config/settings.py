@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'encrypted_model_fields',
     'knox',
     'rest_auth',
+    'corsheaders'
 ]
 
 SITE_ID = 1
@@ -68,6 +69,7 @@ FIELD_ENCRYPTION_KEYS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -151,9 +153,20 @@ STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'stay_close.User'
 
-DEFF_SALT = "a>4:-nc{U'4*Kz$T`8t%FN_Jj&a^(:$,.;z;zsj8"
-DEFF_PASSWORD = ",tZ;WFVP$R?ELye9>zmx6xtY(6S<G&P)!v[>ZB(K"
+FIELD_ENCRYPTION_KEYS = [
+    "f164ec6bd6fbc4aef5647abc15199da0f9badcc1d2127bde2087ae0d794a9a0b"
+]
+
+DEFF_SALT = "43CCC274C86B72E92C39989F3E800C3B7C24862C"
+DEFF_PASSWORD = "88E6CC6E4E0B956B31C2684D8A42CAB497570655"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
 REST_USE_JWT = True
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8000',
+)

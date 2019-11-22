@@ -31,11 +31,11 @@ class LoginForm extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Username:
-                    <input type='text' name='user' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
+                    <input type='text' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
                     </label>
                     <label>
                         Password:
-                    <input type='password' name='pass' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
+                    <input type='password' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
                     </label>
                     <input type='submit' value='submit' />
                 </form>
