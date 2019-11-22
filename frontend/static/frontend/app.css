@@ -8,6 +8,7 @@ body {
 .navbar{
     display: flex; 
     justify-content: space-evenly;
+    margin-bottom: 50px; 
 }
 
 .links {
@@ -48,13 +49,13 @@ li {
     margin-top: 15px; 
 }
 
-a:-webkit-any-link {
-    color: #CBDFDF;
+.nav {
+    color: #BCCACA;
     cursor: pointer;
     text-decoration: none;
 }
 
-a:-webkit-any-link:hover {
+.nav:hover {
     color: rgb(164, 176, 176);
     cursor: pointer;
     text-decoration: none;
@@ -62,6 +63,27 @@ a:-webkit-any-link:hover {
 
 h1 {
     color: #79BFC0; 
+    font-size: 50pt; 
     margin-right: 40%; 
-    font-size: 30pt; 
+    margin-top: 0; 
+}
+
+.circle {
+    border-radius: 50%;
+    background-color: #E09590; 
+    padding: 80px; 
+    width: 50px; 
+    height: 50px; 
+    text-align: center;
+    display: inline-block;
+    color: white; 
+    text-decoration: none;
+    font-size: 14pt;
+    margin-left: 50px; 
+} 
+
+.circle-list {
+    display: flex; 
+    justify-content: space-evenly;
+    flex-wrap: wrap; 
 }
