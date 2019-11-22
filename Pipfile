@@ -19,6 +19,7 @@ django-allauth = "*"
 httpie = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"
