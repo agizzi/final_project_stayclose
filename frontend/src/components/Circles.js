@@ -22,19 +22,16 @@ class Circles extends Component {
     axios.get('http://127.0.0.1:8000/api/circles/', config, {
     }).then(res => {
       console.log(res)
-      for (let i = 0; i < res.data.length; i++) {
-        this.state.circles.push(<Link className="circle" key={i}> {res.data[i].name} </Link>)
-      }
+      let circles = res.data
+      this.setState({ circles: circles })
+
     })
   }
-
-
-
 
   render() {
     return (
       <div className="circle-list">
-        {this.state.circles}
+        {this.state.circles.map(circle => <Link className="circle" key={circle.id}>{circle.name}</Link>)}
       </div>
     );
   }
