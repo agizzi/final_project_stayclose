@@ -21,7 +21,7 @@ class Circle(models.Model):
   name = fields.EncryptedCharField(max_length = 100)
   admin = models.ForeignKey(to="User", related_name="is_admin", on_delete=models.CASCADE)
   members = models.ManyToManyField(to="User", related_name="mates")
-  content = models.ForeignKey(to="Content", related_name = "circle", on_delete=models.CASCADE)
+  content = models.ForeignKey(to="Content", related_name = "circle", on_delete=models.CASCADE, blank=True, null=True)
   created_at = fields.EncryptedDateField(default = date.today)
 
 

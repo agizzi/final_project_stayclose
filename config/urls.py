@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('frontend.urls')),
     path('register/', include('frontend.urls')),
     path('profile/', include('frontend.urls')),
+    path('new-circle/', include('frontend.urls')),
 ]

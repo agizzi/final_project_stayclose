@@ -18,6 +18,7 @@ django-rest-auth = {extras = ["with-social"],version = "*"}
 django-allauth = "*"
 httpie = "*"
 djangorestframework-simplejwt = "*"
+django-cors-headers = "*"
 
 [requires]
 python_version = "3.7"
