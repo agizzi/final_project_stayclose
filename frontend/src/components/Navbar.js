@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Notification from './Notifications'
+import Notification from './Notifications';
+import Circles from './Circles';
 import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
@@ -11,10 +12,10 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
-                    <h1 className="nav"> StayClose. </h1>
+                    <h1> StayClose </h1>
                     <ul className="links">
-                        <li><button type="button" className="add"><Link className="nav"> {this.props.username} </Link></button></li>
-                        <li><button type="button" className="add"><Link className="nav"> + Circle </Link></button></li>
+                        <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
+                        <li><button type="button" className="add"><Link className="nav" to="/new-circle"> + Circle </Link></button></li>
                         <li><button type="button" className="add"><Link className="nav">Logout </Link></button></li>
                         <li className="notification"><Link to="/notification" className="nav">
                             <div className="sandwich"></div>
