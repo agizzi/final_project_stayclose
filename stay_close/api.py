@@ -1,5 +1,7 @@
 from .models import User, Circle, Content, Comments, Invite
 from rest_framework import viewsets, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer, InviteSerializer
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -54,3 +56,17 @@ class InviteViewSet(viewsets.ModelViewSet):
   permission_classes = [
     permissions.AllowAny
   ]
+
+class UsersByCircle(APIView):
+  def get(self, request, format=None):
+    circle = request.query_params.get('id')
+    users = User.objects.filter(pk__in=Circle.objects.filter(pk=circle).values('members'))
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+class ContentByCircle(APIView):
+  def get(self, request, format=None):
+    circle = request.query_params.get('id')
+    content = Content.objects.filter(pk__in=Circle.objects.filter(pk=circle).values('content'))
+    serializer = ContentSerializer(content, many=True)
+    return Response(serializer.data)

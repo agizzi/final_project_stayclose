@@ -20,6 +20,8 @@ httpie = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
 django-filter = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"

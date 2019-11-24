@@ -15,6 +15,8 @@ router.register(r'invites', api.InviteViewSet, basename='Invites')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/users-by-circle/', api.UsersByCircle.as_view()),
+    path('api/content-by-circle/', api.ContentByCircle.as_view()),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
     path('api/rest-auth/', include('rest_auth.urls')),

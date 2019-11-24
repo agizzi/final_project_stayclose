@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ed384e12c1f3e5075cb853496a7f3f0f15ba1e39200792b266290cc80085653b"
+            "sha256": "84334663a87b50140837480b70d2e73ddfff9681f9270236d138e5aae29ce0f7"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -101,6 +101,13 @@
             ],
             "version": "==0.6.0"
         },
+        "dj-database-url": {
+            "hashes": [
+                "sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163",
+                "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9"
+            ],
+            "version": "==0.5.0"
+        },
         "django": {
             "hashes": [
                 "sha256:16040e1288c6c9f68c6da2fe75ebde83c0a158f6f5d54f4c5177b0c1478c5b86",
@@ -148,6 +155,14 @@
             "index": "pypi",
             "version": "==2.2.0"
         },
+        "django-heroku": {
+            "hashes": [
+                "sha256:2bc690aab89eedbe01311752320a9a12e7548e3b0ed102681acc5736a41a4762",
+                "sha256:6af4bc3ae4a9b55eaad6dbe5164918982d2762661aebc9f83d9fa49f6009514e"
+            ],
+            "index": "pypi",
+            "version": "==0.3.1"
+        },
         "django-rest-auth": {
             "extras": [
                 "with-social"
@@ -189,6 +204,14 @@
             ],
             "index": "pypi",
             "version": "==4.3.0"
+        },
+        "gunicorn": {
+            "hashes": [
+                "sha256:5a3bf56a1d44c2ed15dae2f9d2a9e7c87acc3517f7225e27e4ece3098a2b5efc",
+                "sha256:fe457b7093b353cefcb2ebc40d192fc7c8a62bba49da648c9e1fa0671fa654d1"
+            ],
+            "index": "pypi",
+            "version": "==20.0.2"
         },
         "httpie": {
             "hashes": [
@@ -379,6 +402,13 @@
                 "sha256:f3c5fd51747d450d4dcf6f923c81f78f811aab8205fda64b0aba34a4e48b0745"
             ],
             "version": "==1.25.7"
+        },
+        "whitenoise": {
+            "hashes": [
+                "sha256:22f79cf8f1f509639330f93886acaece8ec5ac5e9600c3b981d33c34e8a42dfd",
+                "sha256:6dfea214b7c12efd689007abf9afa87a426586e9dbc051873ad2c8e535e2a1ac"
+            ],
+            "version": "==4.1.4"
         }
     },
     "develop": {}
