@@ -67,6 +67,6 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(pk__in=Circle.objects.filter(pk=circle).values('content'))
+    content = Content.objects.filter(circle=circle)
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
