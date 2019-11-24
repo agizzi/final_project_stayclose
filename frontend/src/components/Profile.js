@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from './Navbar';
+import NavBar from './NavBar';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Circles from './Circles'

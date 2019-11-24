@@ -21,7 +21,6 @@ class Circle(models.Model):
   name = fields.EncryptedCharField(max_length = 100)
   admin = models.ForeignKey(to="User", related_name="is_admin", on_delete=models.CASCADE)
   members = models.ManyToManyField(to="User", related_name="mates")
-  content = models.ManyToManyField(to="Content", related_name = "circle", blank=True)
   created_at = fields.EncryptedDateField(default = date.today)
 
 
@@ -29,7 +28,8 @@ class Circle(models.Model):
     return self.name
 
 class Content(models.Model):
-  member = models.ForeignKey(to="User", related_name="posts", on_delete=models.CASCADE)
+  member = models.ForeignKey(to="User", related_name="poster", on_delete=models.CASCADE)
+  circle = models.ForeignKey(to="Circle", related_name="posts", on_delete=models.CASCADE)
   text_post = fields.EncryptedTextField(blank=True, null=True)
   img_post = EncryptedImageField(blank=True, null=True)
   caption = fields.EncryptedCharField(max_length=200, blank=True, null=True)

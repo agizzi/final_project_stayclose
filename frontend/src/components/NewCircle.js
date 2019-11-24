@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -22,9 +22,9 @@ class NewCircle extends Component {
         }
         axios.post('http://127.0.0.1:8000/api/circles/', {
             name: this.state.name,
-            created_at: "2020-11-22",
+            created_at: "2020-11-30",
             admin: 1,
-            content: null,
+            content: [],
             members: [
                 1
             ]
