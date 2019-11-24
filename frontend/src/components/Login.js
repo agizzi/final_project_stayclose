@@ -27,21 +27,32 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Username:
-                    <input type='text' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
-                    </label>
-                    <label>
-                        Password:
-                    <input type='password' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
-                    </label>
-                    <input type='submit' value='submit' />
-                </form>
-                <p>
-                    Not a Member? <Link to="/register"> Click Here to Register</Link>
-                </p>
+            <div className="login-page">
+                <div className= "login-1">
+                    <h1>StayClose</h1>
+                    <p>"Personal. Practical. Private."</p>
+                </div>
+                <div className= "login-2">
+                    <h2>Sign In:</h2>
+                    <form onSubmit={this.handleSubmit}>
+                        <label>
+                            Username: 
+                            <div></div>
+                        <input type='text' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
+                        </label>
+                        <div></div>
+                        <label>
+                            Password:
+                            <div></div>
+                        <input type='password' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
+                        </label>
+                        <div></div>
+                        <button type='submit' value='submit' className="signin"> Sign In</button>
+                    </form>
+                    <p>
+                        Not a Member? <Link to="/register"> Click Here to Register</Link>
+                    </p>
+                </div>
             </div>
         );
     }

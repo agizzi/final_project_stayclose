@@ -3,6 +3,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
+    background: url('https://66.media.tumblr.com/d2662e0ce640759d5c3d835bff85117c/17b3ba5bedb840e0-cc/s1280x1920/0478e11be1fa6adab961bfedfdf9d67e0ea9b4c3.png');
+    background-repeat: no-repeat;
+    background-size: cover; 
 }
 
 .navbar{
@@ -32,7 +35,7 @@ li {
 }
 
 .add {
-    border-style: solid; /* Green */
+    border-style: solid; 
     border-color:#CBDFDF;  
     border-width: 5px; 
     border-radius: 10px; 
@@ -70,12 +73,11 @@ h1 {
 
 .circle {
     border-radius: 50%;
-    background-color: #E09590; 
+    background-color: #E7E564; 
     padding: 80px; 
     width: 50px; 
     height: 50px; 
     text-align: center;
-    display: inline-block;
     color: white; 
     text-decoration: none;
     font-size: 14pt;
@@ -86,4 +88,69 @@ h1 {
     display: flex; 
     justify-content: space-evenly;
     flex-wrap: wrap; 
+}
+
+.login-page {
+    display: flex; 
+    justify-content: space-evenly;
+    flex-wrap: wrap; 
+    margin-top: 10%; 
+}
+
+.login-2 {
+    border-style: solid;
+    border-color: #CBDFDF; 
+    border-radius: 10%; 
+    padding: 30px; 
+}
+
+input {
+    border-style: solid; 
+    border-color:#CBDFDF;  
+    border-width: 2px; 
+    border-radius: 10px; 
+    background-color: white; 
+    padding: 10px; 
+    width: 240px; 
+    margin-bottom: 20px; 
+}
+
+.signin {
+    margin-left: 210px; 
+}
+
+.registration {
+    display: flex; 
+    justify-content: space-evenly;
+    flex-wrap: wrap; 
+    margin-top: 10%; 
+}
+
+.register-2 {
+    border-style: solid;
+    border-color: #CBDFDF; 
+    border-radius: 10%; 
+    padding: 30px; 
+}
+
+button {
+    color: #BCCACA;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button:hover {
+    color: rgb(164, 176, 176);
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.circleForm{
+    border-style: solid; 
+    border-color: #CBDFDF;
+    border-radius: 10px; 
+    background-color: white; 
+    padding: 50px; 
+    width: 275px; 
+
 }
