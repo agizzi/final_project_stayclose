@@ -3,7 +3,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    background-image: url("frontend/static/frontend/images/molecule.png");
+    background: url('https://66.media.tumblr.com/d2662e0ce640759d5c3d835bff85117c/17b3ba5bedb840e0-cc/s1280x1920/0478e11be1fa6adab961bfedfdf9d67e0ea9b4c3.png');
+    background-repeat: no-repeat;
+    background-size: cover; 
 }
 
 .navbar{
@@ -76,7 +78,6 @@ h1 {
     width: 50px; 
     height: 50px; 
     text-align: center;
-    display: inline-block;
     color: white; 
     text-decoration: none;
     font-size: 14pt;
@@ -142,4 +143,14 @@ button:hover {
     color: rgb(164, 176, 176);
     cursor: pointer;
     text-decoration: none;
+}
+
+.circleForm{
+    border-style: solid; 
+    border-color: #CBDFDF;
+    border-radius: 10px; 
+    background-color: white; 
+    padding: 50px; 
+    width: 275px; 
+
 }
