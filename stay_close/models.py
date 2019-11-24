@@ -21,7 +21,7 @@ class Circle(models.Model):
   name = fields.EncryptedCharField(max_length = 100)
   admin = models.ForeignKey(to="User", related_name="is_admin", on_delete=models.CASCADE)
   members = models.ManyToManyField(to="User", related_name="mates")
-  content = models.ForeignKey(to="Content", related_name = "circle", on_delete=models.CASCADE, blank=True, null=True)
+  content = models.ManyToManyField(to="Content", related_name = "circle", blank=True)
   created_at = fields.EncryptedDateField(default = date.today)
 
 
@@ -32,14 +32,14 @@ class Content(models.Model):
   member = models.ForeignKey(to="User", related_name="posts", on_delete=models.CASCADE)
   text_post = fields.EncryptedTextField(blank=True, null=True)
   img_post = EncryptedImageField(blank=True, null=True)
-  caption = fields.EncryptedCharField(max_length=200)
+  caption = fields.EncryptedCharField(max_length=200, blank=True, null=True)
   created_at = fields.EncryptedDateTimeField(default = timezone.now)
   updated_at = fields.EncryptedDateTimeField(default=timezone.now)
   likes = fields.EncryptedIntegerField(default=0)
-  tags = models.ForeignKey(to="User", related_name="tagged", on_delete=models.CASCADE)
+  tags = models.ForeignKey(to="User", related_name="tagged", on_delete=models.CASCADE, blank=True, null=True)
 
   def __str__(self):
-    return self.created_at
+    return self.text_post
 
 class Comments(models.Model):
   author = models.ForeignKey(to="User", related_name="comments", on_delete=models.CASCADE)
@@ -59,6 +59,3 @@ class Invite(models.Model):
 
   def __str__(self):
     return self.receiver
-
-
-  

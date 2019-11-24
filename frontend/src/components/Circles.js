@@ -21,7 +21,6 @@ class Circles extends Component {
     }
     axios.get('http://127.0.0.1:8000/api/circles/', config, {
     }).then(res => {
-      console.log(res)
       let circles = res.data
       this.setState({ circles: circles })
 
@@ -31,7 +30,7 @@ class Circles extends Component {
   render() {
     return (
       <div className="circle-list">
-        {this.state.circles.map(circle => <Link className="circle" key={circle.id}>{circle.name}</Link>)}
+        {this.state.circles.map(circle => <Link className="circle" to={'/circle/' + circle.id + '/' + circle.name} key={circle.id}>{circle.name}</Link>)}
       </div>
     );
   }
