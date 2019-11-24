@@ -40,16 +40,21 @@ class NewCircle extends Component {
     render() {
         return (
             <div className='circleForm'>
+                <h2>New Circle: </h2>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Circle Name:
+                        <div></div>
                     <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+                    <div></div>
                     </label>
                     <label>
                         Add Members:
+                        <div></div>
                     <input type='text' value={this.state.members} onChange={(e) => this.setState({ members: e.target.value })} />
                     </label>
-                    <input type='submit' value='create' />
+                    <div></div>
+                    <button type='submit' value='create'>Create a Circle</button>
                 </form>
             </div>
         )
