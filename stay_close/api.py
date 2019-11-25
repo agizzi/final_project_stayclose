@@ -14,8 +14,6 @@ class UserViewSet(viewsets.ModelViewSet):
     permissions.AllowAny
   ]
 
-
-
 class CircleViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows circles to be viewed or edited.
@@ -33,7 +31,7 @@ class ContentViewSet(viewsets.ModelViewSet):
   queryset = Content.objects.all()
   serializer_class = ContentSerializer
   permission_classes = [
-    permissions.IsAuthenticated
+    permissions.AllowAny
   ]
 
 
@@ -71,8 +69,10 @@ class ContentByCircle(APIView):
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
-class CurrentUser(APIView):
+class CurrentUserByUsername(APIView):
   def get(self, request, format=None):
-    user = request.user
-    serializer = UserSerializer(user)
+    username = request.query_params.get('username')
+    user = User.objects.filter(username=username)
+    serializer = UserSerializer(user, many=True)
     return Response(serializer.data)
+
