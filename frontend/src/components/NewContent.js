@@ -10,8 +10,35 @@ class NewContent extends Component {
         super(props);
 
         this.state = {
-            post: ''
+            post: '',
+            userId: ''
         }
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const { match: { params } } = this.props;
+        let config = {
+            headers: {
+                Authorization: localStorage.getItem("access_key")
+            }
+        }
+        axios.post('http://127.0.0.1:8000/api/content/',{
+            params: {
+                text_post: this.state.post,
+                img_post: null,
+                caption: "",
+                created_at: "2020-11-30",
+                updated_at: "2020-11-30",
+                likes: 0,
+                member: 1,
+                circle: 1,
+                tags: null
+            }
+        }, config
+        ).then(res => {
+            this.props.history.push('/circle/' + this.props.circleId + '/' + this.props.circleName)
+        })
     }
 
     render() {
@@ -22,7 +49,7 @@ class NewContent extends Component {
                 <label>
                     Post:
                     <div></div>
-                    <input type='text' value={this.state.post} onChange={(e) => this.setState({ name: e.target.value })} />
+                    <input type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                     <div></div>
                 </label>
                 <div></div>

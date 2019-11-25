@@ -17,7 +17,7 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/users-by-circle/', api.UsersByCircle.as_view()),
     path('api/content-by-circle/', api.ContentByCircle.as_view()),
-    path('api/current-user/', api.CurrentUser.as_view()),
+    path('api/current-user/', api.CurrentUserByUsername.as_view()),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
     path('api/rest-auth/', include('rest_auth.urls')),

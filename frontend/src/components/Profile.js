@@ -15,6 +15,11 @@ class ProfilePage extends Component {
 
     componentDidMount() {
         this.setState({ username: localStorage.getItem("username") })
+        let config = {
+            headers: {
+                Authorization: localStorage.getItem("access_key")
+            }
+        }
     }
 
     render() {
