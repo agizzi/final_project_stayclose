@@ -16,7 +16,7 @@ class NavBar extends Component {
                     <ul className="links">
                         <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
                         <li><button type="button" className="add"><Link className="nav" to="/new-circle"> + Circle </Link></button></li>
-                        <li><button type="button" className="add"><Link className="nav">Logout </Link></button></li>
+                        <li><button type="button" className="add"><Link className="nav" to="/Logout">Logout </Link></button></li>
                         <li className="notification"><Link to="/notification" className="nav">
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>

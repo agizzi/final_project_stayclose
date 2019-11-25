@@ -21,6 +21,7 @@ class ProfilePage extends Component {
         }
         axios.get('http://127.0.0.1:8000/api/current-user/', config, {
         }).then(res => {
+            console.log(res)
             this.setState({ username: res.data.username })
             localStorage.setItem('username', this.state.username)
         })

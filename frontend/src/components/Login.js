@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Link, withRouter} from 'react-router-dom';
 import axios from 'axios';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -36,7 +38,7 @@ class LoginForm extends Component {
                     <h2>Sign In:</h2>
                     <form onSubmit={this.handleSubmit}>
                         <label>
-                            Username: 
+                            Username:
                             <div></div>
                         <input type='text' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
                         </label>
