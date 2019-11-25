@@ -31,7 +31,7 @@ class Circle extends Component {
     render() {
         return (
         <div className="members">
-                {this.state.members.map(member => <p className="member" key={member.id}>{member.username}</p>)}
+            {this.state.members.map(member => <p className="member" key={member.id}>{member.username}</p>)}
         </div>
         );
       }

@@ -21,6 +21,7 @@ class LoginForm extends Component {
         }).then(res => {
             localStorage.setItem('access_key', res.data.access);
             localStorage.setItem('refresh_key', res.data.refresh);
+            localStorage.setItem('username', this.state.user);
             this.props.history.push("/profile");
         }).catch(function(error) {
             alert('login unsuccessful, try again')
