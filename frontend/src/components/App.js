@@ -8,6 +8,7 @@ import NewCircle from './NewCircle';
 import CircleFeed from './CircleFeed';
 import NewContent from './NewContent';
 
+
 class App extends Component {
   constructor() {
     super();
