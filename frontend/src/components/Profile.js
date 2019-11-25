@@ -19,9 +19,9 @@ class ProfilePage extends Component {
                 Authorization: localStorage.getItem("access_key")
             }
         }
-        axios.get('http://127.0.0.1:8000/api/users/', config, {
+        axios.get('http://127.0.0.1:8000/api/current-user/', config, {
         }).then(res => {
-            this.setState({ username: res.data[0].username })
+            this.setState({ username: res.data.username })
             localStorage.setItem('username', this.state.username)
         })
     }
@@ -38,8 +38,6 @@ class ProfilePage extends Component {
 }
 
 export default withRouter(ProfilePage);
-
-console.log('hi');
 
 
 
