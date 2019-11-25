@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import { request } from 'http';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+
+console.log("new-circle")
+
 
 class NewCircle extends Component {
     constructor(props) {
@@ -10,7 +15,8 @@ class NewCircle extends Component {
         this.state = {
             name: '',
             members: '',
-            addedMember: ''
+            addedMember: '',
+            currentUser: '',
         };
     }
 
@@ -25,13 +31,13 @@ class NewCircle extends Component {
         if (this.state.members !== '') {
             axios.get('http://127.0.0.1:8000/api/users/', config, {
             }).then(res => {
-                console.log(res.data[0].username)
                 for (let i = 0; i < res.data.length; i++) {
                     if (this.state.members === res.data[i].username) {
                         console.log('true')
                         this.setState({ addedMember: res.data[i].id })
                     }
                 }
+
                 axios.post('http://127.0.0.1:8000/api/circles/', {
                     name: this.state.name,
                     created_at: "2020-11-30",
@@ -73,6 +79,7 @@ class NewCircle extends Component {
 
     render() {
         return (
+
             <div className='circleForm'>
                 <h2>New Circle: </h2>
                 <form onSubmit={this.handleSubmit}>

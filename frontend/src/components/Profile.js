@@ -10,6 +10,7 @@ class ProfilePage extends Component {
 
         this.state = {
             username: ''
+
         };
     }
 
@@ -21,7 +22,7 @@ class ProfilePage extends Component {
         return (
             <React.Fragment>
                 <NavBar username={this.state.username} />
-                <Circles />
+                <Circles username={this.state.username} />
             </React.Fragment>
 
         );
