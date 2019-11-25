@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, useHistory } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -103,6 +103,11 @@ class NavBar extends Component {
 
     }
 
+    handleLogout() {
+        window.localStorage.clear()
+        this.props.history.push('/')
+    }
+
     render() {
         if (localStorage.getItem('access_key')) {
             return (
@@ -132,7 +137,7 @@ class NavBar extends Component {
                                 <button onClick={this.handleCloseModal}>Close Modal</button>
                             </ReactModal>
                         </div>
-                        <li><button type="button" onClick={this.handleCloseModal} className="add"><Link className="nav" to="/">Logout </Link></button></li>
+                        <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
                         <li className="notification"><Link to="/notification" className="nav">
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>
@@ -158,4 +163,4 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+export default withRouter(NavBar);
