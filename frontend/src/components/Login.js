@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import {Link, withRouter} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
+window.localStorage.clear()
+
+
+
 class LoginForm extends Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +18,8 @@ class LoginForm extends Component {
             pass: ''
         };
     }
+
+
 
     handleSubmit = (event) => {
         event.preventDefault();
@@ -23,31 +31,32 @@ class LoginForm extends Component {
             localStorage.setItem('refresh_key', res.data.refresh);
             localStorage.setItem('username', this.state.user);
             this.props.history.push("/profile");
-        }).catch(function(error) {
+        }).catch(function (error) {
             alert('login unsuccessful, try again')
         })
     }
 
     render() {
         return (
-            <div className="login-page">
-                <div className= "login-1">
+
+            < div className="login-page" >
+                <div className="login-1">
                     <h1>StayClose</h1>
                     <p>"Personal. Practical. Private."</p>
                 </div>
-                <div className= "login-2">
+                <div className="login-2">
                     <h2>Sign In:</h2>
                     <form onSubmit={this.handleSubmit}>
                         <label>
                             Username:
                             <div></div>
-                        <input type='text' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
+                            <input type='text' value={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
                         </label>
                         <div></div>
                         <label>
                             Password:
                             <div></div>
-                        <input type='password' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
+                            <input type='password' value={this.state.pass} onChange={(e) => this.setState({ pass: e.target.value })} />
                         </label>
                         <div></div>
                         <button type='submit' value='submit' className="signin"> Sign In</button>
@@ -56,7 +65,7 @@ class LoginForm extends Component {
                         Not a Member? <Link to="/register"> Click Here to Register</Link>
                     </p>
                 </div>
-            </div>
+            </div >
         );
     }
 }
