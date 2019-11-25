@@ -43,7 +43,6 @@ class Circles extends Component {
           for (let j = 0; j < circles[i].members.length; j++) {
             if (circles[i].admin === this.state.currentUser || circles[i].members[j] === this.state.currentUser) {
               myCircles.push(circles[i])
-              console.log(circles[i].admin)
             }
           }
 

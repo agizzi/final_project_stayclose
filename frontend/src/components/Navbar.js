@@ -7,28 +7,35 @@ import Notification from './Notifications';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 
+
+
+
 class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: '',
             name: '',
             members: '',
-            addedMember: '', 
+            addedMember: '',
             showModal: false
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
     }
 
-    handleOpenModal () {
+
+
+    handleOpenModal() {
         this.setState({ showModal: true });
     }
 
-    handleCloseModal () {
+    handleCloseModal() {
         this.setState({ showModal: false });
     }
 
     handleSubmit = (event) => {
+        console.log('submit working')
         event.preventDefault();
         let config = {
             headers: {
@@ -39,17 +46,21 @@ class NavBar extends Component {
         if (this.state.members !== '') {
             axios.get('http://127.0.0.1:8000/api/users/', config, {
             }).then(res => {
-                console.log(res.data[0].username)
                 for (let i = 0; i < res.data.length; i++) {
+                    if (res.data[i].username === this.props.username) {
+                        console.log("true")
+                        this.setState({ user: res.data[i].id })
+                        console.log(this.state.user)
+                    }
                     if (this.state.members === res.data[i].username) {
                         console.log('true')
                         this.setState({ addedMember: res.data[i].id })
                     }
                 }
-                axios.post('http://127.0.0.1:8000/api/circles/', {
+                axios.post('http://127.0.0.1:8000/api/circles/', config, {
                     name: this.state.name,
                     created_at: "2020-11-30",
-                    admin: 1,
+                    admin: this.state.user,
                     content: [],
                     members: [
                         this.state.addedMember
@@ -66,14 +77,12 @@ class NavBar extends Component {
 
         else {
 
-            axios.post('http://127.0.0.1:8000/api/circles/', {
+            axios.post('http://127.0.0.1:8000/api/circles/', config, {
                 name: this.state.name,
                 created_at: "2020-11-30",
-                admin: 1,
+                admin: this.state.user,
                 content: [],
-                members: [
-
-                ]
+                members: []
             }, config
             ).then(res => {
                 console.log(res)
@@ -82,6 +91,8 @@ class NavBar extends Component {
                 alert('circle not created, try again')
             })
         }
+
+
     }
 
     render() {
@@ -111,9 +122,9 @@ class NavBar extends Component {
                                     <button type='submit' value='create'>Create a Circle</button>
                                 </form>
                                 <button onClick={this.handleCloseModal}>Close Modal</button>
-                            </ReactModal>     
+                            </ReactModal>
                         </div>
-                        <li><button type="button"  onClick={this.handleCloseModal} className="add"><Link className="nav" to="/">Logout </Link></button></li>
+                        <li><button type="button" onClick={this.handleCloseModal} className="add"><Link className="nav" to="/">Logout </Link></button></li>
                         <li className="notification"><Link to="/notification" className="nav">
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>

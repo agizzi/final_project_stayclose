@@ -14,6 +14,7 @@ class ProfilePage extends Component {
         };
     }
 
+
     componentDidMount() {
         this.setState({ username: localStorage.getItem("username") })
     }
