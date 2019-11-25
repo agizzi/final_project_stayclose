@@ -14,17 +14,7 @@ class ProfilePage extends Component {
     }
 
     componentDidMount() {
-        let config = {
-            headers: {
-                Authorization: localStorage.getItem("access_key")
-            }
-        }
-        axios.get('http://127.0.0.1:8000/api/current-user/', config, {
-        }).then(res => {
-            console.log(res)
-            this.setState({ username: res.data.username })
-            localStorage.setItem('username', this.state.username)
-        })
+        this.setState({ username: localStorage.getItem("username") })
     }
 
     render() {

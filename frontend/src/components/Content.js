@@ -35,6 +35,9 @@ class Content extends Component {
                     <h1>Contents</h1>
                     {this.state.contents.map(content => <p className="content" key={content.id}>{content.text_post}</p>)}
                 </div>
+                <div className="postButton">
+                    <button type="button" className="add"><Link className="nav" to={'/post/' + this.props.circleId + '/' + localStorage.getItem('username')} >Add Post</Link></button>
+                </div>
             </div>
         );
       }
