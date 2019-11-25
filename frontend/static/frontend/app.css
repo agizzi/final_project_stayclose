@@ -45,6 +45,7 @@ li {
     display: inline-block;
     font-size: 16px;
     margin-top: 15px; 
+    outline: none;
 }
 
 .notification {
@@ -152,4 +153,8 @@ ReactModal {
     background-color: white; 
     padding: 50px; 
     width: 275px; 
+}
+
+form {
+    background-position: center;
 }
