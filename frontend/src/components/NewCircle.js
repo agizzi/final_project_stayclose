@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-import ReactModal from 'react-modal';
 
 
 class NewCircle extends Component {
@@ -13,20 +12,8 @@ class NewCircle extends Component {
             name: '',
             members: '',
             addedMember: '', 
-            showModal: false
         };
-        this.handleOpenModal = this.handleOpenModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
-        
-    }
-    handleOpenModal () {
-        this.setState({ showModal: true });
-    }
-    
-    handleCloseModal () {
-        this.setState({ showModal: false });
-    }
-
+    }    
      
     handleSubmit = (event) => {
         event.preventDefault();
@@ -88,8 +75,6 @@ class NewCircle extends Component {
     render() {
         return (
             <div className='circleForm'>
-                <button onClick={this.handleOpenModal}>Trigger Modal</button>
-                <ReactModal isOpen={this.state.showModal} contentLabel="Minimal Modal Example">
                     <h2>New Circle: </h2>
                     <form onSubmit={this.handleSubmit}>
                         <label>
@@ -104,10 +89,7 @@ class NewCircle extends Component {
                             <input type='text' value={this.state.members} onChange={(e) => this.setState({ members: e.target.value })} />
                         </label>
                         <div></div>
-                        <button value='create' onClick={this.handleCloseModal}>Create a Circle</button>
-                    </form>
-                <button onClick={this.handleCloseModal}>Close Modal</button>
-                </ReactModal>       
+                    </form>   
             </div>
         )
     }

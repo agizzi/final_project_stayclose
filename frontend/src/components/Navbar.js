@@ -7,6 +7,17 @@ import Notification from './Notifications';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 
+const customStyles = {
+    content : {
+      top                   : '50%',
+      left                  : '50%',
+      right                 : 'auto',
+      bottom                : 'auto',
+      marginRight           : '-50%',
+      transform             : 'translate(-50%, -50%)',
+    }
+  };
+
 class NavBar extends Component {
     constructor(props) {
         super(props);
@@ -93,7 +104,7 @@ class NavBar extends Component {
                         <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
                         <li><button className="add" onClick={this.handleOpenModal}>+ Circle </button></li>
                         <div>
-                            <ReactModal isOpen={this.state.showModal} contentLabel="Minimal Modal Example">
+                            <ReactModal isOpen={this.state.showModal} style={customStyles}>
                                 <h2>New Circle: </h2>
                                 <form onSubmit={this.handleSubmit}>
                                     <label>
