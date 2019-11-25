@@ -70,3 +70,8 @@ class ContentByCircle(APIView):
     content = Content.objects.filter(circle=circle)
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
+
+class CurrentUser(APIView):
+  def get(self, request, format=None):
+    serializer = UserSerializer(request.user)
+    return Response(serializer.data)
