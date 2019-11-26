@@ -52,20 +52,20 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-            axios.post('http://127.0.0.1:8000/api/circles/', {
-                name: currName,
-                created_at: "2020-11-30",
-                admin: currAdmin,
-                members: []
-            }, config
-            ).then(res => {
-                this.setState({ showModal: false} );
-                window.location.reload(false);
-                //this.props.history.push("/profile");
-            }).catch(function (error) {
-                alert('circle not created, try again')
-            })
-            }
+        axios.post('/api/circles/', {
+            name: currName,
+            created_at: "2020-11-30",
+            admin: currAdmin,
+            members: []
+        }, config
+        ).then(res => {
+            this.setState({ showModal: false });
+            window.location.reload(false);
+            //this.props.history.push("/profile");
+        }).catch(function (error) {
+            alert('circle not created, try again')
+        })
+    }
 
     handleLogout() {
         window.localStorage.clear()

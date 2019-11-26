@@ -20,14 +20,14 @@ class NewContent extends Component {
         let member = this.props.match.params.userId;
         let circle = this.props.match.params.circleId;
         let date = new Date('2020-11-30');
-        let timestamp = date.getTime()/1000;
+        let timestamp = date.getTime() / 1000;
         event.preventDefault();
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.post('http://127.0.0.1:8000/api/content/',{
+        axios.post('/api/content/', {
             text_post: post_text,
             img_post: null,
             caption: "",
@@ -42,21 +42,21 @@ class NewContent extends Component {
     }
 
     render() {
-    return (
-        <div className='postForm'>
-            <h2>New Post: </h2>
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Post:
+        return (
+            <div className='postForm'>
+                <h2>New Post: </h2>
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        Post:
                     <div></div>
-                    <input type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                        <input type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                        <div></div>
+                    </label>
                     <div></div>
-                </label>
-                <div></div>
-                <button type='submit' value='create'>Create a Post</button>
-            </form>
-        </div>
-    )
+                    <button type='submit' value='create'>Create a Post</button>
+                </form>
+            </div>
+        )
     }
 }
 

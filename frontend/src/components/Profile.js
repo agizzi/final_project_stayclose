@@ -24,7 +24,7 @@ class ProfilePage extends Component {
             }
         }
 
-        axios.get('http://127.0.0.1:8000/api/user/', config, {
+        axios.get('/api/user/', config, {
         }).then(res => {
             this.setState({ userId: res.data.id })
         })
@@ -33,7 +33,7 @@ class ProfilePage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar username={this.state.username} userId={this.state.userId}/>
+                <NavBar username={this.state.username} userId={this.state.userId} />
                 <Circles username={this.state.username} userId={this.state.userId} />
             </React.Fragment>
 

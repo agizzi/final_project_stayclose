@@ -13,11 +13,11 @@ class Circle extends Component {
 
     componentDidMount() {
         let config = {
-          headers: {
-            Authorization: localStorage.getItem("access_key")
-          }
+            headers: {
+                Authorization: localStorage.getItem("access_key")
+            }
         }
-        axios.get('http://127.0.0.1:8000/api/users-by-circle/',{
+        axios.get('/api/users-by-circle/', {
             params: {
                 id: this.props.circleId
             }
@@ -30,11 +30,11 @@ class Circle extends Component {
 
     render() {
         return (
-        <div className="members">
-            {this.state.members.map(member => <p className="member" key={member.id}>{member.username}</p>)}
-        </div>
+            <div className="members">
+                {this.state.members.map(member => <p className="member" key={member.id}>{member.username}</p>)}
+            </div>
         );
-      }
+    }
 
 }
 
