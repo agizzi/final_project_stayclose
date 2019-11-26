@@ -4,9 +4,6 @@ import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
-// window.localStorage.clear()
-
-
 
 class LoginForm extends Component {
 
@@ -16,19 +13,20 @@ class LoginForm extends Component {
         this.state = {
             user: '',
             pass: '',
+            currentUser: ''
 
         };
     }
 
-
-
     handleSubmit = (event) => {
         event.preventDefault();
+
         axios.post('http://127.0.0.1:8000/api/rest-auth/login/', {
             username: this.state.user,
             password: this.state.pass,
 
         }).then(res => {
+
             localStorage.setItem('access_key', res.data.access);
             localStorage.setItem('refresh_key', res.data.refresh);
             localStorage.setItem('username', this.state.user);
@@ -37,12 +35,13 @@ class LoginForm extends Component {
         }).catch(function (error) {
             alert('login unsuccessful, try again')
         })
+
     }
 
     render() {
         return (
 
-            < div className="login-page" >
+            <div className="login-page" >
                 <div className="login-1">
                     <h1>StayClose</h1>
                     <p>"Personal. Practical. Private."</p>

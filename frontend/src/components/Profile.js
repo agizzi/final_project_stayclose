@@ -9,7 +9,8 @@ class ProfilePage extends Component {
         super(props);
 
         this.state = {
-            username: ''
+            username: '',
+            userId: '',
 
         };
     }
@@ -22,6 +23,17 @@ class ProfilePage extends Component {
                 Authorization: localStorage.getItem("access_key")
             }
         }
+
+        axios.get('http://127.0.0.1:8000/api/users/', config, {
+        }).then(res => {
+            for (let i = 0; i < res.data.length; i++) {
+                if (res.data[i].username === this.state.username) {
+                    console.log("true")
+                    this.setState({ userId: res.data[i].id })
+                    localStorage.setItem('userId', this.state.userId);
+                }
+            }
+        })
     }
 
     render() {
