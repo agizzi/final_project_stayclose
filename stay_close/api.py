@@ -4,6 +4,12 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer, InviteSerializer
 
+class LoggedInUserView(APIView):
+  def get(self, request, format=None):
+    current_user = self.request.user
+    return Response(UserSerializer(current_user).data)
+
+
 class UserViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows users to be viewed or edited.

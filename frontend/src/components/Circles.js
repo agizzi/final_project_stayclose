@@ -10,15 +10,14 @@ class Circles extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      circles: [],
-      currentUser: localStorage.getItem("userId")
+      circles: []
     };
 
   }
 
   componentDidMount() {
 
-    console.log(this.state.currentUser)
+    console.log(this.props.userId)
     let config = {
       headers: {
         Authorization: localStorage.getItem("access_key")
@@ -32,9 +31,9 @@ class Circles extends Component {
       let myCircles = [];
       for (let i = 0; i < circles.length; i++) {
         for (let j = 0; j < circles[i].members.length; j++) {
-          console.log(circles[i].members[j].toString() === this.state.currentUser)
+          console.log(circles[i].members[j] === this.props.userId)
 
-          if (circles[i].admin.toString() === this.state.currentUser || circles[i].members[j].toString() === this.state.currentUser) {
+          if (circles[i].admin === this.props.userId || circles[i].members[j] === this.props.userId) {
             myCircles.push(circles[i])
           }
         }
