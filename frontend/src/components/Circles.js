@@ -38,7 +38,7 @@ class Circles extends Component {
       <React.Fragment>
 
         <div className="circle-list">
-          {this.state.circles.map(circle => <Link className="circle" to={'/circle/' + circle.id + '/' + circle.name} key={circle.id}>{circle.name}</Link>)}
+          {this.state.circles.map(circle => <Link className="circle-name" to={'/circle/' + circle.id + '/' + circle.name} key={circle.id}>{circle.name}</Link>)}
         </div>
       </React.Fragment>
     );

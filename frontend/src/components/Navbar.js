@@ -108,12 +108,13 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
-                    <h1> StayClose </h1>
+                    <h1> <Link  className="header" to="/profile"> StayClose</Link></h1>
                     <ul className="links">
                         <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
                         <li><button className="add" onClick={this.handleOpenModal}>+ Circle </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showModal} style={customStyles}>
+                                <button className="modal" onClick={this.handleCloseModal}>X</button>
                                 <h2>New Circle: </h2>
                                 <form onSubmit={this.handleSubmit}>
                                     <label>
@@ -130,7 +131,6 @@ class NavBar extends Component {
                                     <div></div>
                                     <button type='submit' value='create'>Create a Circle</button>
                                 </form>
-                                <button onClick={this.handleCloseModal}>Close Modal</button>
                             </ReactModal>
                         </div>
                         <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
