@@ -44,60 +44,28 @@ class NavBar extends Component {
     }
 
     handleSubmit = (event) => {
-        console.log('submit working')
+        let currName = this.state.name
+        let currAdmin = this.props.userId
         event.preventDefault();
         let config = {
             headers: {
-                Authorization: localStorage.getItem("access_key")
+                Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-
-        this.setState({ user: localStorage.getItem("username") })
-        this.setState({ userId: localStorage.getItem("userId") })
-
-        if (this.state.members !== '') {
-            axios.get('http://127.0.0.1:8000/api/users/', config, {
-            }).then(res => {
-                for (let i = 0; i < res.data.length; i++) {
-                    if (this.state.members === res.data[i].username) {
-                        this.setState({ addedMember: res.data[i].id })
-                    }
-                }
-                axios.post('http://127.0.0.1:8000/api/circles/', config, {
-                    name: this.state.name,
-                    created_at: "2020-11-30",
-                    admin: this.state.userId,
-                    members: [
-                        this.state.addedMember
-                    ]
-                }, config
-                ).then(res => {
-                    console.log(res)
-                    this.props.history.push("/profile");
-                }).catch(function (error) {
-                    alert('circle not created, try again')
-                })
-            })
-        }
-
-        else {
-
-            axios.post('http://127.0.0.1:8000/api/circles/', config, {
-                name: this.state.name,
+            axios.post('http://127.0.0.1:8000/api/circles/', {
+                name: currName,
                 created_at: "2020-11-30",
-                admin: this.state.userId,
+                admin: currAdmin,
                 members: []
-            },
+            }, config
             ).then(res => {
-                console.log(res)
-                this.props.history.push("/profile");
+                this.setState({ showModal: false} );
+                window.location.reload(false);
+                //this.props.history.push("/profile");
             }).catch(function (error) {
                 alert('circle not created, try again')
             })
-        }
-
-
-    }
+            }
 
     handleLogout() {
         window.localStorage.clear()
