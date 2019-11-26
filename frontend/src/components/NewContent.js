@@ -16,28 +16,28 @@ class NewContent extends Component {
     }
 
     handleSubmit = (event) => {
+        let post_text = this.state.post;
+        let member = this.props.match.params.userId;
+        let circle = this.props.match.params.circleId;
+        let date = new Date('2020-11-30');
+        let timestamp = date.getTime()/1000;
         event.preventDefault();
-        const { match: { params } } = this.props;
         let config = {
             headers: {
-                Authorization: localStorage.getItem("access_key")
+                Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
         axios.post('http://127.0.0.1:8000/api/content/',{
-            params: {
-                text_post: this.state.post,
-                img_post: null,
-                caption: "",
-                created_at: "2020-11-30",
-                updated_at: "2020-11-30",
-                likes: 0,
-                member: 1,
-                circle: 1,
-                tags: null
-            }
+            text_post: post_text,
+            img_post: null,
+            caption: "",
+            likes: 0,
+            member: member,
+            circle: circle,
+            tags: null
         }, config
         ).then(res => {
-            this.props.history.push('/circle/' + this.props.circleId + '/' + this.props.circleName)
+            this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
         })
     }
 

@@ -12,12 +12,11 @@ class CircleFeed extends Component {
     render() {
         const { match: { params } } = this.props;
         return (
-            <div>
-                <React.Fragment>
-                    <NavBar username={localStorage.getItem('username')} />
-                    <Content circleId={params.circleId} circleName={params.circleName}/>
-                </React.Fragment>
-            </div>
+            <React.Fragment>
+                <NavBar username={localStorage.getItem('username')} />
+                <Circle circleId={params.circleId}/>
+                <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
+            </React.Fragment>
         );
       }
 
