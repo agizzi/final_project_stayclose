@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter, useHistory } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -26,6 +26,7 @@ class NavBar extends Component {
             name: '',
             members: '',
             addedMember: '',
+            userId: '',
             showModal: false
         };
         this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -51,25 +52,21 @@ class NavBar extends Component {
             }
         }
 
+        this.setState({ user: localStorage.getItem("username") })
+        this.setState({ userId: localStorage.getItem("userId") })
+
         if (this.state.members !== '') {
             axios.get('http://127.0.0.1:8000/api/users/', config, {
             }).then(res => {
                 for (let i = 0; i < res.data.length; i++) {
-                    if (res.data[i].username === this.props.username) {
-                        console.log("true")
-                        this.setState({ user: res.data[i].id })
-                        console.log(this.state.user)
-                    }
                     if (this.state.members === res.data[i].username) {
-                        console.log('true')
                         this.setState({ addedMember: res.data[i].id })
                     }
                 }
                 axios.post('http://127.0.0.1:8000/api/circles/', config, {
                     name: this.state.name,
                     created_at: "2020-11-30",
-                    admin: this.state.user,
-                    content: [],
+                    admin: this.state.userId,
                     members: [
                         this.state.addedMember
                     ]
@@ -88,10 +85,9 @@ class NavBar extends Component {
             axios.post('http://127.0.0.1:8000/api/circles/', config, {
                 name: this.state.name,
                 created_at: "2020-11-30",
-                admin: this.state.user,
-                content: [],
+                admin: this.state.userId,
                 members: []
-            }, config
+            },
             ).then(res => {
                 console.log(res)
                 this.props.history.push("/profile");

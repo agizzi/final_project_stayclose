@@ -9,7 +9,8 @@ class ProfilePage extends Component {
         super(props);
 
         this.state = {
-            username: ''
+            username: '',
+            userId: '',
 
         };
     }
@@ -19,16 +20,21 @@ class ProfilePage extends Component {
         this.setState({ username: localStorage.getItem("username") })
         let config = {
             headers: {
-                Authorization: localStorage.getItem("access_key")
+                Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
+
+        axios.get('http://127.0.0.1:8000/api/user/', config, {
+        }).then(res => {
+            this.setState({ userId: res.data.id })
+        })
     }
 
     render() {
         return (
             <React.Fragment>
                 <NavBar username={this.state.username} />
-                <Circles username={this.state.username} />
+                <Circles username={this.state.username} userId={this.state.userId} />
             </React.Fragment>
 
         );

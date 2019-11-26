@@ -56,8 +56,9 @@ SITE_ID = 1
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
     ]
     # 'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
@@ -164,7 +165,7 @@ DEFF_PASSWORD = "88E6CC6E4E0B956B31C2684D8A42CAB497570655"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-REST_USE_JWT = True
+# REST_USE_JWT = True
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
