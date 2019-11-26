@@ -16,7 +16,7 @@ class CircleFeed extends Component {
             <React.Fragment>
                 <NavBar username={localStorage.getItem('username')} />
                 <Circle circleId={params.circleId}/>
-                <Content circleId={params.circleId} circleName={params.circleName}/>
+                <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
             </React.Fragment>
         );
       }
