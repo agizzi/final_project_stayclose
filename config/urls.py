@@ -9,7 +9,7 @@ router.register(r'users', api.UserViewSet, basename='User')
 router.register(r'circles', api.CircleViewSet, basename='Circle')
 router.register(r'content', api.ContentViewSet, basename='Content')
 router.register(r'comments', api.CommentsViewSet, basename='Comments')
-router.register(r'invites', api.InviteViewSet, basename='Invites')
+
 
 
 urlpatterns = [
