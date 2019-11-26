@@ -108,7 +108,7 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
-                    <h1> <Link  className="header" to="/profile"> StayClose</Link></h1>
+                    <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
                     <ul className="links">
                         <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
                         <li><button className="add" onClick={this.handleOpenModal}>+ Circle </button></li>
