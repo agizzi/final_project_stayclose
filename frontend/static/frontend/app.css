@@ -14,7 +14,14 @@
 .header {
     color: #79BFC0; 
     font-size: 50pt; 
-    margin-right: 60%; 
+    margin-right: 80%; 
+    text-decoration: none;
+}
+
+.header:hover {
+    color: rgb(137, 236, 237); 
+    font-size: 50pt; 
+    margin-right: 80%; 
     text-decoration: none;
 }
 
@@ -43,6 +50,8 @@ h2 {
     display: flex; 
     justify-content: space-evenly;
     margin-bottom: 50px; 
+    margin-left: 30px; 
+    margin-right: 30px; 
 }
 
 .links {
@@ -197,6 +206,14 @@ button:hover {
     text-decoration: none; 
 }
 
-form {
-    background-position: center;
+.content {
+    border-style: solid;
+    border-color: #BCCACA;
+    border-width: 5px; 
+    border-radius: 10px;
+    padding: 4rem; 
+}
+
+.content-header {
+    color: rgb(134, 134, 134); 
 }

@@ -44,7 +44,7 @@ class NewContent extends Component {
     render() {
     return (
         <div className='postForm'>
-            <h2>New Circle: </h2>
+            <h2>New Post: </h2>
             <form onSubmit={this.handleSubmit}>
                 <label>
                     Post:
