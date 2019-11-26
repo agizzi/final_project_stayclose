@@ -20,29 +20,15 @@ class Circles extends Component {
     console.log(this.props.userId)
     let config = {
       headers: {
-        Authorization: localStorage.getItem("access_key")
+        Authorization: `Token ${localStorage.getItem("access_key")}`
       }
     }
 
     axios.get('http://127.0.0.1:8000/api/circles/', config, {
     }).then(res => {
       let circles = res.data
-      console.log(circles.length)
-      let myCircles = [];
-      for (let i = 0; i < circles.length; i++) {
-        for (let j = 0; j < circles[i].members.length; j++) {
-          console.log(circles[i].members[j] === this.props.userId)
-
-          if (circles[i].admin === this.props.userId || circles[i].members[j] === this.props.userId) {
-            myCircles.push(circles[i])
-          }
-        }
-
-      }
-
-
-      this.setState({ circles: myCircles })
-      console.log(myCircles)
+      this.setState({ circles: circles })
+      console.log(circles)
 
     })
   }

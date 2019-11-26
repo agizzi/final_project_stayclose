@@ -3,10 +3,12 @@ from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer, InviteSerializer
+from django.db.models import Q
 
 class LoggedInUserView(APIView):
   def get(self, request, format=None):
     current_user = self.request.user
+
     return Response(UserSerializer(current_user).data)
 
 
@@ -24,11 +26,19 @@ class CircleViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows circles to be viewed or edited.
   """
-  queryset = Circle.objects.all()
+  
   permission_classes = [
     permissions.AllowAny
   ]
   serializer_class = CircleSerializer
+
+  def get_queryset(self):
+    current_user = self.request.user
+    admin_circles = Circle.objects.filter(Q(admin=self.request.user))
+    member_circles = Circle.objects.filter(members__pk = self.request.user.id)
+    circles = member_circles.difference(admin_circles)
+    circles = circles.union(admin_circles)
+    return circles
 
 class ContentViewSet(viewsets.ModelViewSet):
   """
