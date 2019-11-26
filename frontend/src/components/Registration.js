@@ -15,7 +15,7 @@ class RegistrationForm extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://127.0.0.1:8000/api/rest-auth/registration/', {
+        axios.post('/api/rest-auth/registration/', {
             username: this.state.user,
             email: this.state.email,
             password1: this.state.pass1,

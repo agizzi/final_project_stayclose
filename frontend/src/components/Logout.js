@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 
-axios.post('http://127.0.0.1:8000/api/rest-auth/logout/', {
+axios.post('/api/rest-auth/logout/', {
 }).then(res => {
     console.log(res)
     this.props.history.push("/logout");

@@ -18,7 +18,7 @@ class Content extends Component {
                 Authorization: localStorage.getItem("access_key")
             }
         }
-        axios.get('http://127.0.0.1:8000/api/content-by-circle/', {
+        axios.get('/api/content-by-circle/', {
             params: {
                 id: this.props.circleId
             }
@@ -40,6 +40,9 @@ class Content extends Component {
                 <React.Fragment>
                     Members: <Circle circleId={params.circleId} />
                 </React.Fragment>
+                <div className="postButton">
+                    <button type="button" className="add"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')} >Add Post</Link></button>
+                </div>
             </div>
         );
     }
