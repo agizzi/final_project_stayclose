@@ -19,6 +19,7 @@ class NewCircle extends Component {
 
 
     handleSubmit = (event) => {
+        console.log(this.props.user)
         event.preventDefault();
         let config = {
             headers: {
@@ -27,7 +28,7 @@ class NewCircle extends Component {
         }
 
         if (this.state.members !== '') {
-            axios.get('http://127.0.0.1:8000/api/users/', config, {
+            axios.get('/api/users/', config, {
             }).then(res => {
                 for (let i = 0; i < res.data.length; i++) {
                     if (this.state.members === res.data[i].username) {
@@ -35,7 +36,7 @@ class NewCircle extends Component {
                     }
                 }
 
-                axios.post('http://127.0.0.1:8000/api/circles/', {
+                axios.post('/api/circles/', {
                     name: this.state.name,
                     created_at: "2020-11-30",
                     admin: 1,
