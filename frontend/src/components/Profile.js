@@ -28,7 +28,6 @@ class ProfilePage extends Component {
         }).then(res => {
             for (let i = 0; i < res.data.length; i++) {
                 if (res.data[i].username === this.state.username) {
-                    console.log("true")
                     this.setState({ userId: res.data[i].id })
                     localStorage.setItem('userId', this.state.userId);
                 }

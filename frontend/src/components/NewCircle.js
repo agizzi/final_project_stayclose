@@ -7,10 +7,6 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
 
 
-
-console.log("new-circle")
-
-
 class NewCircle extends Component {
     constructor(props) {
         super(props);
@@ -35,7 +31,6 @@ class NewCircle extends Component {
             }).then(res => {
                 for (let i = 0; i < res.data.length; i++) {
                     if (this.state.members === res.data[i].username) {
-                        console.log('true')
                         this.setState({ addedMember: res.data[i].id })
                     }
                 }
@@ -50,7 +45,7 @@ class NewCircle extends Component {
                     ]
                 }, config
                 ).then(res => {
-                    console.log(res)
+
                     this.props.history.push("/profile");
                 }).catch(function (error) {
                     alert('circle not created, try again')
