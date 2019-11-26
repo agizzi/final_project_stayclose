@@ -1,11 +1,42 @@
-body {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: 'Quicksand', sans-serif;
-    background: url('https://66.media.tumblr.com/d2662e0ce640759d5c3d835bff85117c/17b3ba5bedb840e0-cc/s1280x1920/0478e11be1fa6adab961bfedfdf9d67e0ea9b4c3.png');
+}
+
+/* .background { 
+    background-image: url('https://66.media.tumblr.com/d2662e0ce640759d5c3d835bff85117c/17b3ba5bedb840e0-cc/s1280x1920/0478e11be1fa6adab961bfedfdf9d67e0ea9b4c3.png');
     background-repeat: no-repeat;
-    background-size: cover; 
+    background-size: cover;  
+} */
+
+.header {
+    color: #79BFC0; 
+    font-size: 50pt; 
+    margin-right: 60%; 
+    text-decoration: none;
+}
+
+.login-header {
+    color: #79BFC0; 
+    font-size: 50pt; 
+    margin-top: 10%; 
+    margin-bottom: 10%; 
+}
+
+.login-p {
+    color: rgb(155, 168, 168); 
+}
+
+h2 {
+    color: #79BFC0; 
+    font-size: 30pt; 
+    margin-bottom: 10%; 
+}
+
+.signin {
+    margin-bottom: 20px; 
 }
 
 .navbar{
@@ -15,6 +46,7 @@ body {
 }
 
 .links {
+    margin-top: 20px; 
     display: flex;
     justify-content: space-evenly;
 }
@@ -31,7 +63,7 @@ li {
     width: 35px;
     height: 5px;
     background-color: #CBDFDF;
-    margin: 6px 0;
+    margin: 6px 0 0 6px;
 }
 
 .add {
@@ -64,32 +96,25 @@ li {
     text-decoration: none;
 }
 
-h1 {
-    color: #79BFC0; 
-    font-size: 50pt; 
-    margin-right: 40%; 
-    margin-top: 0; 
-}
-
-.circle {
-    border-radius: 50%;
-    background-color: #E7E564; 
-    padding: 80px; 
-    width: 50px; 
-    height: 50px; 
-    text-align: center;
-    color: white; 
-    text-decoration: none;
-    font-size: 14pt;
-    margin-left: 50px; 
-    margin-bottom: 50px; 
-} 
-
 .circle-list {
     display: flex; 
     justify-content: space-evenly;
     flex-wrap: wrap; 
 }
+
+.circle-name {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    font-size: 14pt;
+    background-color: #79BFC0;
+    line-height: 180px;
+    text-align: center;
+    margin: 50px; 
+    color: white; 
+    text-decoration: none; 
+}
+
 
 .login-page {
     display: flex; 
@@ -105,6 +130,10 @@ h1 {
     padding: 30px; 
 }
 
+.signin {
+    margin-left: 210px; 
+}
+
 input {
     border-style: solid; 
     border-color:#CBDFDF;  
@@ -112,12 +141,9 @@ input {
     border-radius: 10px; 
     background-color: white; 
     padding: 10px; 
-    width: 240px; 
+    width: 250px; 
     margin-bottom: 20px; 
-}
-
-.signin {
-    margin-left: 210px; 
+    outline: none;
 }
 
 .registration {
@@ -133,11 +159,23 @@ input {
     border-radius: 10%; 
     padding: 30px; 
 }
+.modal {
+    margin-left: 93%; 
+}
+
+label {
+    color: rgb(155, 168, 168); 
+}
 
 button {
     color: #BCCACA;
     cursor: pointer;
     text-decoration: none;
+    padding: 5px; 
+    border-radius: 10%; 
+    border-color: #BCCACA;
+    border-width: 1px; 
+    outline: none; 
 }
 
 button:hover {
@@ -145,14 +183,18 @@ button:hover {
     cursor: pointer;
     text-decoration: none;
 }
+.member {
+    color: rgb(155, 168, 168); 
+}
 
-ReactModal {
-    border-style: solid; 
-    border-color: #CBDFDF;
-    border-radius: 10px; 
-    background-color: white; 
-    padding: 50px; 
-    width: 275px; 
+.register-link {
+    color: rgb(134, 134, 134); 
+    text-decoration: none; 
+}
+
+.register-link:hover {
+    color: rgb(78, 75, 75); 
+    text-decoration: none; 
 }
 
 form {

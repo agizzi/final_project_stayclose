@@ -43,8 +43,8 @@ class LoginForm extends Component {
 
             <div className="login-page" >
                 <div className="login-1">
-                    <h1>StayClose</h1>
-                    <p>"Personal. Practical. Private."</p>
+                    <h1 className="login-header">StayClose</h1>
+                    <p className="login-p">"Personal. Practical. Private."</p>
                 </div>
                 <div className="login-2">
                     <h2>Sign In:</h2>
@@ -63,8 +63,8 @@ class LoginForm extends Component {
                         <div></div>
                         <button type='submit' value='submit' className="signin"> Sign In</button>
                     </form>
-                    <p>
-                        Not a Member? <Link to="/register"> Click Here to Register</Link>
+                    <p className="member">
+                        Not a Member? <Link className="register-link" to="/register"> Click Here to Register</Link>
                     </p>
                 </div>
             </div >
