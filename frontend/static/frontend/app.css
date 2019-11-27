@@ -123,6 +123,18 @@ li {
     text-decoration: none; 
 }
 
+.pending-circle-name {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    font-size: 14pt;
+    background-color: palevioletred;
+    line-height: 180px;
+    text-align: center;
+    margin: 50px; 
+    color: white; 
+    text-decoration: none; 
+}
 
 .login-page {
     display: flex; 
