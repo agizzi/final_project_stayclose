@@ -1,8 +1,8 @@
-from .models import User, Circle, Content, Comments, Invite
+from .models import User, Circle, Content, Comments
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer, InviteSerializer
+from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer
 from django.db.models import Q
 
 class LoggedInUserView(APIView):
@@ -49,16 +49,6 @@ class CommentsViewSet(viewsets.ModelViewSet):
   """
   queryset = Comments.objects.all()
   serializer_class = CommentsSerializer
-  permission_classes = [
-    permissions.AllowAny
-  ]
-
-class InviteViewSet(viewsets.ModelViewSet):
-  """
-  API Endpoint that allows invites to be viewed or edited.
-  """
-  queryset = Invite.objects.all()
-  serializer_class = InviteSerializer
   permission_classes = [
     permissions.AllowAny
   ]

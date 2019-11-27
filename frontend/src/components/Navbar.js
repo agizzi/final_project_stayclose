@@ -52,7 +52,7 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-            axios.post('http://127.0.0.1:8000/api/circles/', {
+            axios.post('/api/circles/', {
                 name: currName,
                 created_at: "2020-11-30",
                 admin: currAdmin,

@@ -21,6 +21,7 @@ class Circle(models.Model):
   name = fields.EncryptedCharField(max_length = 100)
   admin = models.ForeignKey(to="User", related_name="is_admin", on_delete=models.CASCADE)
   members = models.ManyToManyField(to="User", related_name="mates", blank=True)
+  pending_members = models.ManyToManyField(to="User", related_name="pending", blank=True)
   created_at = fields.EncryptedDateField(default = date.today)
 
 
@@ -51,12 +52,3 @@ class Comments(models.Model):
 
   def __str__(self):
     return self.comment
-
-class Invite(models.Model):
-  sender = models.ForeignKey(to="User", related_name="invites", on_delete=models.CASCADE)
-  receiver = fields.EncryptedEmailField(max_length=254)
-  message = fields.EncryptedTextField()
-  register_link = fields.EncryptedTextField()
-
-  def __str__(self):
-    return self.receiver

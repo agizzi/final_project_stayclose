@@ -15,7 +15,6 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
     }
 };
-
 class Toolbar extends Component {
   constructor(props) {
     super(props);

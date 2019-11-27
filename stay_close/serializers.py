@@ -1,4 +1,4 @@
-from .models import User, Circle, Content, Comments, Invite
+from .models import User, Circle, Content, Comments
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
@@ -21,7 +21,3 @@ class CommentsSerializer(serializers.ModelSerializer):
     model = Comments
     fields = '__all__'
 
-class InviteSerializer(serializers.ModelSerializer):
-  class Meta:
-    model = Invite
-    fields = '__all__'

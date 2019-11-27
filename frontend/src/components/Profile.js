@@ -24,7 +24,7 @@ class ProfilePage extends Component {
             }
         }
 
-        axios.get('http://127.0.0.1:8000/api/user/', config, {
+        axios.get('/api/user/', config, {
         }).then(res => {
             this.setState({ userId: res.data.id })
         })

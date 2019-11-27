@@ -19,7 +19,7 @@ class CircleFeed extends Component {
                 <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
             </React.Fragment>
         );
-      }
+    }
 
 }
 
