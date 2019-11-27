@@ -21,7 +21,7 @@
 .header:hover {
     color: rgb(137, 236, 237); 
     font-size: 50pt; 
-    margin-right: 80%; 
+    /* margin-right: 80%;  */
     text-decoration: none;
 }
 
@@ -49,14 +49,13 @@ h2 {
 .navbar{
     display: flex; 
     justify-content: space-evenly;
-    margin-bottom: 50px; 
-    margin-left: 30px; 
-    margin-right: 30px; 
+    margin: 16px 30px 25px; 
 }
 
-.links {
+.links-2 {
     margin-top: 20px; 
     display: flex;
+    margin-left: 29%;
     justify-content: space-evenly;
 }
 
@@ -218,7 +217,7 @@ button:hover {
     text-decoration: none; 
 }
 
-.content {
+.content-1 {
     border-style: solid;
     border-color: #BCCACA;
     border-width: 5px; 
@@ -226,6 +225,113 @@ button:hover {
     padding: 4rem; 
 }
 
+.content-2 {
+    border-style: solid;
+    border-color: #BCCACA;
+    border-width: 5px; 
+    border-radius: 10px;
+    padding: 32px; 
+    display: flex; 
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+
 .content-header {
     color: rgb(134, 134, 134); 
+}
+
+h3 {
+    color: rgb(134, 134, 134); 
+    margin-top: 15px; 
+    margin-bottom: 20px; 
+}
+
+canvas {
+    background-image: url('https://www.logolynx.com/images/logolynx/03/039b004617d1ef43cf1769aae45d6ea2.png');
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+.message {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    color: #79BFC0; 
+}
+
+.edit {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.delete {
+    display: flex;
+    justify-content: space-evenly;
+}
+ 
+
+.post-2 {
+    padding: 30px 50px; 
+    width: 80%; 
+}
+
+.posting-1 {
+    color: rgb(134, 134, 134); 
+}
+
+.posting-2 {
+    margin-bottom: 30px; 
+    text-align: center;
+    color: rgb(134, 134, 134); 
+}
+
+.posting-3 {
+    margin-bottom: 40px; 
+    color: rgb(134, 134, 134); 
+    margin-left: 60%; 
+}
+
+.editor {
+    margin-right: 10px; 
+    margin-left: 83%; 
+}
+
+.content-header {
+    margin-bottom: 30px; 
+}
+
+.postButton {
+    margin-left: 85%
+}
+
+.editing-input {
+    width: 650px; 
+    height: 100px; 
+    text-align: center; 
+}
+
+.exit {
+    margin-left: 97%; 
+}
+
+.exiter {
+    margin-left: 97%; 
+    margin-bottom: 20px; 
+}
+
+.delete-message {
+    margin-bottom: 20px; 
+}
+
+.new-post-header {
+    margin-bottom: 20px;
+}
+
+.postmate {
+    margin-bottom: 10px; 
+}
+
+.posting-input {
+    width: 650px; 
+    height: 100px; 
+    text-align: center; 
 }
