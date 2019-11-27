@@ -3,6 +3,7 @@ import NavBar from './NavBar';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Circles from './Circles'
+import PendingCircles from './PendingCircles';
 
 class ProfilePage extends Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class ProfilePage extends Component {
         return (
             <React.Fragment>
                 <NavBar username={this.state.username} userId={this.state.userId} />
+                <PendingCircles username={this.state.username} userID={this.state.userId} />
                 <Circles username={this.state.username} userId={this.state.userId} />
             </React.Fragment>
 
