@@ -135,9 +135,6 @@ class Content extends Component {
                 <React.Fragment>
                     Members: <Circle circleId={params.circleId} />
                 </React.Fragment>
-                <div className="postButton">
-                    <button type="button" className="add"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')} >Add Post</Link></button>
-                </div>
             </div>
         );
     }
