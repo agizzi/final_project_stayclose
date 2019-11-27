@@ -56,7 +56,7 @@ class NewCircle extends Component {
 
         else {
 
-            axios.post('http://127.0.0.1:8000/api/circles/', {
+            axios.post('/api/circles/', {
                 name: this.state.name,
                 created_at: "2020-11-30",
                 admin: 1,

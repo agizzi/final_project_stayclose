@@ -84,3 +84,19 @@ class CirclesByUser(APIView):
       serializer = CircleSerializer(circles, many=True)
       return Response(serializer.data)
 
+class PendingCirclesByUser(APIView):
+  def get(self, request, format=None):
+      current_user = self.request.user
+      pending_circles = Circle.objects.filter(pending_members__pk = self.request.user.id)
+      serializer = CircleSerializer(pending_circles, many=True)
+      return Response(serializer.data)
+
+# class AdminOfPendingCircle(APIView):
+#   def get(self, request, format=None):
+#     current_user = self.request.user
+#     admin_user = Users.objects.filter(admin=self.request.user)
+
+# class AnyUserByUsername(APIView):
+#   def get(self, request, format=None):
+#     current_user = self.request.user
+

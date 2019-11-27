@@ -32,7 +32,7 @@ class Content extends Component {
     }
 
     handleOpenDeleteModal(id) {
-        this.setState({ contentId: id});
+        this.setState({ contentId: id });
         this.setState({ showDeleteModal: true });
     }
 
@@ -41,43 +41,43 @@ class Content extends Component {
     }
 
     handleOpenEditModal(text, id) {
-        this.setState({ post: text})
-        this.setState({ contentId: id});
+        this.setState({ post: text })
+        this.setState({ contentId: id });
         this.setState({ showEditModal: true });
     }
 
     handleCloseEditModal() {
-        this.setState({ post: ''});
+        this.setState({ post: '' });
         this.setState({ showEditModal: false });
     }
 
-    handleDelete(){
+    handleDelete() {
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.delete('http://127.0.0.1:8000/api/content/' + this.state.contentId, config, {
+        axios.delete('/api/content/' + this.state.contentId, config, {
         }).then(res => {
-            this.setState({ showDeleteModal: false} );
+            this.setState({ showDeleteModal: false });
             this.componentDidMount();
             this.forceUpdate();
         })
     }
 
-    handleEdit(){
+    handleEdit() {
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.patch('http://127.0.0.1:8000/api/content/' + this.state.contentId + '/', {
+        axios.patch('/api/content/' + this.state.contentId + '/', {
             text_post: this.state.post
         }, config
         ).then(res => {
             console.log(this.state.post);
-            this.setState({ showEditModal: false} );
-            this.setState({ text: ''});
+            this.setState({ showEditModal: false });
+            this.setState({ text: '' });
             this.componentDidMount();
             this.forceUpdate();
         })
@@ -107,29 +107,29 @@ class Content extends Component {
                 <div className="contentDetail">
                     <h1 className="content-header">{this.props.circleName}</h1>
                     {this.state.contents.map(content =>
-                    <div className="content" key={content.id}>
-                        <div className="avatar"></div>
-                        <p>text: {content.text_post}</p>
-                        <p>author: {content.author}</p>
-                        <p>created at: {content.created_at}</p>
-                        <button onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
-                        <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
+                        <div className="content" key={content.id}>
+                            <div className="avatar"></div>
+                            <p>text: {content.text_post}</p>
+                            <p>author: {content.author}</p>
+                            <p>created at: {content.created_at}</p>
+                            <button onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
+                            <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                 <button className="modal" onClick={(e) => this.handleCloseEditModal()}>X</button>
                                 <h2>Edit</h2>
                                 <form>
-                                <input type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                                    <input type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                                 </form>
                                 <button className="delete" onClick={(e) => this.handleEdit()}>Yes</button>
                                 <button className="no" onClick={(e) => this.handleCloseEditModal()}>No</button>
-                        </ReactModal>
-                        <button onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
-                        <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
+                            </ReactModal>
+                            <button onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                            <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                 <button className="modal" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                 <h2>Delete?</h2>
                                 <button className="delete" onClick={(e) => this.handleDelete()}>Yes</button>
                                 <button className="no" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
-                        </ReactModal>
-                    </div>
+                            </ReactModal>
+                        </div>
                     )}
                 </div>
                 <React.Fragment>
