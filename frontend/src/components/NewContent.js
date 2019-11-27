@@ -45,12 +45,12 @@ class NewContent extends Component {
     render() {
         return (
             <div className='postForm'>
-                <h2>New Post: </h2>
+                <h2 className="new-post-header">New Post: </h2>
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Post:
+                        <p className="postmate">Post: </p>
                     <div></div>
-                        <input type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                        <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                         <div></div>
                     </label>
                     <div></div>

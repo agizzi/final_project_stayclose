@@ -80,7 +80,7 @@ class NavBar extends Component {
             return (
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
-                    <ul className="links">
+                    <ul className="links-2">
                         <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
                         <li><button className="add" onClick={this.handleOpenModal}>+ Circle </button></li>
                         <div>
