@@ -30,6 +30,7 @@ class Circle(models.Model):
 
 class Content(models.Model):
   member = models.ForeignKey(to="User", related_name="poster", on_delete=models.CASCADE)
+  author = models.CharField(max_length=255, blank=True, null=True)
   circle = models.ForeignKey(to="Circle", related_name="posts", on_delete=models.CASCADE)
   text_post = fields.EncryptedTextField(blank=True, null=True)
   img_post = EncryptedImageField(blank=True, null=True)

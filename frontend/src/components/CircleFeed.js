@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import NavBar from './NavBar'
 import Content from './Content'
-// import Toolbar from './Toolbar'
+import Toolbar from './Toolbar'
 
 class CircleFeed extends Component {
     constructor(props) {
@@ -14,9 +14,9 @@ class CircleFeed extends Component {
         const { match: { params } } = this.props;
         return (
             <React.Fragment>
-                <NavBar username={localStorage.getItem('username')} />
-                <Circle circleId={params.circleId} />
-                <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} />
+                <NavBar username={localStorage.getItem('username')} userId={params.userId}/>
+                <Toolbar circleId={params.circleId} circleName={params.circleName} />
+                <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
             </React.Fragment>
         );
     }

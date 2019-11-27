@@ -26,19 +26,11 @@ class CircleViewSet(viewsets.ModelViewSet):
   """
   API Endpoint that allows circles to be viewed or edited.
   """
-  
+  queryset = Circle.objects.all()
   permission_classes = [
     permissions.AllowAny
   ]
   serializer_class = CircleSerializer
-
-  def get_queryset(self):
-    current_user = self.request.user
-    admin_circles = Circle.objects.filter(Q(admin=self.request.user))
-    member_circles = Circle.objects.filter(members__pk = self.request.user.id)
-    circles = member_circles.difference(admin_circles)
-    circles = circles.union(admin_circles)
-    return circles
 
 class ContentViewSet(viewsets.ModelViewSet):
   """
@@ -71,7 +63,7 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(circle=circle)
+    content = Content.objects.filter(circle=circle).order_by('-created_at')
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
@@ -81,4 +73,14 @@ class CurrentUserByUsername(APIView):
     user = User.objects.filter(username=username)
     serializer = UserSerializer(user, many=True)
     return Response(serializer.data)
+
+class CirclesByUser(APIView):
+  def get(self, request, format=None):
+      current_user = self.request.user
+      admin_circles = Circle.objects.filter(Q(admin=self.request.user))
+      member_circles = Circle.objects.filter(members__pk = self.request.user.id)
+      circles = member_circles.difference(admin_circles)
+      circles = circles.union(admin_circles)
+      serializer = CircleSerializer(circles, many=True)
+      return Response(serializer.data)
 

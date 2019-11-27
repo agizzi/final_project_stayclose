@@ -52,20 +52,23 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.post('/api/circles/', {
-            name: currName,
-            created_at: "2020-11-30",
-            admin: currAdmin,
-            members: []
-        }, config
-        ).then(res => {
-            this.setState({ showModal: false });
-            window.location.reload(false);
-            //this.props.history.push("/profile");
-        }).catch(function (error) {
-            alert('circle not created, try again')
-        })
-    }
+            axios.post('/api/circles/', {
+                name: currName,
+                created_at: "2020-11-30",
+                admin: currAdmin,
+                members: []
+            }, config
+            ).then(res => {
+                this.setState({ showModal: false} );
+                if (this.props.location.pathname != '/profile/'){
+                    this.props.history.push('/profile');
+                } else {
+                    window.location.reload(false);
+                }
+            }).catch(function (error) {
+                alert('circle not created, try again')
+            })
+            }
 
     handleLogout() {
         window.localStorage.clear()
@@ -91,12 +94,6 @@ class NavBar extends Component {
                                         <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
                                         <div></div>
                                     </label>
-                                    <label>
-                                        Add Members:
-                                        <div></div>
-                                        <input type='text' value={this.state.members} onChange={(e) => this.setState({ members: e.target.value })} />
-                                    </label>
-                                    <div></div>
                                     <button type='submit' value='create'>Create a Circle</button>
                                 </form>
                             </ReactModal>
