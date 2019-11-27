@@ -20,30 +20,64 @@ class Content extends Component {
 
         this.state = {
             contents: [],
-            showModal: false
+            contentId: '',
+            post: '',
+            showDeleteModal: false,
+            showEditModal: false
         }
-        this.handleOpenModal = this.handleOpenModal.bind(this);
-        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleOpenDeleteModal = this.handleOpenDeleteModal.bind(this);
+        this.handleCloseDeleteModal = this.handleCloseDeleteModal.bind(this);
+        this.handleOpenEditModal = this.handleOpenEditModal.bind(this);
+        this.handleClosEditModal = this.handleCloseEditModal.bind(this);
     }
 
-    handleOpenModal() {
-        this.setState({ showModal: true });
+    handleOpenDeleteModal(id) {
+        this.setState({ contentId: id});
+        this.setState({ showDeleteModal: true });
     }
 
-    handleCloseModal() {
-        this.setState({ showModal: false });
+    handleCloseDeleteModal() {
+        this.setState({ showDeleteModal: false });
     }
 
-    handleDelete(id){
-        console.log(id);
+    handleOpenEditModal(text, id) {
+        this.setState({ post: text})
+        this.setState({ contentId: id});
+        this.setState({ showEditModal: true });
+    }
+
+    handleCloseEditModal() {
+        this.setState({ post: ''});
+        this.setState({ showEditModal: false });
+    }
+
+    handleDelete(){
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.delete('http://127.0.0.1:8000/api/content/' + id, config, {
+        axios.delete('http://127.0.0.1:8000/api/content/' + this.state.contentId, config, {
         }).then(res => {
-            this.setState({ showModal: false} );
+            this.setState({ showDeleteModal: false} );
+            this.componentDidMount();
+            this.forceUpdate();
+        })
+    }
+
+    handleEdit(){
+        let config = {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
+        }
+        axios.patch('http://127.0.0.1:8000/api/content/' + this.state.contentId + '/', {
+            text_post: this.state.post
+        }, config
+        ).then(res => {
+            console.log(this.state.post);
+            this.setState({ showEditModal: false} );
+            this.setState({ text: ''});
             this.componentDidMount();
             this.forceUpdate();
         })
@@ -78,13 +112,22 @@ class Content extends Component {
                         <p>text: {content.text_post}</p>
                         <p>author: {content.author}</p>
                         <p>created at: {content.created_at}</p>
-                        <button>Edit</button>
-                        <button onClick={this.handleOpenModal}>Delete</button>
-                        <ReactModal isOpen={this.state.showModal} style={customStyles}>
-                                <button className="modal" onClick={this.handleCloseModal}>X</button>
+                        <button onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
+                        <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
+                                <button className="modal" onClick={(e) => this.handleCloseEditModal()}>X</button>
+                                <h2>Edit</h2>
+                                <form>
+                                <input type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                                </form>
+                                <button className="delete" onClick={(e) => this.handleEdit()}>Yes</button>
+                                <button className="no" onClick={(e) => this.handleCloseEditModal()}>No</button>
+                        </ReactModal>
+                        <button onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                        <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
+                                <button className="modal" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                 <h2>Delete?</h2>
-                                <button className="delete" onClick={(e) => this.handleDelete(content.id)}>Yes</button>
-                                <button className="no" onClick={this.handleDelete}>No</button>
+                                <button className="delete" onClick={(e) => this.handleDelete()}>Yes</button>
+                                <button className="no" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                         </ReactModal>
                     </div>
                     )}
