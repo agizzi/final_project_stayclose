@@ -24,7 +24,7 @@ class Circles extends Component {
       }
     }
 
-    axios.get('http://127.0.0.1:8000/api/circles/', config, {
+    axios.get('/api/circles-by-user', config, {
     }).then(res => {
       let circles = res.data
       this.setState({ circles: circles })

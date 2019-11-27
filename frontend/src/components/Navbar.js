@@ -60,8 +60,11 @@ class NavBar extends Component {
             }, config
             ).then(res => {
                 this.setState({ showModal: false} );
-                window.location.reload(false);
-                //this.props.history.push("/profile");
+                if (this.props.location.pathname != '/profile/'){
+                    this.props.history.push('/profile');
+                } else {
+                    window.location.reload(false);
+                }
             }).catch(function (error) {
                 alert('circle not created, try again')
             })
@@ -91,12 +94,6 @@ class NavBar extends Component {
                                         <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
                                         <div></div>
                                     </label>
-                                    <label>
-                                        Add Members:
-                                        <div></div>
-                                        <input type='text' value={this.state.members} onChange={(e) => this.setState({ members: e.target.value })} />
-                                    </label>
-                                    <div></div>
                                     <button type='submit' value='create'>Create a Circle</button>
                                 </form>
                             </ReactModal>

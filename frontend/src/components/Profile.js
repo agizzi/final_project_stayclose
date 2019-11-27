@@ -33,7 +33,7 @@ class ProfilePage extends Component {
     render() {
         return (
             <React.Fragment>
-                <NavBar username={this.state.username} userId={this.state.userId}/>
+                <NavBar username={this.state.username} userId={this.state.userId} />
                 <Circles username={this.state.username} userId={this.state.userId} />
             </React.Fragment>
 
