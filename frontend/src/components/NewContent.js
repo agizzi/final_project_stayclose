@@ -11,7 +11,8 @@ class NewContent extends Component {
 
         this.state = {
             post: '',
-            userId: ''
+            userId: '',
+            username: localStorage.getItem('username')
         }
     }
 
@@ -28,7 +29,7 @@ class NewContent extends Component {
             }
         }
         axios.post('/api/content/', {
-            author: 'placeholder',
+            author: this.state.username,
             text_post: post_text,
             img_post: null,
             caption: "",

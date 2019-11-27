@@ -19,7 +19,9 @@ urlpatterns = [
     path('api/content-by-circle/', api.ContentByCircle.as_view()),
     path('api/current-user/', api.CurrentUserByUsername.as_view()),
     path('api/user/', api.LoggedInUserView.as_view()),
-    path('api/circles-by-user', api.CirclesByUser.as_view()),
+    path('api/circles-by-user/', api.CirclesByUser.as_view()),
+    path('api/pending-circles-by-user/', api.PendingCirclesByUser.as_view()),
+    path('api/user-by-username/', api.UserByUsername.as_view()),
     # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
     path('api/rest-auth/', include('rest_auth.urls')),
@@ -29,4 +31,5 @@ urlpatterns = [
     path('register/', include('frontend.urls')),
     path('profile/', include('frontend.urls')),
     path('new-circle/', include('frontend.urls')),
+    path('circle/<int:pk>/<str:circleName>/<int:id>/', include('frontend.urls'))
 ]
