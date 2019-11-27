@@ -77,7 +77,7 @@ class CurrentUserByUsername(APIView):
 class CirclesByUser(APIView):
   def get(self, request, format=None):
       current_user = self.request.user
-      admin_circles = Circle.objects.filter(Q(admin=self.request.user))
+      admin_circles = Circle.objects.filter(admin=self.request.user)
       member_circles = Circle.objects.filter(members__pk = self.request.user.id)
       circles = member_circles.difference(admin_circles)
       circles = circles.union(admin_circles)

@@ -16,8 +16,6 @@ class Circles extends Component {
   }
 
   componentDidMount() {
-
-    console.log(this.props.userId)
     let config = {
       headers: {
         Authorization: `Token ${localStorage.getItem("access_key")}`
