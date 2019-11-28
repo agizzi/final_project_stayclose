@@ -1,6 +1,7 @@
 from .models import User, Circle, Content, Comments
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+from django.http import HttpResponse
 from rest_framework.views import APIView
 from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer
 from django.db.models import Q
@@ -63,7 +64,7 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(circle=circle).order_by('-created_at')
+    content = Content.objects.filter(circle=circle).order_by('created_at')
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
@@ -100,13 +101,28 @@ class UserByUsername(APIView):
   def get(self, request, format=None):
     usernames = request.query_params.get("entered_usernames")
     usernames = usernames.split(" ")
-    
     queryset = User.objects.none()
     for username in usernames:
       user = User.objects.filter(username = username)
       if user:
         queryset = queryset.union(user)
-    serializer = UserSerializer(queryset, many=True)      
+    serializer = UserSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+class RemoveUserFromCircle(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    circleId = request.query_params.get('circleId')
+    user = User.objects.get(pk=userId)
+    circle = Circle.objects.get(pk=circleId)
+    circle.members.remove(user)
+    return HttpResponse(status=200)
+
+class CommentsByContent(APIView):
+  def get(self, request, format=None):
+    contentId = request.query_params.get('contentId')
+    comments = Comments.objects.filter(content=contentId)
+    serializer = CommentsSerializer(comments, many=True)
     return Response(serializer.data)
 
 

@@ -20,6 +20,7 @@ class Content extends Component {
 
         this.state = {
             contents: [],
+            comments: {},
             contentId: '',
             post: '',
             showDeleteModal: false,
@@ -75,7 +76,6 @@ class Content extends Component {
             text_post: this.state.post
         }, config
         ).then(res => {
-            console.log(this.state.post);
             this.setState({ showEditModal: false });
             this.setState({ text: '' });
             this.componentDidMount();
@@ -84,6 +84,7 @@ class Content extends Component {
     }
 
     componentDidMount() {
+        let comments = {};
         let config = {
             headers: {
                 Authorization: localStorage.getItem("access_key")
@@ -98,6 +99,23 @@ class Content extends Component {
             let content = res.data
             this.setState({ contents: content })
         })
+        for (let i=0; i<this.state.contents.length; i++){
+            let config = {
+                headers: {
+                    Authorization: localStorage.getItem("access_key")
+                }
+            }
+            axios.get('/api/comments-by-content/', {
+                params: {
+                    id: this.state.contents[i]['id']
+                }
+            }, config
+            ).then(res => {
+                let comment = res.data
+                comments[this.contents[i]['id']] = comment
+            })
+        }
+        this.setState({ comments: comments })
     }
 
     render() {
@@ -116,7 +134,9 @@ class Content extends Component {
                                 <p className="posting-1">author: {content.author}</p>
                                 <p className="posting-2"> "{content.text_post}"</p>
                                 <p className="posting-3">created at: {content.created_at}</p>
+                                {content.member == this.props.userId &&
                                 <button className="editor" onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
+                                }
                                 <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                     <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
                                     <h3>Edit Your Post: </h3>
@@ -128,7 +148,9 @@ class Content extends Component {
                                         <button className="editing" onClick={(e) => this.handleCloseEditModal()}>Do Not Save</button>
                                     </div>
                                 </ReactModal>
+                                {content.member == this.props.userId &&
                                 <button className="deleter" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                                }
                                 <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                     <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                     <h3 className="delete-message">Are you sure you want to delete your post?</h3>

@@ -335,3 +335,8 @@ canvas {
     height: 100px; 
     text-align: center; 
 }
+
+.profile-pic {
+    height: 150px;
+    width: 150px;
+}
