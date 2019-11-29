@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Circle from './Circle';
+import ContentLikes from './ContentLikes';
+import Comments from './Comments';
 import ReactModal from 'react-modal';
 
 const customStyles = {
@@ -20,11 +22,10 @@ class Content extends Component {
 
         this.state = {
             contents: [],
-            comments: {},
             contentId: '',
             post: '',
             showDeleteModal: false,
-            showEditModal: false
+            showEditModal: false,
         }
         this.handleOpenDeleteModal = this.handleOpenDeleteModal.bind(this);
         this.handleCloseDeleteModal = this.handleCloseDeleteModal.bind(this);
@@ -84,7 +85,6 @@ class Content extends Component {
     }
 
     componentDidMount() {
-        let comments = {};
         let config = {
             headers: {
                 Authorization: localStorage.getItem("access_key")
@@ -99,23 +99,6 @@ class Content extends Component {
             let content = res.data
             this.setState({ contents: content })
         })
-        for (let i=0; i<this.state.contents.length; i++){
-            let config = {
-                headers: {
-                    Authorization: localStorage.getItem("access_key")
-                }
-            }
-            axios.get('/api/comments-by-content/', {
-                params: {
-                    id: this.state.contents[i]['id']
-                }
-            }, config
-            ).then(res => {
-                let comment = res.data
-                comments[this.contents[i]['id']] = comment
-            })
-        }
-        this.setState({ comments: comments })
     }
 
     render() {
@@ -159,7 +142,9 @@ class Content extends Component {
                                         <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                     </div>
                                 </ReactModal>
+                                <ContentLikes likes={content.likes.length} contentId={content.id} userId={this.props.userId}/>
                             </div>
+                            <Comments contentId={content.id} userId={this.props.userId}/>
                         </div>
                     )}
                 </div>

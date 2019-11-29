@@ -57,9 +57,9 @@ class NavBar extends Component {
     }
 
     handleAddSubmit = (event) => {
+        event.preventDefault();
         let currName = this.state.name
         let currAdmin = this.props.userId
-        event.preventDefault();
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -67,8 +67,8 @@ class NavBar extends Component {
         }
             axios.post('/api/circles/', {
                 name: currName,
-                created_at: "2020-11-30",
                 admin: currAdmin,
+                pending_members: [],
                 members: []
             }, config
             ).then(res => {
@@ -86,7 +86,6 @@ class NavBar extends Component {
     handleSettingsSubmit = (event) => {
         let newUsername = this.state.user
         let currUser = this.props.userId
-        console.log(newUsername)
         event.preventDefault();
         let config = {
             headers: {
@@ -132,7 +131,9 @@ class NavBar extends Component {
             return (
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
+                    {this.state.user.avatar != null &&
                     <img className='profile-pic' src={this.state.user.avatar}></img>
+                    }
                     <ul className="links-2">
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
                         <div>
@@ -143,7 +144,7 @@ class NavBar extends Component {
                                     <label>
                                         Username:
                                         <div></div>
-                                        <input type='text' defaultValue={this.state.user} onChange={(e) => this.setState({ user: e.target.value })} />
+                                        <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
                                         <div></div>
                                     </label>
                                     <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
@@ -165,7 +166,7 @@ class NavBar extends Component {
                             <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseAddModal}>X</button>
                                 <h2>New Circle: </h2>
-                                <form onSubmit={(e) => this.handleSettingSubmit}>
+                                <form onSubmit={this.handleAddSubmit}>
                                     <label>
                                         Circle Name:
                                         <div></div>

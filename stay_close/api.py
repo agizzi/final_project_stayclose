@@ -125,6 +125,33 @@ class CommentsByContent(APIView):
     serializer = CommentsSerializer(comments, many=True)
     return Response(serializer.data)
 
+class AddOrDeleteLikeContent(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    contentId = request.query_params.get('contentId')
+    content = Content.objects.get(pk=contentId)
+    likes = Content.objects.filter(pk=contentId).values_list('likes', flat=True)
+    user = User.objects.get(pk=userId)
+    if user.id in likes:
+      content.likes.remove(user)
+    else:
+      content.likes.add(user)
+    serializer = ContentSerializer(content)
+    return Response(serializer.data)
+
+class AddOrDeleteLikeComment(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    commentId = request.query_params.get('commentId')
+    comment = Comments.objects.get(pk=commentId)
+    likes = Comments.objects.filter(pk=commentId).values_list('likes', flat=True)
+    user = User.objects.get(pk=userId)
+    if user.id in likes:
+      comment.likes.remove(user)
+    else:
+      comment.likes.add(user)
+    serializer = CommentsSerializer(comment)
+    return Response(serializer.data)
 
 
 

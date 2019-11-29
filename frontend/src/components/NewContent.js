@@ -31,7 +31,7 @@ class NewContent extends Component {
             text_post: post_text,
             img_post: null,
             caption: "",
-            likes: 0,
+            likes: [],
             member: member,
             circle: circle,
             tags: null

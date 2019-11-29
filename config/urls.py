@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/pending-circles-by-user/', api.PendingCirclesByUser.as_view()),
     path('api/user-by-username/', api.UserByUsername.as_view()),
     path('api/comments-by-content/', api.CommentsByContent.as_view()),
+    path("api/add-or-delete-like-content/", api.AddOrDeleteLikeContent.as_view()),
+    path("api/add-or-delete-like-comment/", api.AddOrDeleteLikeComment.as_view()),
     path('api/remove-user-from-circle/', api.RemoveUserFromCircle.as_view()),
     # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
