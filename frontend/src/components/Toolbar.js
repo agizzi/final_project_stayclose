@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+import Circle from './Circle';
 import ReactModal from 'react-modal';
 
 const customStyles = {
@@ -67,12 +68,14 @@ class Toolbar extends Component {
   }
 
   render() {
+    const { match: { params } } = this.props;
     return (
-
+      
       <div className="postButton" >
-        <button type="button" className="add-button"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
-        <button type="button" className="delete-button" onClick={(e) => this.handleDelete()}>Delete Circle</button>
-        <button type="button" className="add-member" onClick={this.handleOpenModal}>Add Member</button>
+        <h1 className="content-header">{this.props.circleName}</h1>
+        <button type="button" className="toolbar"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+        <button type="button" className="toolbar" onClick={(e) => this.handleDelete()}>Delete Circle</button>
+        <button type="button" className="toolbar" onClick={this.handleOpenModal}>Add Member</button>
         <ReactModal isOpen={this.state.showModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseModal}>X</button>
           <h2>New Members: </h2>
@@ -84,6 +87,9 @@ class Toolbar extends Component {
             <button type='submit' value='create'>Add Members</button>
           </form>
         </ReactModal>
+        <React.Fragment>
+            Members: <Circle circleId={params.circleId} />
+        </React.Fragment>
       </div>
     )
   }

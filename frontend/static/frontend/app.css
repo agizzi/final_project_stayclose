@@ -129,6 +129,17 @@ li {
     margin-top: 15px; 
 }
 
+.notification .badge {
+    position: absolute;
+    top: 38px;
+    right: 90px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #AF5050;
+    color: white;
+    font-weight: bolder;
+}
+
 .circle-list {
     display: flex; 
     justify-content: space-evenly;
@@ -230,29 +241,23 @@ input {
     margin-left: 93%; 
 }
 
-
-/* .content-1 {
-    border-style: solid;
-    border-color: #BCCACA;
-    border-width: 5px; 
-    border-radius: 10px;
-    padding: 4rem; 
-} */
-
 .content-2 {
     border-style: solid;
-    border-color: #BCCACA;
+    border-color: rgb(7, 142, 144);
     border-width: 5px; 
     border-radius: 10px;
-    padding: 32px; 
+    
     display: flex; 
     justify-content: flex-start;
-    margin-bottom: 10px;
+    
 }
 
 .content-header {
-    color: rgb(134, 134, 134); 
+    color: rgb(134, 134, 134);
+    display: flex;
+    justify-content: flex-start; 
 }
+
 
 h3 {
     color: rgb(134, 134, 134); 
@@ -313,7 +318,15 @@ canvas {
 }
 
 .postButton {
-    margin-left: 85%
+    display: grid;
+    grid-auto-columns: 1fr;
+    padding: 10px; 
+    border-style: solid;
+    border-color: rgb(7, 142, 144);
+    border-radius: 15px;
+    padding: 30px;  
+    border-width: 5px; 
+    text-align: center;
 }
 
 .editing-input {
@@ -347,4 +360,14 @@ canvas {
     width: 650px; 
     height: 100px; 
     text-align: center; 
+}
+
+.contents {
+    display: flex; 
+    justify-content: space-between; 
+}
+
+.profile-1 {
+    margin: 10px 300px 10px 30px; 
+    padding: 20px 10px; 
 }
