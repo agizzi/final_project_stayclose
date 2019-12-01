@@ -1,6 +1,7 @@
 from .models import User, Circle, Content, Comments
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+from django.http import HttpResponse
 from rest_framework.views import APIView
 from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer
 from django.db.models import Q
@@ -63,7 +64,7 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(circle=circle).order_by('-created_at')
+    content = Content.objects.filter(circle=circle).order_by('created_at')
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
@@ -105,9 +106,52 @@ class UserByUsername(APIView):
       user = User.objects.filter(username = username)
       if user:
         queryset = queryset.union(user)
-    serializer = UserSerializer(queryset, many=True)      
+    serializer = UserSerializer(queryset, many=True)
     return Response(serializer.data)
 
+class RemoveUserFromCircle(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    circleId = request.query_params.get('circleId')
+    user = User.objects.get(pk=userId)
+    circle = Circle.objects.get(pk=circleId)
+    circle.members.remove(user)
+    return HttpResponse(status=200)
+
+class CommentsByContent(APIView):
+  def get(self, request, format=None):
+    contentId = request.query_params.get('contentId')
+    comments = Comments.objects.filter(content=contentId).order_by('created_at')
+    serializer = CommentsSerializer(comments, many=True)
+    return Response(serializer.data)
+
+class AddOrDeleteLikeContent(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    contentId = request.query_params.get('contentId')
+    content = Content.objects.get(pk=contentId)
+    likes = Content.objects.filter(pk=contentId).values_list('likes', flat=True)
+    user = User.objects.get(pk=userId)
+    if user.id in likes:
+      content.likes.remove(user)
+    else:
+      content.likes.add(user)
+    serializer = ContentSerializer(content)
+    return Response(serializer.data)
+
+class AddOrDeleteLikeComment(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    commentId = request.query_params.get('commentId')
+    comment = Comments.objects.get(pk=commentId)
+    likes = Comments.objects.filter(pk=commentId).values_list('likes', flat=True)
+    user = User.objects.get(pk=userId)
+    if user.id in likes:
+      comment.likes.remove(user)
+    else:
+      comment.likes.add(user)
+    serializer = CommentsSerializer(comment)
+    return Response(serializer.data)
 
 
 
