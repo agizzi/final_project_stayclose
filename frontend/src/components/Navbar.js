@@ -82,7 +82,7 @@ class NavBar extends Component {
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
                     <ul className="links-2">
-                        <li><button type="button" className="nav">{this.props.username}'s Profile Settings </button></li>
+                        <li><button type="button" className="add">{this.props.username}'s Profile Settings </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseModal}>X</button>
