@@ -11,15 +11,32 @@
     background-size: cover;  
 } */
 
+button {
+    color: #BCCACA;
+    cursor: pointer;
+    text-decoration: none;
+    padding: 5px; 
+    border-radius: 10%; 
+    border-color: #BCCACA;
+    border-width: 1px; 
+    outline: none; 
+    font-weight: bolder;
+}
+
+button:hover {
+    background-color: rgb(164, 176, 176);
+    color: white; 
+}
+
 .header {
-    color: #79BFC0; 
+    color: rgb(10, 195, 198); 
     font-size: 50pt; 
     margin-right: 80%; 
     text-decoration: none;
 }
 
 .header:hover {
-    color: rgb(137, 236, 237); 
+    color: rgb(7, 142, 144); 
     font-size: 50pt; 
     /* margin-right: 80%;  */
     text-decoration: none;
@@ -33,7 +50,9 @@
 }
 
 .login-p {
-    color: rgb(155, 168, 168); 
+    color: rgb(105, 109, 109); 
+    font-size: 20pt; 
+    font-weight: bold; 
 }
 
 h2 {
@@ -43,8 +62,20 @@ h2 {
 }
 
 .signin {
-    margin-bottom: 20px; 
+    border-style: solid;
+    border-color: rgb(174, 175, 175); 
+    border-width: 2px;
+    margin-left: 67%;  
+    margin-bottom: 30px; 
+    font-size: 12pt; 
 }
+
+.member {
+    color: rgb(120, 124, 124); 
+    font-size: 12pt; 
+    font-weight: bold;
+}
+
 
 .navbar{
     display: flex; 
@@ -70,38 +101,32 @@ li {
 .sandwich {
     width: 35px;
     height: 5px;
-    background-color: #CBDFDF;
+    background-color: rgb(7, 142, 144); 
     margin: 6px 0 0 6px;
 }
 
 .add {
     border-style: solid; 
-    border-color:#CBDFDF;  
+    border-color:rgb(7, 142, 144); 
     border-width: 5px; 
     border-radius: 10px; 
-    padding: 5px 15px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
+    font-weight: bolder;
+    padding: 5px 15px;
     margin-top: 15px; 
     outline: none;
+    color: rgb(7, 142, 144); 
+}
+
+.add:hover {
+    background-color: rgb(7, 142, 144); 
+    color: white; 
 }
 
 .notification {
     margin-top: 15px; 
-}
-
-.nav {
-    color: #BCCACA;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.nav:hover {
-    color: rgb(164, 176, 176);
-    cursor: pointer;
-    text-decoration: none;
 }
 
 .circle-list {
@@ -114,13 +139,21 @@ li {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    font-size: 14pt;
-    background-color: #79BFC0;
+    font-size: 15pt;
+    background-color: rgb(72, 179, 181);
     line-height: 180px;
     text-align: center;
     margin: 50px; 
     color: white; 
-    text-decoration: none; 
+    text-decoration: none;
+    font-weight: 900; 
+    box-shadow: 10px 5px 8px rgba(193, 188, 188, 0.765);
+}
+.circle-name:hover {
+    width: 220px;
+    height: 220px;
+    line-height: 220px;
+    background-color: rgb(7, 142, 144);
 }
 
 .pending-circle-name {
@@ -145,18 +178,19 @@ li {
 
 .login-2 {
     border-style: solid;
-    border-color: #CBDFDF; 
+    border-color: rgb(174, 175, 175); 
     border-radius: 10%; 
     padding: 30px; 
 }
 
-.signin {
-    margin-left: 210px; 
+label {
+    color: rgb(105, 109, 109); 
+    font-weight: bold; 
 }
 
 input {
     border-style: solid; 
-    border-color:#CBDFDF;  
+    border-color:rgb(174, 175, 175);  
     border-width: 2px; 
     border-radius: 10px; 
     background-color: white; 
@@ -164,6 +198,9 @@ input {
     width: 250px; 
     margin-bottom: 20px; 
     outline: none;
+    font-weight: bold; 
+    font-size: 14pt; 
+    color: rgb(63, 64, 64); 
 }
 
 .registration {
@@ -179,33 +216,6 @@ input {
     border-radius: 10%; 
     padding: 30px; 
 }
-.modal {
-    margin-left: 93%; 
-}
-
-label {
-    color: rgb(155, 168, 168); 
-}
-
-button {
-    color: #BCCACA;
-    cursor: pointer;
-    text-decoration: none;
-    padding: 5px; 
-    border-radius: 10%; 
-    border-color: #BCCACA;
-    border-width: 1px; 
-    outline: none; 
-}
-
-button:hover {
-    color: rgb(164, 176, 176);
-    cursor: pointer;
-    text-decoration: none;
-}
-.member {
-    color: rgb(155, 168, 168); 
-}
 
 .register-link {
     color: rgb(134, 134, 134); 
@@ -216,14 +226,18 @@ button:hover {
     color: rgb(78, 75, 75); 
     text-decoration: none; 
 }
+.modal {
+    margin-left: 93%; 
+}
 
-.content-1 {
+
+/* .content-1 {
     border-style: solid;
     border-color: #BCCACA;
     border-width: 5px; 
     border-radius: 10px;
     padding: 4rem; 
-}
+} */
 
 .content-2 {
     border-style: solid;
@@ -268,7 +282,6 @@ canvas {
     justify-content: space-evenly;
 }
  
-
 .post-2 {
     padding: 30px 50px; 
     width: 80%; 
