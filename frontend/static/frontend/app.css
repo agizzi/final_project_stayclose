@@ -371,3 +371,8 @@ canvas {
     margin: 10px 300px 10px 30px; 
     padding: 20px 10px; 
 }
+    
+.profile-pic {
+    height: 150px;
+    width: 150px;
+}

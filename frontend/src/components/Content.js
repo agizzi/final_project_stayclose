@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Circle from './Circle';
+import ContentLikes from './ContentLikes';
+import Comments from './Comments';
 import ReactModal from 'react-modal';
 
 const customStyles = {
@@ -23,7 +25,7 @@ class Content extends Component {
             contentId: '',
             post: '',
             showDeleteModal: false,
-            showEditModal: false
+            showEditModal: false,
         }
         this.handleOpenDeleteModal = this.handleOpenDeleteModal.bind(this);
         this.handleCloseDeleteModal = this.handleCloseDeleteModal.bind(this);
@@ -75,7 +77,6 @@ class Content extends Component {
             text_post: this.state.post
         }, config
         ).then(res => {
-            console.log(this.state.post);
             this.setState({ showEditModal: false });
             this.setState({ text: '' });
             this.componentDidMount();
@@ -105,11 +106,14 @@ class Content extends Component {
             <div className="contentDetail">
                 {this.state.contents.map(content =>
                     <div className="content-2" key={content.id}>
+                        <canvas className="post"></canvas>
                         <div className="post-2">
                             <p className="posting-1">author: {content.author}</p>
                             <p className="posting-2"> "{content.text_post}"</p>
                             <p className="posting-3">created at: {content.created_at}</p>
+                            {content.member == this.props.userId &&
                             <button className="editor" onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
+                            }
                             <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                 <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
                                 <h3>Edit Your Post: </h3>
@@ -121,7 +125,9 @@ class Content extends Component {
                                     <button className="editing" onClick={(e) => this.handleCloseEditModal()}>Do Not Save</button>
                                 </div>
                             </ReactModal>
+                            {content.member == this.props.userId &&
                             <button className="deleter" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                            }
                             <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                 <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                 <h3 className="delete-message">Are you sure you want to delete your post?</h3>
@@ -130,10 +136,13 @@ class Content extends Component {
                                     <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                 </div>
                             </ReactModal>
+                            <ContentLikes likes={content.likes.length} contentId={content.id} userId={this.props.userId}/>
                         </div>
+                        <Comments contentId={content.id} userId={this.props.userId}/>
                     </div>
-                )}
+                 )}    
             </div>
+               
         );
     }
 

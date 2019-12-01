@@ -20,25 +20,37 @@ class Toolbar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false,
-      members: ""
+      showAddModal: false,
+      showLeaveModal: false,
+      members: "",
+      isAdmin: false
     }
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOpenAddModal = this.handleOpenAddModal.bind(this);
+    this.handleCloseAddModal = this.handleCloseAddModal.bind(this);
+    this.handleOpenLeaveModal = this.handleOpenLeaveModal.bind(this);
+    this.handleCloseLeaveModal = this.handleCloseLeaveModal.bind(this);
+    this.handleAddSubmit = this.handleAddSubmit.bind(this);
+    this.handleLeaveSubmit = this.handleLeaveSubmit.bind(this);
   }
 
-  handleOpenModal() {
-    this.setState({ showModal: true });
+  handleOpenAddModal() {
+    this.setState({ showAddModal: true });
   }
 
-  handleCloseModal() {
-    this.setState({ showModal: false });
+  handleCloseAddModal() {
+    this.setState({ showAddModal: false });
   }
 
-  handleSubmit() {
+  handleOpenLeaveModal() {
+    this.setState({ showLeaveModal: true });
+  }
+
+  handleCloseLeaveModal() {
+    this.setState({ showLeaveModal: false });
+  }
+
+  handleAddSubmit() {
     event.preventDefault()
-    console.log(this.state.members)
     let config = {
       headers: {
         Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -49,11 +61,29 @@ class Toolbar extends Component {
         entered_usernames: this.state.members
       }
     }, config).then(res => {
-      console.log(res.data)
+      console.log(res.data.length)
     })
   }
 
-
+  handleLeaveSubmit() {
+    let user = this.props.userId;
+    let circle = this.props.circleId;
+    event.preventDefault()
+    let config = {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("access_key")}`
+      }
+    }
+    axios.get('/api/remove-user-from-circle/', {
+      params: {
+        userId: user,
+        circleId: circle
+      }
+    }, config
+    ).then(res => {
+      this.props.history.push('/profile')
+    })
+  }
 
   handleDelete() {
     let config = {
@@ -67,19 +97,33 @@ class Toolbar extends Component {
     })
   }
 
+  componentDidMount() {
+    let config = {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("access_key")}`
+      }
+    }
+    axios.get('/api/circles/'+ this.props.circleId + '/', config, {
+    }).then(res => {
+        if (res.data['admin'] == this.props.userId){
+          this.setState({isAdmin: true})
+        }
+    })
+}
+
   render() {
     const { match: { params } } = this.props;
+    if (this.state.isAdmin){
     return (
-      
       <div className="postButton" >
         <h1 className="content-header">{this.props.circleName}</h1>
         <button type="button" className="toolbar"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
         <button type="button" className="toolbar" onClick={(e) => this.handleDelete()}>Delete Circle</button>
-        <button type="button" className="toolbar" onClick={this.handleOpenModal}>Add Member</button>
-        <ReactModal isOpen={this.state.showModal} style={customStyles}>
-          <button className="modal" onClick={this.handleCloseModal}>X</button>
+        <button type="button" className="toolbar" onClick={this.handleOpenAddModal}>Add Member</button>
+        <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+          <button className="modal" onClick={this.handleCloseAddModal}>X</button>
           <h2>New Members: </h2>
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleAddSubmit}>
             <label>
               Add Members:
               </label>
@@ -90,8 +134,41 @@ class Toolbar extends Component {
         <React.Fragment>
             Members: <Circle circleId={params.circleId} />
         </React.Fragment>
+        <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
+        <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
+          <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
+          <h2>Are You Sure? </h2>
+          <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
+          <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
+        </ReactModal>
+      </div>
+    )
+  } else {
+    return (
+      <div className="postButton" >
+        <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+        <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
+        <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+          <button className="modal" onClick={this.handleCloseAddModal}>X</button>
+          <h2>New Members: </h2>
+          <form onSubmit={this.handleAddSubmit}>
+            <label>
+              Add Members:
+              </label>
+            <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
+            <button type='submit' value='create'>Add Members</button>
+          </form>
+        </ReactModal>
+        <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
+        <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
+          <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
+          <h2>Are You Sure? </h2>
+          <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
+          <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
+        </ReactModal>
       </div>
     )
   }
+}
 }
 export default withRouter(Toolbar)

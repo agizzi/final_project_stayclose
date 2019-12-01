@@ -11,7 +11,7 @@ from django_encrypted_filefield.fields import EncryptedFileField, EncryptedImage
 # Create your models here.
 class User(AbstractUser):
   joined_on = models.DateField(default = date.today)
-  avatar = EncryptedImageField(blank=True, null=True)
+  avatar = models.ImageField(upload_to='images', blank=True, null=True)
   birthday = fields.EncryptedDateField(blank=True, null=True)
 
   def __str__(self):
@@ -35,9 +35,9 @@ class Content(models.Model):
   text_post = fields.EncryptedTextField(blank=True, null=True)
   img_post = EncryptedImageField(blank=True, null=True)
   caption = fields.EncryptedCharField(max_length=200, blank=True, null=True)
+  likes = models.ManyToManyField(to="User", related_name="content_liker", blank=True)
   created_at = fields.EncryptedDateTimeField(default = timezone.now)
   updated_at = fields.EncryptedDateTimeField(default=timezone.now)
-  likes = fields.EncryptedIntegerField(default=0)
   tags = models.ForeignKey(to="User", related_name="tagged", on_delete=models.CASCADE, blank=True, null=True)
 
   def __str__(self):
@@ -46,6 +46,7 @@ class Content(models.Model):
 class Comments(models.Model):
   author = models.ForeignKey(to="User", related_name="comments", on_delete=models.CASCADE)
   comment = fields.EncryptedTextField()
+  likes = models.ManyToManyField(to="User", related_name="comment_liker", blank=True)
   content = models.ForeignKey(to="Content", related_name="commented_stuff", on_delete=models.CASCADE)
   created_at = fields.EncryptedDateTimeField(default = timezone.now)
   updated_at = fields.EncryptedDateTimeField(default=timezone.now)
