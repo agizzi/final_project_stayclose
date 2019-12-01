@@ -29,6 +29,7 @@ class NavBar extends Component {
             addedMember: '',
             userId: '',
             user: '',
+            picToUpload: [],
             showAddModal: false,
             showSettingsModal: false
         };
@@ -84,20 +85,25 @@ class NavBar extends Component {
     }
 
     handleSettingsSubmit = (event) => {
+        let fd = new FormData();
+        fd.append('avatar',this.state.picToUpload.name);
+        console.log(fd)
         let newUsername = this.state.user
         let currUser = this.props.userId
         event.preventDefault();
         let config = {
             headers: {
+                'content-type': 'multipart/form-data',
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
             axios.patch('/api/users/' + currUser + '/', {
-                username: newUsername,
+                avatar: fd
             }, config
             ).then(res => {
+                console.log(res)
                 this.setState({ showSettingsModal: false} );
-                localStorage.setItem('username', newUsername);
+                // localStorage.setItem('username', newUsername);
                 if (this.props.location.pathname != '/profile/'){
                     this.props.history.push('/profile');
                 } else {
@@ -147,12 +153,12 @@ class NavBar extends Component {
                                         <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
                                         <div></div>
                                     </label>
-                                    <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
-                                        {({getRootProps, getInputProps}) => (
+                                    <Dropzone onDrop={acceptedFiles => this.setState({picToUpload: acceptedFiles})}>
+                                        {({getRootProps, getInputProps, isDragActive}) => (
                                         <section>
                                             <div {...getRootProps()}>
                                                 <input {...getInputProps()} />
-                                                    <p>Drag 'n' drop some files here, or click to select files</p>
+                                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
                                             </div>
                                         </section>
                                     )}

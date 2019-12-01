@@ -22,6 +22,7 @@ class Content extends Component {
 
         this.state = {
             contents: [],
+            user: '',
             contentId: '',
             post: '',
             showDeleteModal: false,
@@ -99,6 +100,10 @@ class Content extends Component {
             let content = res.data
             this.setState({ contents: content })
         })
+        axios.get('/api/user/', config, {
+        }).then(res => {
+          this.setState({user: res.data})
+        })
     }
 
     render() {
@@ -112,7 +117,9 @@ class Content extends Component {
                     <h1 className="content-header">{this.props.circleName}</h1>
                     {this.state.contents.map(content =>
                         <div className="content-2" key={content.id}>
-                            <canvas className="post"></canvas>
+                            {this.state.user.avatar != null &&
+                            <img className='profile-pic' src={this.state.user.avatar}></img>
+                            }
                             <div className="post-2">
                                 <p className="posting-1">author: {content.author}</p>
                                 <p className="posting-2"> "{content.text_post}"</p>
