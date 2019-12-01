@@ -6,6 +6,7 @@ axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 import Notification from './Notifications';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
+import Dropzone from 'react-dropzone';
 
 const customStyles = {
     content: {
@@ -81,7 +82,22 @@ class NavBar extends Component {
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
                     <ul className="links-2">
-                        <li><button type="button" className="add"><Link className="nav"> {this.props.username}'s Profile Settings </Link></button></li>
+                        <li><button type="button" className="nav">{this.props.username}'s Profile Settings </button></li>
+                        <div>
+                            <ReactModal isOpen={this.state.showModal} style={customStyles}>
+                                <button className="modal" onClick={this.handleCloseModal}>X</button>
+                                <h2>New Circle: </h2>
+                                <form onSubmit={this.handleSubmit}>
+                                    <label>
+                                        Circle Name:
+                                        <div></div>
+                                        <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+                                        <div></div>
+                                    </label>
+                                    <button type='submit' value='create'>Create a Circle</button>
+                                </form>
+                            </ReactModal>
+                        </div>
                         <li><button className="add" onClick={this.handleOpenModal}>+ Circle </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showModal} style={customStyles}>
