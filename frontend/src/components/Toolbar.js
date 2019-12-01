@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+import Circle from './Circle';
 import ReactModal from 'react-modal';
 
 const customStyles = {
@@ -60,7 +61,7 @@ class Toolbar extends Component {
         entered_usernames: this.state.members
       }
     }, config).then(res => {
-      console.log(res.data)
+      console.log(res.data.length)
     })
   }
 
@@ -111,13 +112,14 @@ class Toolbar extends Component {
 }
 
   render() {
+    const { match: { params } } = this.props;
     if (this.state.isAdmin){
     return (
-
       <div className="postButton" >
-        <button type="button" className="add-button"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
-        <button type="button" className="delete-button" onClick={(e) => this.handleDelete()}>Delete Circle</button>
-        <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
+        <h1 className="content-header">{this.props.circleName}</h1>
+        <button type="button" className="toolbar"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+        <button type="button" className="toolbar" onClick={(e) => this.handleDelete()}>Delete Circle</button>
+        <button type="button" className="toolbar" onClick={this.handleOpenAddModal}>Add Member</button>
         <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseAddModal}>X</button>
           <h2>New Members: </h2>
@@ -136,6 +138,9 @@ class Toolbar extends Component {
           <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
           <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
         </ReactModal>
+        <React.Fragment>
+            Members: <Circle circleId={params.circleId} />
+        </React.Fragment>
       </div>
     )
   } else {
