@@ -103,7 +103,6 @@ class Comments extends Component {
             <div className="comments">
                 {this.state.comments.map(comment =>
                     <div className="comment" key={comment.id}>
-                        <canvas className="post"></canvas>
                             <div >
                                 <p> "{comment.comment}"</p>
                                 <p>created at: {comment.created_at}</p>

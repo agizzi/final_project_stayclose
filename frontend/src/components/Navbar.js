@@ -179,6 +179,7 @@ class NavBar extends Component {
                         </div>
                         <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
                         <li className="notification"><Link to="/notification" className="nav">
+                            <span class="badge">0</span>
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>
