@@ -22,6 +22,7 @@ class Comments extends Component {
         this.state = {
             comments: [],
             newComment: '',
+            user: '',
             showAddModal: false,
             showDeleteModal: false
         };
@@ -96,6 +97,10 @@ class Comments extends Component {
             let comments = res.data
             this.setState({ comments: comments })
         })
+        axios.get('/api/user/', config, {
+        }).then(res => {
+          this.setState({user: res.data})
+        })
     }
 
     render() {
@@ -103,7 +108,9 @@ class Comments extends Component {
             <div className="comments">
                 {this.state.comments.map(comment =>
                     <div className="comment" key={comment.id}>
-                        <canvas className="post"></canvas>
+                        {this.state.user.avatar != null &&
+                            <img className='profile-pic' src={this.state.user.avatar}></img>
+                            }
                             <div >
                                 <p> "{comment.comment}"</p>
                                 <p>created at: {comment.created_at}</p>
