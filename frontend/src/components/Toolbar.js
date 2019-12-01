@@ -113,8 +113,9 @@ class Toolbar extends Component {
   render() {
     if (this.state.isAdmin){
     return (
+
       <div className="postButton" >
-        <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+        <button type="button" className="add-button"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
         <button type="button" className="delete-button" onClick={(e) => this.handleDelete()}>Delete Circle</button>
         <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
         <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
