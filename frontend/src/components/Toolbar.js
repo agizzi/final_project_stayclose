@@ -48,7 +48,7 @@ class Toolbar extends Component {
         entered_usernames: this.state.members
       }
     }, config).then(res => {
-      console.log(res.data)
+      console.log(res.data.length)
     })
   }
 

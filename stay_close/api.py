@@ -100,7 +100,6 @@ class UserByUsername(APIView):
   def get(self, request, format=None):
     usernames = request.query_params.get("entered_usernames")
     usernames = usernames.split(" ")
-    
     queryset = User.objects.none()
     for username in usernames:
       user = User.objects.filter(username = username)
