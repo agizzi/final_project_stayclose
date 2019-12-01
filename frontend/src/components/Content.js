@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import ContentLikes from './ContentLikes';
+import Circle from './Circle';
 import Comments from './Comments';
 import ReactModal from 'react-modal';
 import Moment from 'react-moment';
@@ -110,7 +111,7 @@ class Content extends Component {
         return (
             <div className="content-1">
                 <React.Fragment>
-                    Members: <Circle circleId={params.circleId} />
+                    Members: <Circle circleId={this.props.circleId} />
                 </React.Fragment>
                 <div className="contentDetail">
                     <h1 className="content-header">{this.props.circleName}</h1>
@@ -186,13 +187,12 @@ class Content extends Component {
                                             <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                         </div>
                                     </ReactModal>
-                                    
                                     <Comments contentId={content.id} userId={this.props.userId}/>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
-                    </div>
-                 )}    
+                 )}
+                 </div>
             </div>
         );
     }

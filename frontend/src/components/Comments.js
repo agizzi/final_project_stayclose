@@ -22,6 +22,7 @@ class Comments extends Component {
         this.state = {
             comments: [],
             newComment: '',
+            user: '',
             showAddModal: false,
             showDeleteModal: false
         };
