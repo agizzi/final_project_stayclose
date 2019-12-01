@@ -19,7 +19,7 @@ class CircleFeed extends Component {
                     <div className="profile-1">
                         <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
                     </div>
-                    <div className="profile">
+                    <div className="profile-2">
                         <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
                     </div>
                 </div>

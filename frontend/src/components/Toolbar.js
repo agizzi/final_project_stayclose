@@ -131,9 +131,6 @@ class Toolbar extends Component {
             <button type='submit' value='create'>Add Members</button>
           </form>
         </ReactModal>
-        <React.Fragment>
-            Members: <Circle circleId={params.circleId} />
-        </React.Fragment>
         <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
         <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
@@ -141,6 +138,9 @@ class Toolbar extends Component {
           <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
           <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
         </ReactModal>
+        <React.Fragment>
+            Members: <Circle circleId={params.circleId} />
+        </React.Fragment>
       </div>
     )
   } else {
