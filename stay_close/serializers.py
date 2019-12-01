@@ -11,6 +11,7 @@ class CircleSerializer(serializers.ModelSerializer):
     model = Circle
     fields = '__all__'
 
+
 class ContentSerializer(serializers.ModelSerializer):
   class Meta:
     model = Content

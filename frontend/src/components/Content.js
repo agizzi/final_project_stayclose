@@ -118,7 +118,7 @@ class Content extends Component {
                                 <p className="posting-2"> "{content.text_post}"</p>
                                 <p className="posting-3">created at: {content.created_at}</p>
                                 {content.member == this.props.userId &&
-                                <button className="editor" onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
+                                    <button className="editor" onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
                                 }
                                 <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                     <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
@@ -132,7 +132,7 @@ class Content extends Component {
                                     </div>
                                 </ReactModal>
                                 {content.member == this.props.userId &&
-                                <button className="deleter" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                                    <button className="delete" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
                                 }
                                 <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                     <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
@@ -142,9 +142,9 @@ class Content extends Component {
                                         <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                     </div>
                                 </ReactModal>
-                                <ContentLikes likes={content.likes.length} contentId={content.id} userId={this.props.userId}/>
+                                <ContentLikes likes={content.likes.length} contentId={content.id} userId={this.props.userId} />
                             </div>
-                            <Comments contentId={content.id} userId={this.props.userId}/>
+                            <Comments contentId={content.id} userId={this.props.userId} />
                         </div>
                     )}
                 </div>
