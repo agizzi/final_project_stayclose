@@ -20,8 +20,6 @@ class NewContent extends Component {
         let post_text = this.state.post;
         let member = this.props.match.params.userId;
         let circle = this.props.match.params.circleId;
-        let date = new Date('2020-11-30');
-        let timestamp = date.getTime() / 1000;
         event.preventDefault();
         let config = {
             headers: {
@@ -33,7 +31,7 @@ class NewContent extends Component {
             text_post: post_text,
             img_post: null,
             caption: "",
-            likes: 0,
+            likes: [],
             member: member,
             circle: circle,
             tags: null

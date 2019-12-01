@@ -22,6 +22,8 @@ django-cors-headers = "*"
 django-filter = "*"
 django-heroku = "*"
 gunicorn = "*"
+django-extensions = "*"
+channels = "*"
 
 [requires]
 python_version = "3.7"

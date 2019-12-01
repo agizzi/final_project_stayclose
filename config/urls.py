@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
 from django.urls import path, include
 from rest_framework import routers
 from stay_close import api
@@ -22,6 +24,10 @@ urlpatterns = [
     path('api/circles-by-user/', api.CirclesByUser.as_view()),
     path('api/pending-circles-by-user/', api.PendingCirclesByUser.as_view()),
     path('api/user-by-username/', api.UserByUsername.as_view()),
+    path('api/comments-by-content/', api.CommentsByContent.as_view()),
+    path("api/add-or-delete-like-content/", api.AddOrDeleteLikeContent.as_view()),
+    path("api/add-or-delete-like-comment/", api.AddOrDeleteLikeComment.as_view()),
+    path('api/remove-user-from-circle/', api.RemoveUserFromCircle.as_view()),
     # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
     path('api/rest-auth/', include('rest_auth.urls')),
@@ -31,5 +37,6 @@ urlpatterns = [
     path('register/', include('frontend.urls')),
     path('profile/', include('frontend.urls')),
     path('new-circle/', include('frontend.urls')),
-    path('circle/<int:pk>/<str:circleName>/<int:id>/', include('frontend.urls'))
-]
+    path('circle/<int:pk>/<str:circleName>/<int:id>/', include('frontend.urls')),
+    path('post/<int:circleId>/<str:circleName>/<int:userId>/<str:memberName>', include('frontend.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
     'rest_auth.registration',
     'stay_close',
     'rest_framework',
@@ -165,7 +166,8 @@ DEFF_PASSWORD = "88E6CC6E4E0B956B31C2684D8A42CAB497570655"
 
 ACCOUNT_EMAIL_VERIFICATION = "none"
 
-# REST_USE_JWT = True
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'stayclose')
 
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ALLOW_CREDENTIALS = True
