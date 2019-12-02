@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import CommentLikes from './CommentLikes';
+import Comment from './Comment';
 import axios from 'axios';
 import ReactModal from 'react-modal';
+import ProfilePicture from './ProfilePicture';
 import Moment from 'react-moment';
 
 const customStyles = {
@@ -23,7 +25,6 @@ class Comments extends Component {
         this.state = {
             comments: [],
             newComment: '',
-            user: '',
             showAddModal: false,
             showDeleteModal: false
         };
@@ -98,26 +99,25 @@ class Comments extends Component {
             let comments = res.data
             this.setState({ comments: comments })
         })
-        axios.get('/api/user/', config, {
-        }).then(res => {
-          this.setState({user: res.data})
-        })
     }
 
     render() {
         return (
             <div className="comments">
                 {this.state.comments.map(comment =>
+<<<<<<< HEAD
+                    <Comment comment={comment} userId={this.props.userId} key={comment.id} />
+=======
                     <div className="comment" key={comment.id}>
                         <div className="post-comment">
-                            <div className="post-1">
+                            <div className="posts-1">
                                 {this.state.user.avatar != null &&
-                                    <img className='profile-pic' src={this.state.user.avatar}></img>
+                                    <img className='comment-pic' src={this.state.user.avatar}></img>
                                 }
                             </div>    
-                            <div className="post-2">
+                            <div className="posts-2">
                                 <div>
-                                    <p className="postings-1">{comment.author} says, </p>
+                                    <h3 className="postings-1">{comment.author} says, </h3>
                                 </div>
                                 <div>
                                     <p className="postings-2"> "{comment.comment}"</p>
@@ -141,6 +141,7 @@ class Comments extends Component {
                             </div>
                         </div>    
                     </div>  
+>>>>>>> master
                  )}
                   <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
                     <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
@@ -152,9 +153,9 @@ class Comments extends Component {
                                     </form>
                                     <button className="add-comment" onClick={(e) => this.handleAddSubmit()}>Comment</button>
                                 </div>
-                    </ReactModal>   
-            </div>  
-        )             
+                    </ReactModal>
+            </div>
+        )
     }
 }
 
