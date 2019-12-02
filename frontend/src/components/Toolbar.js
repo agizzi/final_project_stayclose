@@ -149,7 +149,7 @@ class Toolbar extends Component {
               <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
               </label>
               <div></div>
-              <button type='submit' value='create' onClick={this.handleCloseAddModal}>Add Members</button>
+              <button type='submit' value='create'>Add Members</button>
             </form>
           </ReactModal>
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>

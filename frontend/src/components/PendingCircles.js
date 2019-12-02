@@ -36,10 +36,11 @@ class PendingCircles extends Component {
       <React.Fragment>
         {this.state.pending_circles.length > 0 &&
           <div className="invites">
-            <h3 className="invites-header">Your Circle Invitations:</h3>
+            <h2 className="invites-header">Your Circle Invitations:</h2>
             <div className="circle-list">
               {this.state.pending_circles.map(pending_circle => <Link className="pending-circle-name" to={'/pending_circle/' + pending_circle.id + '/' + pending_circle.name + '/' + this.props.userId} key={pending_circle.id}>{pending_circle.name}</Link>)}
             </div>
+            <hr></hr>
           </div>
         }
       </React.Fragment>
