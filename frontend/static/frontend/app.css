@@ -182,6 +182,15 @@ li {
     margin: 50px; 
     color: white; 
     text-decoration: none; 
+    box-shadow: 10px 5px 8px rgba(193, 188, 188, 0.765);
+    transition: all 0.5s ease; 
+}
+
+.pending-circle-name:hover {
+    width: 220px;
+    height: 220px;
+    line-height: 220px;
+    background-color: rgb(216, 67, 116);
 }
 
 .login-page {
@@ -453,4 +462,21 @@ h3 {
 .leaving {
     display: flex; 
     justify-content: space-evenly; 
+}
+
+.invites-header {
+    text-align: center; 
+    margin-bottom: 30px; 
+}
+
+hr {
+    border: 3px dashed rgb(163, 147, 147);
+    width: 100%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+p {
+    color: rgb(7, 90, 92);
 }
