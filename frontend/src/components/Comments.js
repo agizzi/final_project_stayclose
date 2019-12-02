@@ -105,9 +105,6 @@ class Comments extends Component {
         return (
             <div className="comments">
                 {this.state.comments.map(comment =>
-<<<<<<< HEAD
-                    <Comment comment={comment} userId={this.props.userId} key={comment.id} />
-=======
                     <div className="comment" key={comment.id}>
                         <div className="post-comment">
                             <div className="posts-1">
@@ -141,7 +138,6 @@ class Comments extends Component {
                             </div>
                         </div>    
                     </div>  
->>>>>>> master
                  )}
                   <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
                     <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
