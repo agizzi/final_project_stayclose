@@ -117,7 +117,7 @@ class Comments extends Component {
                             </div>    
                             <div className="posts-2">
                                 <div>
-                                    <p className="postings-1">{comment.author} says, </p>
+                                    <h3 className="postings-1">{comment.author} says, </h3>
                                 </div>
                                 <div>
                                     <p className="postings-2"> "{comment.comment}"</p>
