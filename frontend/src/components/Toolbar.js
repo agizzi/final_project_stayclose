@@ -66,15 +66,15 @@ class Toolbar extends Component {
     }, config).then(res => {
       console.log(res.data)
       if (res.data.length > 0) {
-        let pending_members = []
         for (let i = 0; i < res.data.length; i++) {
           let userId = res.data[i].id
-          this.setState({ pending_member: res.data[i].id })
-          let formData = { "op": "add", "path": "/pending_members/-", "value": userId }
-          axios.patch('/api/circles/' + circleId + '/', config, {
+          console.log("circleID =" + circleId)
+          console.log("userId =" + userId)
+          axios.get('/api/invite-member/', {
             params: {
-              formData
-            }
+              userId: userId,
+              circleId: circleId
+            }, config,
           }).then(res => {
             console.log(res)
           })
