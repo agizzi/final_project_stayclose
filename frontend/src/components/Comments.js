@@ -105,39 +105,7 @@ class Comments extends Component {
         return (
             <div className="comments">
                 {this.state.comments.map(comment =>
-                    <div className="comment" key={comment.id}>
-                        <div className="post-comment">
-                            <div className="posts-1">
-                                {this.state.user.avatar != null &&
-                                    <img className='comment-pic' src={this.state.user.avatar}></img>
-                                }
-                            </div>    
-                            <div className="posts-2">
-                                <div>
-                                    <h3 className="postings-1">{comment.author} says, </h3>
-                                </div>
-                                <div>
-                                    <p className="postings-2"> "{comment.comment}"</p>
-                                </div>
-                                <div className="postings-buttons">
-                                    <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{comment.created_at}</Moment></p>
-                                    <p className="posters"><CommentLikes likes={comment.likes.length} commentId={comment.id} userId={this.props.userId}/></p>
-                                    {comment.author == this.props.userId &&
-                                        <button className="posters" onClick={(e) => this.handleOpenDeleteModal()}>Delete</button>
-                                    }
-                                    <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
-                                    <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
-                                        <h3 className="delete-message">Delete: </h3>
-                                        <div className="delete">
-                                            <button className="deleting" onClick={(e) => this.handleDeleteSubmit(comment.id)}>Yes</button>
-                                            <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
-                                        </div>
-                                    </ReactModal>
-                                </div>
-                                   
-                            </div>
-                        </div>    
-                    </div>  
+                    <Comment comment={comment} userId={this.props.userId} key={comment.id} />
                  )}
                   <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
                     <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
