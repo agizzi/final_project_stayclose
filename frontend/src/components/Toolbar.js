@@ -150,15 +150,16 @@ class Toolbar extends Component {
         <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
         <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-          <h2>New Members: </h2>
+          <h2>New Members</h2>
           <form onSubmit={this.handleAddSubmit}>
-            <label>
-              Add Members:
+              <label className="adding-members">
+                Add Members:
               </label>
-            <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
-            <button type='submit' value='create'>Add Members</button>
+              <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
+              <button type='submit' value='create'>Add Members</button>
           </form>
         </ReactModal>
+        <div></div>
         <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
         <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>

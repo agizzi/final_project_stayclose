@@ -218,14 +218,6 @@ input {
     color: rgb(63, 64, 64); 
 }
 
-/* a:-webkit-any-link {
-    text-decoration: none; 
-    color: rgb(165, 168, 168); 
-}
-a:-webkit-any-link:hover {
-    color: white;
-} */
-
 .registration {
     display: flex; 
     justify-content: space-evenly;
@@ -266,12 +258,6 @@ h3 {
     margin-bottom: 20px; 
 }
 
-canvas {
-    background-image: url('https://www.logolynx.com/images/logolynx/03/039b004617d1ef43cf1769aae45d6ea2.png');
-    background-size: cover; 
-    background-repeat: no-repeat;
-}
-
 .message {
     margin-top: 10%;
     margin-bottom: 10%;
@@ -292,6 +278,8 @@ canvas {
     width: 100%; 
 }
 
+
+
 .post-me {
     border-style: solid;
     border-color: rgb(7, 142, 144);
@@ -300,14 +288,26 @@ canvas {
     display: flex; 
     justify-content: space-between;
     margin-left: 20px;  
-    margin-bottom: 10px; 
     margin-right: 20px; 
-    width: 185%; 
-    height: 170%; 
+    width: 210%; 
+    height: 100%; 
+}
+
+.post-comment {
+    border-style: solid;
+    border-color: rgb(7, 142, 144);
+    border-width: 5px; 
+    border-radius: 10px;
+    display: flex; 
+    justify-content: space-between;
+    margin-left: 20px;  
+    margin-right: 20px; 
+    width: 210%; 
+    height: 150px; 
 }
 
 .post-1 {
-    padding: 50px; 
+    padding: 30px; 
     text-align: center; 
 }
 
@@ -315,19 +315,43 @@ canvas {
     /* padding-left: 200px; 
     padding-right: 200px;  */
     width: 100%; 
+    height: 100%; 
+    margin-top: 30px; 
+}
+
+.content-pic {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%; 
+}
+
+.posting-1 {
+    margin-bottom: 5%; 
 }
 
 .posting-2 {
-    margin-bottom: 30px; 
+    margin-bottom: 8%; 
     text-align: center;
 }
 
 .posting-buttons {
     display: flex; 
     justify-content: end; 
-    margin-left: 55%; 
+    margin-left: 70%; 
 }
 
+
+.postings-2 {
+    margin-bottom: 3%; 
+    text-align: center;
+}
+
+.postings-buttons {
+    display: flex; 
+    justify-content: end; 
+    margin-left: 70%; 
+    margin-bottom: 5%;
+}
 .posters {
     margin-right: 10px; 
 }
@@ -398,4 +422,8 @@ canvas {
     height: 100px;
     width: 100px;
     border-radius: 50%; 
+}
+
+.profile-submit{
+    margin-top: 15px; 
 }
