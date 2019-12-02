@@ -349,7 +349,7 @@ h3 {
 .postings-buttons {
     display: flex; 
     justify-content: end; 
-    margin-left: 70%; 
+    margin-left: 77%; 
     margin-bottom: 5%;
 }
 .posters {
@@ -378,6 +378,11 @@ h3 {
     margin-right: 20px; 
 }
 
+.add-comment {
+    width: 210%; 
+    margin-left: 20px; 
+    margin-bottom: 20px; 
+}
 
 
 .editing-input {

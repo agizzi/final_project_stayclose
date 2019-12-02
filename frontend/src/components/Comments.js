@@ -124,9 +124,9 @@ class Comments extends Component {
                                 </div>
                                 <div className="postings-buttons">
                                     <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{comment.created_at}</Moment></p>
-                                    <CommentLikes likes={comment.likes.length} commentId={comment.id} userId={this.props.userId}/>
+                                    <p className="posters"><CommentLikes likes={comment.likes.length} commentId={comment.id} userId={this.props.userId}/></p>
                                     {comment.author == this.props.userId &&
-                                        <button className="posters" onClick={(e) => this.handleOpenDeleteModal()}>Delete Comment</button>
+                                        <button className="posters" onClick={(e) => this.handleOpenDeleteModal()}>Delete</button>
                                     }
                                     <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                     <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>

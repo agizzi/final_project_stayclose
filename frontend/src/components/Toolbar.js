@@ -150,12 +150,14 @@ class Toolbar extends Component {
         <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
         <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-          <h2>New Members</h2>
+          <h2>HELLO</h2>
           <form onSubmit={this.handleAddSubmit}>
               <label className="adding-members">
                 Add Members:
               </label>
+              <div></div>
               <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
+              <div></div>
               <button type='submit' value='create'>Add Members</button>
           </form>
         </ReactModal>
@@ -163,7 +165,9 @@ class Toolbar extends Component {
         <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
         <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
+          <div></div>
           <h2>Are You Sure? </h2>
+          <div></div>
           <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
           <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
         </ReactModal>

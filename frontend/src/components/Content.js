@@ -17,6 +17,7 @@ const customStyles = {
         transform: 'translate(-50%, -50%)',
     }
 };
+
 class Content extends Component {
     constructor(props) {
         super(props);
@@ -120,7 +121,7 @@ class Content extends Component {
                             </div>    
                             <div className="post-2">
                                 <div>
-                                    <p className="posting-1">{content.author} says</p>
+                                    <p className="posting-1">{content.author} says, </p>
                                 </div>
                                 <div>
                                     <p className="posting-2"> "{content.text_post}"</p>
