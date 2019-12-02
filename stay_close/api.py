@@ -163,7 +163,25 @@ class InviteMember(APIView):
     serializer = CircleSerializer(circle)
     return Response(serializer.data)
 
+class AcceptCircleInvite(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    circleId = request.query_params.get('circleId')
+    circle = Circle.objects.get(pk=circleId)
+    user = User.objects.get(pk=userId)
+    circle.pending_members.add(user)
+    circle.members.add(user)
+    serializer = CircleSerializer(circle)
+    return Response(serializer.data)
 
-
+class DeclineCircleInvite(APIView):
+  def get(self, request, format=None):
+    userId = request.query_params.get('userId')
+    circleId = request.query_params.get('circleId')
+    circle = Circle.objects.get(pk=circleId)
+    user = User.objects.get(pk=userId)
+    circle.pending_members.remove(user)
+    serializer = CircleSerializer(circle)
+    return Response(serializer.data)
 
 

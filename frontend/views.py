@@ -9,3 +9,6 @@ def circleIndex(request, pk, circleName, id):
 
 def postIndex(request, circleId, circleName, userId, memberName):
   return render(request, 'frontend/index.html')
+
+def pendingCircleIndex(request, pk, pendingCircleName, id):
+  return render(request, 'frontend/index.html')

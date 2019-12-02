@@ -53,7 +53,7 @@ class Toolbar extends Component {
   handleAddSubmit() {
     event.preventDefault()
     let circleId = this.props.circleId
-    console.log(circleId)
+    // console.log(circleId)
     let config = {
       headers: {
         Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -64,12 +64,10 @@ class Toolbar extends Component {
         entered_usernames: this.state.members
       }
     }, config).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       if (res.data.length > 0) {
         for (let i = 0; i < res.data.length; i++) {
           let userId = res.data[i].id
-          console.log("circleID =" + circleId)
-          console.log("userId =" + userId)
           axios.get('/api/invite-member/', {
             params: {
               userId: userId,
