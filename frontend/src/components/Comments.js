@@ -110,12 +110,12 @@ class Comments extends Component {
                 {this.state.comments.map(comment =>
                     <div className="comment" key={comment.id}>
                         <div className="post-comment">
-                            <div className="post-1">
+                            <div className="posts-1">
                                 {this.state.user.avatar != null &&
-                                    <img className='profile-pic' src={this.state.user.avatar}></img>
+                                    <img className='comment-pic' src={this.state.user.avatar}></img>
                                 }
                             </div>    
-                            <div className="post-2">
+                            <div className="posts-2">
                                 <div>
                                     <p className="postings-1">{comment.author} says, </p>
                                 </div>

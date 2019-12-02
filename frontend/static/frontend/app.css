@@ -289,40 +289,57 @@ h3 {
     justify-content: space-between;
     margin-left: 20px;  
     margin-right: 20px; 
-    width: 210%; 
+    width: 200%; 
     height: 100%; 
 }
 
 .post-comment {
     border-style: solid;
-    border-color: rgb(7, 142, 144);
+    border-color: rgb(194, 217, 218);
     border-width: 5px; 
     border-radius: 10px;
     display: flex; 
     justify-content: space-between;
     margin-left: 20px;  
     margin-right: 20px; 
-    width: 210%; 
-    height: 150px; 
+    width: 200%; 
+    height: 130px; 
 }
 
 .post-1 {
     padding: 30px; 
     text-align: center; 
+    margin-right: 10px; 
 }
 
 .post-2 {
-    /* padding-left: 200px; 
-    padding-right: 200px;  */
     width: 100%; 
     height: 100%; 
-    margin-top: 30px; 
+    margin-top: 10px; 
+}
+
+.posts-1 {
+    padding: 20px; 
+    text-align: center; 
+}
+
+.posts-2 {
+    width: 100%; 
+    height: 100%; 
+    margin-top: 10px; 
 }
 
 .content-pic {
     height: 150px;
     width: 150px;
     border-radius: 50%; 
+}
+
+.comment-pic {
+    height: 80px; 
+    width: 80px;
+    border-radius: 50%; 
+    margin-bottom: 50px; 
 }
 
 .posting-1 {
@@ -350,7 +367,7 @@ h3 {
     display: flex; 
     justify-content: end; 
     margin-left: 77%; 
-    margin-bottom: 5%;
+    margin-bottom: 6%;
 }
 .posters {
     margin-right: 10px; 
@@ -379,9 +396,9 @@ h3 {
 }
 
 .add-comment {
-    width: 210%; 
+    width: 200%; 
     margin-left: 20px; 
-    margin-bottom: 20px; 
+    margin-bottom: 30px; 
 }
 
 

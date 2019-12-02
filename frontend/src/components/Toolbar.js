@@ -150,7 +150,7 @@ class Toolbar extends Component {
         <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
         <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
           <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-          <h2>HELLO</h2>
+          <h2>I WANT THIS TO WORK</h2>
           <form onSubmit={this.handleAddSubmit}>
               <label className="adding-members">
                 Add Members:
