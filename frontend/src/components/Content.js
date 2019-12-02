@@ -104,7 +104,7 @@ class Content extends Component {
         })
         axios.get('/api/user/', config, {
         }).then(res => {
-          this.setState({user: res.data})
+            this.setState({ user: res.data })
         })
     }
 
@@ -129,9 +129,9 @@ class Content extends Component {
                                 <div></div>
                                 <div className="posting-buttons">
                                     <p className="posters"> <Moment parse="MM-DD-YYYY HH:mm"> {content.created_at} </Moment></p>
-                                    <p className="posters"><ContentLikes likes={content.likes.length} contentId={content.id} userId={this.props.userId}/></p>
+                                    <p className="posters"><ContentLikes likes={content.likes.length} contentId={content.id} userId={this.props.userId} /></p>
                                     {content.member == this.props.userId &&
-                                    <button className="posters" onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
+                                        <button className="posters" onClick={(e) => this.handleOpenEditModal(content.text_post, content.id)}>Edit</button>
                                     }
                                     <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                         <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
@@ -145,7 +145,7 @@ class Content extends Component {
                                         </div>
                                     </ReactModal>
                                     {content.member == this.props.userId &&
-                                    <button className="posters" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                                        <button className="posters" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
                                     }
                                     <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                         <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
