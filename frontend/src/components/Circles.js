@@ -26,7 +26,7 @@ class Circles extends Component {
     }).then(res => {
       let circles = res.data
       this.setState({ circles: circles })
-      console.log(circles)
+      // console.log(circles)
 
     })
   }

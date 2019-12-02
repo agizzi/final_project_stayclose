@@ -66,27 +66,27 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-            axios.post('/api/circles/', {
-                name: currName,
-                admin: currAdmin,
-                pending_members: [],
-                members: []
-            }, config
-            ).then(res => {
-                this.setState({ showAddModal: false} );
-                if (this.props.location.pathname != '/profile/'){
-                    this.props.history.push('/profile');
-                } else {
-                    window.location.reload(false);
-                }
-            }).catch(function (error) {
-                alert('circle not created, try again')
-            })
+        axios.post('/api/circles/', {
+            name: currName,
+            admin: currAdmin,
+            pending_members: [],
+            members: []
+        }, config
+        ).then(res => {
+            this.setState({ showAddModal: false });
+            if (this.props.location.pathname != '/profile/') {
+                this.props.history.push('/profile');
+            } else {
+                window.location.reload(false);
+            }
+        }).catch(function (error) {
+            alert('circle not created, try again')
+        })
     }
 
     handleSettingsSubmit = (event) => {
         let fd = new FormData();
-        fd.append('avatar',this.state.picToUpload.name);
+        fd.append('avatar', this.state.picToUpload.name);
         console.log(fd)
         let newUsername = this.state.user
         let currUser = this.props.userId
@@ -97,21 +97,21 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-            axios.patch('/api/users/' + currUser + '/', {
-                avatar: fd
-            }, config
-            ).then(res => {
-                console.log(res)
-                this.setState({ showSettingsModal: false} );
-                // localStorage.setItem('username', newUsername);
-                if (this.props.location.pathname != '/profile/'){
-                    this.props.history.push('/profile');
-                } else {
-                    window.location.reload(false);
-                }
-            }).catch(function (error) {
-                alert('username not changed, try again')
-            })
+        axios.patch('/api/users/' + currUser + '/', {
+            avatar: fd
+        }, config
+        ).then(res => {
+            // console.log(res)
+            this.setState({ showSettingsModal: false });
+            // localStorage.setItem('username', newUsername);
+            if (this.props.location.pathname != '/profile/') {
+                this.props.history.push('/profile');
+            } else {
+                window.location.reload(false);
+            }
+        }).catch(function (error) {
+            alert('username not changed, try again')
+        })
     }
 
 
@@ -122,15 +122,15 @@ class NavBar extends Component {
 
     componentDidMount() {
         let config = {
-          headers: {
-            Authorization: `Token ${localStorage.getItem("access_key")}`
-          }
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
         }
         axios.get('/api/user/', config, {
         }).then(res => {
-          this.setState({user: res.data})
+            this.setState({ user: res.data })
         })
-      }
+    }
 
     render() {
         if (localStorage.getItem('access_key')) {
@@ -138,7 +138,7 @@ class NavBar extends Component {
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
                     {this.state.user.avatar != null &&
-                    <img className='profile-pic' src={this.state.user.avatar}></img>
+                        <img className='profile-pic' src={this.state.user.avatar}></img>
                     }
                     <ul className="links-2">
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
@@ -153,15 +153,15 @@ class NavBar extends Component {
                                         <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
                                         <div></div>
                                     </label>
-                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({picToUpload: acceptedFiles})}>
-                                        {({getRootProps, getInputProps, isDragActive}) => (
-                                        <section>
-                                            <div {...getRootProps()}>
-                                                <input {...getInputProps()} />
-                                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                                            </div>
-                                        </section>
-                                    )}
+                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
+                                        {({ getRootProps, getInputProps, isDragActive }) => (
+                                            <section>
+                                                <div {...getRootProps()}>
+                                                    <input {...getInputProps()} />
+                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                                </div>
+                                            </section>
+                                        )}
                                     </Dropzone>
                                     <button className="profile-submit" type='submit' value='create'>Change Settings</button>
                                 </form>
@@ -185,7 +185,7 @@ class NavBar extends Component {
                         </div>
                         <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
                         <li className="notification"><Link to="/notification" className="nav">
-                            <span class="badge">0</span>
+                            <span className="badge">0</span>
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>
                             <div className="sandwich"></div>
