@@ -153,7 +153,7 @@ class NavBar extends Component {
                                         <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
                                         <div></div>
                                     </label>
-                                    <Dropzone onDrop={acceptedFiles => this.setState({picToUpload: acceptedFiles})}>
+                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({picToUpload: acceptedFiles})}>
                                         {({getRootProps, getInputProps, isDragActive}) => (
                                         <section>
                                             <div {...getRootProps()}>
@@ -163,7 +163,7 @@ class NavBar extends Component {
                                         </section>
                                     )}
                                     </Dropzone>
-                                    <button type='submit' value='create'>Change Settings</button>
+                                    <button className="profile-submit" type='submit' value='create'>Change Settings</button>
                                 </form>
                             </ReactModal>
                         </div>

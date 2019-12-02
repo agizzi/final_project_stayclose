@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import CommentLikes from './CommentLikes';
 import axios from 'axios';
 import ReactModal from 'react-modal';
+import Moment from 'react-moment';
 
 const customStyles = {
     content: {
@@ -108,38 +109,52 @@ class Comments extends Component {
             <div className="comments">
                 {this.state.comments.map(comment =>
                     <div className="comment" key={comment.id}>
-                        {this.state.user.avatar != null &&
-                            <img className='profile-pic' src={this.state.user.avatar}></img>
-                            }
-                            <div >
-                                <p> "{comment.comment}"</p>
-                                <p>created at: {comment.created_at}</p>
+                        <div className="post-comment">
+                            <div className="post-1">
+                                {this.state.user.avatar != null &&
+                                    <img className='profile-pic' src={this.state.user.avatar}></img>
+                                }
+                            </div>    
+                            <div className="post-2">
+                                <div>
+                                    <p className="postings-1">{comment.author} says, </p>
+                                </div>
+                                <div>
+                                    <p className="postings-2"> "{comment.comment}"</p>
+                                </div>
+                                <div className="postings-buttons">
+                                    <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{comment.created_at}</Moment></p>
+                                    <p className="posters"><CommentLikes likes={comment.likes.length} commentId={comment.id} userId={this.props.userId}/></p>
+                                    {comment.author == this.props.userId &&
+                                        <button className="posters" onClick={(e) => this.handleOpenDeleteModal()}>Delete</button>
+                                    }
+                                    <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
+                                    <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
+                                        <h3 className="delete-message">Delete: </h3>
+                                        <div className="delete">
+                                            <button className="deleting" onClick={(e) => this.handleDeleteSubmit(comment.id)}>Yes</button>
+                                            <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
+                                        </div>
+                                    </ReactModal>
+                                </div>
+                                   
                             </div>
-                            <CommentLikes likes={comment.likes.length} commentId={comment.id} userId={this.props.userId}/>
-                            {comment.author == this.props.userId &&
-                                <button className="deleter" onClick={(e) => this.handleOpenDeleteModal()}>Delete Comment</button>
-                            }
-                            <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
-                            <button className="delete" onClick={(e) => this.handleCloseAddModal()}>X</button>
-                                <h3 className="delete-message">Delete: </h3>
-                                <button className="delete" onClick={(e) => this.handleDeleteSubmit(comment.id)}>Yes</button>
-                                <button className="delete" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
-            </ReactModal>
-                    </div>
-            )}
-            <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
-            <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-                <button className="add" onClick={(e) => this.handleCloseAddModal()}>X</button>
-                    <h3 className="add-comment-message">Comment: </h3>
-                        <div className="delete">
-                            <form>
-                                <input className="new-comment-input" type='text' value={this.state.newComment} onChange={(e) => this.setState({ newComment: e.target.value })} />
-                            </form>
-                            <button className="add-comment" onClick={(e) => this.handleAddSubmit()}>Comment</button>
-                        </div>
-            </ReactModal>
-            </div>
-        );
+                        </div>    
+                    </div>  
+                 )}
+                  <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
+                    <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+                        <button className="add" onClick={(e) => this.handleCloseAddModal()}>X</button>
+                            <h3 className="add-comment-message">Comment: </h3>
+                                <div className="delete">
+                                    <form>
+                                        <input className="new-comment-input" type='text' value={this.state.newComment} onChange={(e) => this.setState({ newComment: e.target.value })} />
+                                    </form>
+                                    <button className="add-comment" onClick={(e) => this.handleAddSubmit()}>Comment</button>
+                                </div>
+                    </ReactModal>   
+            </div>  
+        )             
     }
 }
 

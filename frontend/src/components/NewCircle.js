@@ -60,17 +60,6 @@ class NewCircle extends Component {
                         <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
                         <div></div>
                     </label>
-                    <label>
-                        Add Members:
-                            <div></div>
-                        <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
-                        <div></div>
-                    </label>
-                    <label>
-                        Add Members:
-                            <div></div>
-                        <input type='text' value={this.state.members} onChange={(e) => this.setState({ members: e.target.value })} />
-                    </label>
                     <div></div>
                     <button value='create' onClick={this.handleCloseModal}>Create a Circle</button>
                 </form>
