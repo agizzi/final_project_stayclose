@@ -4,6 +4,7 @@ import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 import Notification from './Notifications';
+import ProfilePicture from './ProfilePicture';
 import { Link } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import Dropzone from 'react-dropzone';
@@ -23,12 +24,10 @@ class NavBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            user: localStorage.getItem('username'),
+            user: '',
             name: '',
             members: '',
             addedMember: '',
-            userId: '',
-            user: '',
             picToUpload: [],
             showAddModal: false,
             showSettingsModal: false
@@ -121,15 +120,7 @@ class NavBar extends Component {
     }
 
     componentDidMount() {
-        let config = {
-          headers: {
-            Authorization: `Token ${localStorage.getItem("access_key")}`
-          }
-        }
-        axios.get('/api/user/', config, {
-        }).then(res => {
-          this.setState({user: res.data})
-        })
+        console.log(this.props)
       }
 
     render() {
@@ -137,9 +128,7 @@ class NavBar extends Component {
             return (
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
-                    {this.state.user.avatar != null &&
-                    <img className='profile-pic' src={this.state.user.avatar}></img>
-                    }
+                    <ProfilePicture userId={this.props.userId}/>
                     <ul className="links-2">
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
                         <div>

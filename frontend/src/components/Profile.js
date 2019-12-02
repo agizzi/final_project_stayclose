@@ -12,13 +12,11 @@ class ProfilePage extends Component {
         this.state = {
             username: '',
             userId: '',
-
         };
     }
 
 
     componentDidMount() {
-        this.setState({ username: localStorage.getItem("username") })
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -28,6 +26,7 @@ class ProfilePage extends Component {
         axios.get('/api/user/', config, {
         }).then(res => {
             this.setState({ userId: res.data.id })
+            this.setState({ username: localStorage.getItem("username") })
         })
     }
 

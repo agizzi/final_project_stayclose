@@ -6,6 +6,7 @@ import Circle from './Circle';
 import Comments from './Comments';
 import ReactModal from 'react-modal';
 import Moment from 'react-moment';
+import ProfilePicture from './ProfilePicture';
 
 const customStyles = {
     content: {
@@ -117,9 +118,7 @@ class Content extends Component {
                     <h1 className="content-header">{this.props.circleName}</h1>
                     {this.state.contents.map(content =>
                         <div className="content-2" key={content.id}>
-                            {this.state.user.avatar != null &&
-                            <img className='profile-pic' src={this.state.user.avatar}></img>
-                            }
+                            <ProfilePicture userId={content.member} />
                             <div className="post-2">
                                 <p className="posting-1">author: {content.author}</p>
                                 <p className="posting-2"> "{content.text_post}"</p>
