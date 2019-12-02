@@ -6,6 +6,7 @@ import PrivateRoute from './helpers/PrivateRoute'
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import CircleFeed from './CircleFeed';
 import NewContent from './NewContent';
+import PendingCircle from './PendingCircle';
 
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
           <Route exact path="/register" component={RegistrationForm} />
           <PrivateRoute path="/circle/:circleId/:circleName/:userId" component={CircleFeed} />
           <PrivateRoute path="/post/:circleId/:circleName/:userId/:memberName" component={NewContent} />
+          <PrivateRoute path="/pending-circle/:pendingCircleId/:pendingCircleName/" component={PendingCircle} />
           <PrivateRoute exact path="/profile" component={ProfilePage} />
           <Route path="" component={LoginForm} />
         </Switch>
