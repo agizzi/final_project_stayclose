@@ -128,7 +128,7 @@ class NavBar extends Component {
             return (
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
-                    <ProfilePicture userId={this.props.userId}/>
+                        <ProfilePicture userId={this.props.userId}/>
                     <ul className="links-2">
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
                         <div>

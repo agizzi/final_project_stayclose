@@ -10,8 +10,8 @@ class ProfilePage extends Component {
         super(props);
 
         this.state = {
-            username: '',
-            userId: '',
+            username: localStorage.getItem("username"),
+            userId: 0
         };
     }
 
@@ -25,8 +25,8 @@ class ProfilePage extends Component {
 
         axios.get('/api/user/', config, {
         }).then(res => {
-            this.setState({ userId: res.data.id })
-            this.setState({ username: localStorage.getItem("username") })
+            let userId = res.data.id
+            this.setState({ userId: userId })
         })
     }
 

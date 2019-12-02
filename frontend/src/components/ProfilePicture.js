@@ -12,7 +12,6 @@ class ProfilePicture extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.userId)
         let config = {
             headers: {
                 Authorization: localStorage.getItem("access_key")
