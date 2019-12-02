@@ -145,32 +145,36 @@ class Toolbar extends Component {
             <form onSubmit={this.handleAddSubmit}>
               <label>
                 Add Members:
-              </label>
+              <div></div>
               <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
-              <button type='submit' value='create'>Add Members</button>
+              </label>
+              <div></div>
+              <button type='submit' value='create' onClick={this.handleCloseAddModal}>Add Members</button>
             </form>
           </ReactModal>
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
-            <h2>Are You Sure? </h2>
-            <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
-            <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
+            <h2>Are You Sure You Want to leave? </h2>
+            <div className="leaving">
+              <button type='submit' className="left" value='create' onClick={this.handleLeaveSubmit}>Yes</button>
+              <button type='submit' className="left" value='create' onClick={this.handleCloseLeaveModal}>No</button>
+            </div>
           </ReactModal>
           <React.Fragment>
             Members: <Circle circleId={params.circleId} />
-          </React.Fragment>
-        </div>
-      )
-    } else {
-      return (
-        <div className="postButton" >
-          <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
-          <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
-          <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-            <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-            <h2>HELLO</h2>
-            <form onSubmit={this.handleAddSubmit}>
+        </React.Fragment>
+      </div>
+    )
+  } else {
+    return (
+      <div className="postButton" >
+        <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+        <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
+        <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+          <button className="modal" onClick={this.handleCloseAddModal}>X</button>
+          <h2>I WANT THIS TO WORK</h2>
+          <form onSubmit={this.handleAddSubmit}>
               <label className="adding-members">
                 Add Members:
               </label>

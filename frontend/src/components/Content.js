@@ -121,7 +121,7 @@ class Content extends Component {
                             </div>    
                             <div className="post-2">
                                 <div>
-                                    <p className="posting-1">{content.author} says, </p>
+                                    <h2 className="posting-1">{content.author} says, </h2>
                                 </div>
                                 <div>
                                     <p className="posting-2"> "{content.text_post}"</p>
