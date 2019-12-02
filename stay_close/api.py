@@ -169,7 +169,7 @@ class AcceptCircleInvite(APIView):
     circleId = request.query_params.get('circleId')
     circle = Circle.objects.get(pk=circleId)
     user = User.objects.get(pk=userId)
-    circle.pending_members.add(user)
+    circle.pending_members.remove(user)
     circle.members.add(user)
     serializer = CircleSerializer(circle)
     return Response(serializer.data)
