@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
-import { request } from 'http';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
@@ -26,8 +25,6 @@ class Circles extends Component {
     }).then(res => {
       let circles = res.data
       this.setState({ circles: circles })
-
-
     })
   }
 
