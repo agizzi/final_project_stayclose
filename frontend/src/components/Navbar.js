@@ -149,7 +149,7 @@ class NavBar extends Component {
                                 </form>
                             </ReactModal>
                         </div>
-                        {this.props.location.pathname == '/profile/' &&
+                        {this.props.location.pathname == '/profile/' || this.props.location.pathname == '/profile' &&
                         <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
                         }
                         <div>

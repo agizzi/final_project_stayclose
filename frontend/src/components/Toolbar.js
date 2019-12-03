@@ -191,6 +191,7 @@ class Toolbar extends Component {
     } else {
       return (
         <div className="postButton" >
+          <h1 className="content-header">{this.props.circleName}</h1>
           <button type="button" className="add-member"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
           <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
