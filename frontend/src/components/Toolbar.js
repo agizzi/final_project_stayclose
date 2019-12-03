@@ -23,8 +23,11 @@ class Toolbar extends Component {
       showAddModal: false,
       showLeaveModal: false,
       members: "",
+      memberUsernames: [],
       isAdmin: false,
-      pending_member: ""
+      circleAdmin: "",
+      adminUsername: "",
+      pending_members: ""
     }
     this.handleOpenAddModal = this.handleOpenAddModal.bind(this);
     this.handleCloseAddModal = this.handleCloseAddModal.bind(this);
@@ -53,7 +56,7 @@ class Toolbar extends Component {
   handleAddSubmit() {
     event.preventDefault()
     let circleId = this.props.circleId
-    // console.log(circleId)
+    this.setState({ showAddModal: false });
     let config = {
       headers: {
         Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -64,7 +67,7 @@ class Toolbar extends Component {
         entered_usernames: this.state.members
       }
     }, config).then(res => {
-      // console.log(res.data)
+
       if (res.data.length > 0) {
         for (let i = 0; i < res.data.length; i++) {
           let userId = res.data[i].id
@@ -122,11 +125,30 @@ class Toolbar extends Component {
     }
     axios.get('/api/circles/' + this.props.circleId + '/', config, {
     }).then(res => {
+      this.setState({ members: res.data.members })
+      this.setState({ circleAdmin: res.data.admin })
+
       if (res.data['admin'] == this.props.userId) {
         this.setState({ isAdmin: true })
       }
+      let membersUser = []
+      for (let member of this.state.members) {
+        axios.get('/api/users/' + member + '/', config, {
+        }).then(res => {
+          membersUser.push(res.data.username)
+        })
+      }
+      // console.log(membersUser)
+      this.setState({ memberUsernames: membersUser })
+      console.log(membersUser)
+      axios.get('/api/users/' + this.state.circleAdmin + '/', config, {
+      }).then(res => {
+        this.setState({ adminUsername: res.data.username })
+        console.log(this.state.adminUsername)
+      })
     })
   }
+
 
   render() {
     const { match: { params } } = this.props;
@@ -134,6 +156,7 @@ class Toolbar extends Component {
       return (
         <div className="postButton" >
           <h1 className="content-header">{this.props.circleName}</h1>
+          <h4 className="you-are-admin">You are the admin of this circle.</h4>
           <button type="button" className="toolbar"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
           <button type="button" className="toolbar" onClick={(e) => this.handleDelete()}>Delete Circle</button>
           <button type="button" className="toolbar" onClick={this.handleOpenAddModal}>Add Member</button>
@@ -144,7 +167,7 @@ class Toolbar extends Component {
               <label>
                 Add Members:
               <div></div>
-              <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
+                <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
               </label>
               <div></div>
               <button type='submit' value='create'>Add Members</button>
@@ -159,20 +182,21 @@ class Toolbar extends Component {
               <button type='submit' className="left" value='create' onClick={this.handleCloseLeaveModal}>No</button>
             </div>
           </ReactModal>
-          <React.Fragment>
-            Members: <Circle circleId={params.circleId} />
-        </React.Fragment>
-      </div>
-    )
-  } else {
-    return (
-      <div className="postButton" >
-        <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
-        <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
-        <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-          <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-          <h2>I WANT THIS TO WORK</h2>
-          <form onSubmit={this.handleAddSubmit}>
+          <h4>Members: {this.state.memberUsernames.length}</h4>
+          {this.state.memberUsernames.map(member => <p key={member}>{member}</p>)}
+
+
+        </div>
+      )
+    } else {
+      return (
+        <div className="postButton" >
+          <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+          <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
+          <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+            <button className="modal" onClick={this.handleCloseAddModal}>X</button>
+            <h2>Add Member</h2>
+            <form onSubmit={this.handleAddSubmit}>
               <label className="adding-members">
                 Add Members:
               </label>
@@ -192,6 +216,10 @@ class Toolbar extends Component {
             <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
             <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
           </ReactModal>
+          <h4>Admin:</h4>
+          {this.state.adminUsername}
+          <h4>Members:</h4>
+          {this.state.memberUsernames.map(member => <p key={member}>{member}</p>)}
         </div>
       )
     }
