@@ -29,7 +29,7 @@ class ProfilePicture extends Component {
         return (
             <div>
             {this.state.user.avatar != null &&
-                <img className='profile-pic' src={this.state.user.avatar}></img>
+                <img className={`profile-pic ${this.props.size && 'profile-pic-' + this.props.size}`} src={this.state.user.avatar}></img>
                 }
             </div>
         );
