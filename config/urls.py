@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/accept-circle-invite/', api.AcceptCircleInvite.as_view()),
     path('api/decline-circle-invite/', api.DeclineCircleInvite.as_view()),
     path('api/upload-user-avatar/', api.UploadUserAvatar.as_view()),
+    path('api/add-image-to-content/<int:pk>/', api.AddImageToContent.as_view()),
     # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/rest-auth/login/', jwt_views.TokenObtainPairView.as_view(), name='rest_login'),
     path('api/rest-auth/', include('rest_auth.urls')),

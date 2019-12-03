@@ -140,6 +140,11 @@ class Post extends Component {
                     <div>
                         <p className="posting-2"> "{this.props.content.text_post}"</p>
                     </div>
+                    {this.props.content.img_post != null &&
+                        <div>
+                            <img src={this.props.content.img_post} />
+                        </div>
+                    }
                     <div></div>
                     <div className="posting-user">
                         <p className="posters"> <Moment parse="MM-DD-YYYY HH:mm"> {this.props.content.created_at} </Moment></p>

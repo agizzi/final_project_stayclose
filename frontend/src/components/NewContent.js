@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import Dropzone from 'react-dropzone';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 
@@ -12,6 +13,9 @@ class NewContent extends Component {
         this.state = {
             post: '',
             userId: '',
+            contentId: '',
+            picToUpload: [],
+            hasPic: false,
             username: localStorage.getItem('username')
         }
     }
@@ -37,8 +41,27 @@ class NewContent extends Component {
             tags: null
         }, config
         ).then(res => {
-            this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
-        })
+            return res.data
+        }).then(datum => {
+            if (this.state.hasPic) {
+                let profilePicture = this.state.picToUpload[0]
+                let data = new FormData()
+                data.append('file', profilePicture)
+                let config = {
+                headers: {
+                    Authorization: `Token ${localStorage.getItem("access_key")}`
+                }
+            }
+                axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
+                ).then(res => {
+                this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
+            }).catch(function (error) {
+                alert('username not changed, try again')
+            })
+            } else {
+                this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
+            }
+    })
     }
 
     render() {
@@ -53,6 +76,16 @@ class NewContent extends Component {
                         <div></div>
                     </label>
                     <div></div>
+                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
+                        {({ getRootProps, getInputProps, isDragActive }) => (
+                            <section>
+                                <div {...getRootProps()}>
+                                    <input {...getInputProps()} />
+                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                </div>
+                            </section>
+                        )}
+                    </Dropzone>
                     <button type='submit' value='create'>Create a Post</button>
                 </form>
             </div>
