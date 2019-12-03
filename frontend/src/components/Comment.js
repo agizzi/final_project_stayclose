@@ -51,6 +51,15 @@ class Comment extends Component {
     }
 
       componentDidMount() {
+        let config = {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
+        }
+        axios.get('/api/users/' + this.props.comment.author + '/', config, {
+        }).then(res => {
+            this.setState({ author: res.data.username })
+        })
     }
 
     render() {
@@ -62,7 +71,7 @@ class Comment extends Component {
                             </div>
                             <div className="post-2">
                                 <div>
-                                    <p className="postings-1">{this.props.comment.author} says, </p>
+                                    <p className="postings-1">{this.state.author} says, </p>
                                 </div>
                                 <div>
                                     <p className="postings-2"> "{this.props.comment.comment}"</p>

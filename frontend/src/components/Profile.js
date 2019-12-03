@@ -11,15 +11,23 @@ class ProfilePage extends Component {
 
         this.state = {
             username: localStorage.getItem("username"),
-            userId: 0
+            authtoken: localStorage.getItem("access_key"),
+            userId: 0,
+            circles: [],
+            pending_circles: []
         };
     }
 
+    addCircle(circle) {
+        this.setState({
+            circles: this.state.circles.concat([circle]) 
+        })
+    }
 
     componentDidMount() {
         let config = {
             headers: {
-                Authorization: `Token ${localStorage.getItem("access_key")}`
+                Authorization: `Token ${this.state.authtoken}`
             }
         }
 
@@ -28,21 +36,33 @@ class ProfilePage extends Component {
             let userId = res.data.id
             this.setState({ userId: userId })
         })
+
+        axios.get('/api/circles-by-user', config, {
+        }).then(res => {
+          let circles = res.data
+          this.setState({ circles: circles })
+        })
+
+        axios.get('/api/pending-circles-by-user/', config, {
+        }).then(res => {
+          let pending_circles = res.data
+          this.setState({ pending_circles: pending_circles })
+        })
     }
 
     render() {
         return (
             <React.Fragment>
-                <NavBar username={this.state.username} userId={this.state.userId} />
-                <PendingCircles username={this.state.username} userId={this.state.userId} />
-                <Circles username={this.state.username} userId={this.state.userId} />
+                <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
+                <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
+                <Circles username={this.state.username} userId={this.state.userId} circles={this.state.circles} />
             </React.Fragment>
-
-        );
+        )
     }
 }
 
 export default withRouter(ProfilePage);
+
 
 
 
