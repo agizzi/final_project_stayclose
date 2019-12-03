@@ -156,11 +156,14 @@ class AddOrDeleteLikeComment(APIView):
 
 class InviteMember(APIView):
   def get(self, request, format=None):
+    currentUser = self.request.user
     userId = request.query_params.get('userId')
     circleId = request.query_params.get('circleId')
     circle = Circle.objects.get(pk=circleId)
     user = User.objects.get(pk=userId)
-    circle.pending_members.add(user)
+    print(currentUser)
+    if user != currentUser:
+      circle.pending_members.add(user)
     serializer = CircleSerializer(circle)
     return Response(serializer.data)
 
