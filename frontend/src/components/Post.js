@@ -104,7 +104,7 @@ class Post extends Component {
             <div className="content-2" key={this.props.content.id}>
             <div className="post-me">
                 <div className="post-1-pic">
-                    <ProfilePicture userId={this.props.content.member} />
+                    <ProfilePicture userId={this.props.content.member} size='large' />
                 </div>
                 <div className="post-2">
                     <div>

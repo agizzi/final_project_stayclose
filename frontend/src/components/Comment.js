@@ -101,13 +101,13 @@ class Comment extends Component {
         return (
             <div className="comment" >
             <div className="post-comment">
-                <div className="posts-1-pic">
-                    <ProfilePicture userId={this.props.comment.author} />
+                <div className="posts-1">
+                    <ProfilePicture userId={this.props.comment.author} size='small' />
                 </div>
                 <div className="posts-2">
-                        <p className="postings-1">{this.props.comment.author} says, "{this.props.comment.comment}"</p> 
+                        <p className="postings-1">{this.props.comment.author}: "{this.props.comment.comment}"</p> 
                         {this.props.comment.author == this.props.userId &&
-                            <button className="posters" onClick={(e) => this.handleOpenEditModal(this.props.comment.comment, this.props.comment.id)}>Edit</button>
+                            <button className="posters-delete" onClick={(e) => this.handleOpenEditModal(this.props.comment.comment, this.props.comment.id)}>Edit</button>
                         }
                             <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                 <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>

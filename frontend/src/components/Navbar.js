@@ -118,6 +118,7 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
+                   
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
 
                     <ProfilePicture userId={this.props.userId} />
