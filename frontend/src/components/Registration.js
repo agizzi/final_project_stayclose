@@ -30,8 +30,8 @@ class RegistrationForm extends Component {
         return (
             <div className="registration">
                 <div classname="register">
-                    <h1>StayClose</h1>
-                    <p>"Personal. Practical. Private."</p>
+                    <h1 className="login-header">StayClose</h1>
+                    <p className="login-p">"Personal. Practical. Private."</p>
                 </div>
                 <div className="register-2">
                     <h2>Register</h2>

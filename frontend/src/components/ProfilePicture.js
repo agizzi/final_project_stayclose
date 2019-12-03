@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 
+
 class ProfilePicture extends Component {
     constructor(props) {
         super(props);
@@ -33,7 +34,6 @@ class ProfilePicture extends Component {
             </div>
         );
     }
-
 }
 
 export default withRouter(ProfilePicture);

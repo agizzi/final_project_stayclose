@@ -25,6 +25,28 @@ button {
     margin-bottom: 5px; 
 }
 
+.posters-buttons {
+    display: flex; 
+    margin-bottom: 30px; 
+}
+
+.posters-delete {
+    opacity: 0; 
+}
+
+.posters-delete:hover {
+    opacity: 1; 
+}
+
+.posters-1 {
+    margin-right: 58%; 
+}
+
+.posters-2 {
+    margin-left: 10%; 
+    margin-right: 10px; 
+}
+
 button:hover {
     background-color: rgb(164, 176, 176);
     color: white; 
@@ -303,33 +325,43 @@ h3 {
     margin-left: 20px;  
     margin-right: 20px; 
     width: 200%; 
-    height: 100%; 
 }
 
 .post-comment {
     border-style: solid;
     border-color: rgb(194, 217, 218);
-    border-width: 5px; 
+    border-width: 2px; 
     border-radius: 10px;
-    background-color: rgb(208, 222, 226);
     display: flex; 
     justify-content: space-between;
     margin-left: 20px;  
     margin-right: 20px; 
     width: 200%; 
-    height: 150px; 
 }
 
-.post-1 {
-    padding: 30px; 
-    text-align: center; 
-    margin-right: 10px; 
+.postings-1 {
+    background-color: rgba(212, 221, 221, 0.808);
+    display:inline-block;
+    border-radius: 7px; 
+    padding: 5px; 
+    margin-bottom: 15px; 
+    margin-right: 5px; 
+}
+
+.posts-1-pic {
+    width: 5%; 
+    height: 5%; 
+}
+
+.post-1-pic {
+    padding: 30px 20px; 
+    margin-right: 20px; 
 }
 
 .post-2 {
     width: 100%; 
     height: 100%; 
-    margin-top: 10px; 
+    margin-top: 20px; 
 }
 
 .posts-1 {
@@ -338,22 +370,14 @@ h3 {
 }
 
 .posts-2 {
-    width: 100%; 
+    width: 80%; 
     height: 100%; 
     margin-top: 10px; 
+    font-size: 9pt; 
 }
 
-.content-pic {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%; 
-}
-
-.comment-pic {
-    height: 90px; 
-    width: 90px;
-    border-radius: 50%; 
-    margin-bottom: 90px; 
+.post-comment:nth-child(3) {
+    width: 10px; 
 }
 
 .posting-1 {
@@ -361,16 +385,15 @@ h3 {
 }
 
 .posting-2 {
-    margin-bottom: 6%; 
+    margin-bottom: 30px; 
     text-align: center;
 }
 
-.posting-buttons {
+.posting-user {
     display: flex; 
     justify-content: end; 
-    margin-left: 70%; 
+    margin-left: 73%; 
 }
-
 
 .postings-2 {
     text-align: center;
@@ -379,8 +402,8 @@ h3 {
 .postings-buttons {
     display: flex; 
     justify-content: end; 
-    margin-left: 77%; 
-    margin-bottom: 10%;
+    margin-top: 20px; 
+    margin-left: 69.5%; 
 }
 .posters {
     margin-right: 10px; 
@@ -451,6 +474,8 @@ h3 {
 .contents {
     display: flex; 
     justify-content: space-between; 
+    margin-left: 8%; 
+    margin-right: 8%; 
 }
 
 .profile-pic {

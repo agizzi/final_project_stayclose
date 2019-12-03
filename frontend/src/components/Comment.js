@@ -100,24 +100,15 @@ class Comment extends Component {
     render() {
         return (
             <div className="comment" >
-                <div className="post-comment">
-                    <div className="post-1">
-                        <ProfilePicture userId={this.props.comment.author} />
-                    </div>
-                    <div className="post-2">
-                        <div>
-                            <p className="postings-1">{this.state.author} says, </p>
-                        </div>
-                        <div>
-                            <p className="postings-2"> "{this.props.comment.comment}"</p>
-                        </div>
-                        <div className="postings-buttons">
-                            <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{this.props.comment.created_at}</Moment></p>
-                            <p className="posters"><CommentLikes likes={this.props.comment.likes.length} commentId={this.props.comment.id} userId={this.props.userId} /></p>
-                            {this.props.comment.author == this.props.userId &&
-                                <button className="posters" onClick={(e) => this.handleOpenEditModal(this.props.comment.comment, this.props.comment.id)}>Edit</button>
-                            }
-
+            <div className="post-comment">
+                <div className="posts-1-pic">
+                    <ProfilePicture userId={this.props.comment.author} />
+                </div>
+                <div className="posts-2">
+                        <p className="postings-1">{this.props.comment.author} says, "{this.props.comment.comment}"</p> 
+                        {this.props.comment.author == this.props.userId &&
+                            <button className="posters" onClick={(e) => this.handleOpenEditModal(this.props.comment.comment, this.props.comment.id)}>Edit</button>
+                        }
                             <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
                                 <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
                                 <h3>Edit Your Comment: </h3>
@@ -129,22 +120,24 @@ class Comment extends Component {
                                     <button className="editing" onClick={(e) => this.handleCloseEditModal()}>Do Not Save</button>
                                 </div>
                             </ReactModal>
-                            {this.props.comment.author == this.props.userId &&
-                                <button className="posters" onClick={(e) => this.handleOpenDeleteModal()}>Delete</button>
+                        {this.props.comment.author == this.props.userId &&
+                                <button className="posters-delete" onClick={(e) => this.handleOpenDeleteModal()}>Delete</button>
                             }
                             <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
-                                <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
+                            <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                 <h3 className="delete-message">Delete: </h3>
                                 <div className="delete">
-                                    <button className="deleting" onClick={(e) => this.handleDeleteSubmit(this.props.comment.id)}>Yes</button>
+                                    <button className="deleting" onClick={(e) => this.handleDeleteSubmit(comment.id)}>Yes</button>
                                     <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                 </div>
                             </ReactModal>
-
+                        <div className="postings-buttons">
+                            <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{this.props.comment.created_at}</Moment></p>
+                            <p className="posters"><CommentLikes likes={this.props.comment.likes.length} commentId={this.props.comment.id} userId={this.props.userId}/></p>
                         </div>
-                    </div>
                 </div>
             </div>
+        </div>
         )
     }
 }
