@@ -65,44 +65,36 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.post('/api/circles/', {
+        const newCircle = {
             name: currName,
             admin: currAdmin,
             pending_members: [],
             members: []
-        }, config
+        }
+        axios.post('/api/circles/', newCircle, config
         ).then(res => {
             this.setState({ showAddModal: false });
-            if (this.props.location.pathname != '/profile/') {
-                this.props.history.push('/profile');
-            } else {
-                window.location.reload(false);
-            }
+            this.props.addCircle(newCircle)
         }).catch(function (error) {
             alert('circle not created, try again')
         })
     }
 
     handleSettingsSubmit = (event) => {
-        let fd = new FormData();
-        fd.append('avatar', this.state.picToUpload.name);
-        console.log(fd)
-        let newUsername = this.state.user
-        let currUser = this.props.userId
         event.preventDefault();
+        console.log(this.state.picToUpload[0])
+        let profilePicture = this.state.picToUpload[0]
         let config = {
             headers: {
-                'content-type': 'multipart/form-data',
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.patch('/api/users/' + currUser + '/', {
-            avatar: fd
-        }, config
+        let data = new FormData()
+        data.append('file', profilePicture)
+        axios.put('/api/upload-user-avatar/', data, config
         ).then(res => {
-            // console.log(res)
+            console.log(res)
             this.setState({ showSettingsModal: false });
-            // localStorage.setItem('username', newUsername);
             if (this.props.location.pathname != '/profile/') {
                 this.props.history.push('/profile');
             } else {
@@ -127,66 +119,51 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
-                <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
-                <ProfilePicture userId={this.props.userId} />
-                <ul className="links-2">
-                    <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
-                    <div>
-                        <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
-                            <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
-                            <h2>Settings: </h2>
-                            <form onSubmit={this.handleSettingsSubmit}>
-                                <label>
-                                    Username:
-                                    <div></div>
-                                    <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
-                                    <div></div>
-                                </label>
-                                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
-                                    {({ getRootProps, getInputProps, isDragActive }) => (
-                                        <section>
-                                            <div {...getRootProps()}>
-                                                <input {...getInputProps()} />
-                                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                                            </div>
-                                        </section>
-                                    )}
-                                </Dropzone>
-                                <button className="profile-submit" type='submit' value='create'>Change Settings</button>
-                            </form>
-                        </ReactModal>
-                    </div>
-                    <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
-                    <div>
-                        <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-                            <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-                            <h2>New Circle: </h2>
-                            <form onSubmit={this.handleAddSubmit}>
-                                <label>
-                                    Circle Name:
-                                    <div></div>
-                                    <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
-                                    <div></div>
-                                </label>
-                                <button type='submit' value='create'>Create a Circle</button>
-                            </form>
-                        </ReactModal>
-                    </div>
-                    <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
-                </ul>
-            </div>
-        )
-    } else {
-        return (
-            <div className="navbar">
-                <h1 className="nav"> Hi! Welcome to StayClose. </h1>
-                <nav>
-                    <ul>
-                        <li className="nav"> <Link to="/login"> Login </Link> </li>
-                        <li className="nav"> <Link to="/register"> Register </Link> </li>
+                    <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
+
+                    <ProfilePicture userId={this.props.userId} />
+                    <ul className="links-2">
+                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
+                            <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
+                                <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
+                                <h2>Settings: </h2>
+                                <form onSubmit={this.handleSettingsSubmit}>
+                                    <label>
+                                        Username:
+                                        <div></div>
+                                        <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
+                                        <div></div>
+                                    </label>
+                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
+                                        {({ getRootProps, getInputProps, isDragActive }) => (
+                                            <section>
+                                                <div {...getRootProps()}>
+                                                    <input {...getInputProps()} />
+                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                                </div>
+                                            </section>
+                                        )}
+                                    </Dropzone>
+                                    <button className="profile-submit" type='submit' value='create'>Change Settings</button>
+                                </form>
+                            </ReactModal>
+                     
+                        <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                            <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+                                <button className="modal" onClick={this.handleCloseAddModal}>X</button>
+                                <h2>New Circle: </h2>
+                                <form onSubmit={this.handleAddSubmit}>
+                                    <label>
+                                        Circle Name:
+                                        <div></div>
+                                        <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+                                        <div></div>
+                                    </label>
+                                    <button type='submit' value='create'>Create a Circle</button>
+                                </form>
+                            </ReactModal>
+                        <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
                     </ul>
-                </nav>
-                <Notification />
             </div>
             )
         }
@@ -194,11 +171,3 @@ class NavBar extends Component {
 }
 
 export default withRouter(NavBar);
-
-
-{/* <li className="notification"><Link to="/notification" className="nav">
-                            <span className="badge">0</span>
-                            <div className="sandwich"></div>
-                            <div className="sandwich"></div>
-                            <div className="sandwich"></div>
-                        </Link></li> */}

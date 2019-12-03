@@ -1,6 +1,7 @@
 from .models import User, Circle, Content, Comments
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+from rest_framework.parsers import FileUploadParser, MultiPartParser
 from django.http import HttpResponse
 from rest_framework.views import APIView
 from .serializers import UserSerializer, CircleSerializer, ContentSerializer, CommentsSerializer
@@ -183,5 +184,19 @@ class DeclineCircleInvite(APIView):
     circle.pending_members.remove(user)
     serializer = CircleSerializer(circle)
     return Response(serializer.data)
+
+class UploadUserAvatar(APIView):
+  parser_classes = [MultiPartParser,]
+  def put(self, request, format=None):
+    file = request.data['file']
+    print(file)
+
+    user = User.objects.get(id=request.user.id)
+    user.avatar.save(file.name, file, save=True)
+
+    return Response(status=201)
+
+
+
 
 
