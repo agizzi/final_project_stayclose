@@ -127,12 +127,12 @@ class Comment extends Component {
                             <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                 <h3 className="delete-message">Are you sure you want to delete your comment? </h3>
                                 <div className="delete">
-                                    <button className="deleting" onClick={(e) => this.handleDeleteSubmit(comment.id)}>Yes</button>
+                                    <button className="deleting" onClick={(e) => this.handleDeleteSubmit(this.props.comment.id)}>Yes</button>
                                     <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                 </div>
                             </ReactModal>
                         <div className="postings-buttons">
-                            <p className="posters"><Moment format="LLL">{new Date(this.props.comment.created_at)}</Moment></p>
+                            <p className="posters"><Moment format="LLL">{new Date(this.props.comment.updated_at)}</Moment></p>
                             <p className="posters"><CommentLikes likes={this.props.comment.likes.length} commentId={this.props.comment.id} userId={this.props.userId}/></p>
                         </div>
                 </div>

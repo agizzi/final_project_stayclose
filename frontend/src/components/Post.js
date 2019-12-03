@@ -147,7 +147,7 @@ class Post extends Component {
                     }
                     <div></div>
                     <div className="posting-user">
-                        <p className="posters"><Moment format="LLL">{new Date(this.props.content.created_at)}</Moment></p>
+                        <p className="posters"><Moment format="LLL">{new Date(this.props.content.updated_at)}</Moment></p>
                         <p className="posters"><ContentLikes likes={this.props.content.likes.length} contentId={this.props.content.id} userId={this.props.userId}/></p>
                     </div>
                  </div>
