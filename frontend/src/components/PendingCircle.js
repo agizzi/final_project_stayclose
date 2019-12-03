@@ -10,7 +10,11 @@ class PendingCircle extends Component {
     this.state = {
       members: [],
       userId: "",
-      circleId: this.props.circleId
+      circleId: "",
+      username: "",
+      circleAdmin: "",
+      adminUsername: "",
+      circleName: ""
     }
   }
 
@@ -26,7 +30,7 @@ class PendingCircle extends Component {
     axios.get('/api/accept-circle-invite/', {
       params: {
         userId: this.state.userId,
-        circleId: circle
+        circleId: this.state.circleId
       }
     }, config
     ).then(res => {
@@ -38,8 +42,6 @@ class PendingCircle extends Component {
 
   handleDecline = (event) => {
     event.preventDefault()
-    let user = this.props.userId;
-    let circle = this.props.circleId;
     let config = {
       headers: {
         Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -47,8 +49,8 @@ class PendingCircle extends Component {
     }
     axios.get('/api/decline-circle-invite/', {
       params: {
-        userId: user,
-        circleId: circle
+        userId: this.state.userId,
+        circleId: this.state.circleId
       }
     }, config
     ).then(res => {
@@ -56,7 +58,6 @@ class PendingCircle extends Component {
       this.props.history.push('/profile')
     })
   }
-
 
 
   componentDidMount() {
@@ -69,26 +70,36 @@ class PendingCircle extends Component {
     axios.get('/api/user/', config, {
     }).then(res => {
       this.setState({ userId: res.data.id })
-      console.log()
+      this.setState({ username: res.data.username })
+      // console.log(res)
     })
 
 
-    axios.get('/api/users-by-circle/', {
-      params: {
-        id: this.props.circleId
-      }
+    axios.get('/api/circles/' + this.props.match.params.pendingCircleId, {
     }, config
     ).then(res => {
-      let members = res.data
-      this.setState({ members: members })
+      console.log(res)
+      this.setState({ circleId: res.data.id })
+      this.setState({ circleAdmin: res.data.admin })
+      this.setState({ circleName: res.data.name })
+      console.log(this.state.circleAdmin)
+      axios.get('/api/users/' + this.state.circleAdmin, config, {
+      }).then(res => {
+        this.setState({ adminUsername: res.data.username })
+        console.log(res)
+        // console.log(this.state.adminUsername)
+      })
     })
+
+
+
   }
 
   render() {
     return (
       <div className="invite-circle">
-        <Navbar username={this.props.username} />
-        <h3>You have been invited to join Circle Name by Circle Admin</h3>
+        <Navbar username={this.state.username} />
+        <h3>You have been invited to join {this.state.circleName} by {this.state.adminUsername}</h3>
         <h4> Would you like to join this circle?</h4>
         <button type="button" onClick={this.handleAccept}>Yes</button>
         <button type="button" onClick={this.handleDecline}>No</button>
