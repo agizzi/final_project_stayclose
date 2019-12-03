@@ -123,6 +123,7 @@ class NavBar extends Component {
                     <ProfilePicture userId={this.props.userId} />
                     <ul className="links-2">
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
+                        <div>
                             <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
                                 <h2>Settings: </h2>
@@ -164,9 +165,23 @@ class NavBar extends Component {
                                     <button type='submit' value='create'>Create a Circle</button>
                                 </form>
                             </ReactModal>
+                        </div>
                         <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
                     </ul>
-            </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="navbar">
+                    <h1 className="nav"> Hi! Welcome to StayClose. </h1>
+                    <nav>
+                        <ul>
+                            <li className="nav"> <Link to="/login"> Login </Link> </li>
+                            <li className="nav"> <Link to="/register"> Register </Link> </li>
+                        </ul>
+                    </nav>
+                    <Notification />
+                </div>
             )
         }
     }
