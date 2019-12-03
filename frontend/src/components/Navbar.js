@@ -119,9 +119,10 @@ class NavBar extends Component {
             return (
                 <div className="navbar">
                     <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
+
                     <ProfilePicture userId={this.props.userId} />
                     <ul className="links-2">
-                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
+                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>

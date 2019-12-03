@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Circles from './Circles'
+import Circles from './Circles';
 import PendingCircles from './PendingCircles';
+import Greeting from './Greeting';
 
 class ProfilePage extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class ProfilePage extends Component {
 
     addCircle(circle) {
         this.setState({
-            circles: this.state.circles.concat([circle]) 
+            circles: this.state.circles.concat([circle])
         })
     }
 
@@ -39,14 +40,14 @@ class ProfilePage extends Component {
 
         axios.get('/api/circles-by-user', config, {
         }).then(res => {
-          let circles = res.data
-          this.setState({ circles: circles })
+            let circles = res.data
+            this.setState({ circles: circles })
         })
 
         axios.get('/api/pending-circles-by-user/', config, {
         }).then(res => {
-          let pending_circles = res.data
-          this.setState({ pending_circles: pending_circles })
+            let pending_circles = res.data
+            this.setState({ pending_circles: pending_circles })
         })
     }
 
@@ -54,6 +55,7 @@ class ProfilePage extends Component {
         return (
             <React.Fragment>
                 <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
+                <Greeting username={this.state.username} />
                 <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
                 <Circles username={this.state.username} userId={this.state.userId} circles={this.state.circles} />
             </React.Fragment>
