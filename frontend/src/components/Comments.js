@@ -78,12 +78,16 @@ class Comments extends Component {
             content: content
         }, config
         ).then(res => {
-            this.setState({showAddModal: false})
+            this.setState({ showAddModal: false })
             this.componentDidMount();
         })
     }
 
-      componentDidMount() {
+    componentDidMount() {
+        this.loadComments()
+    }
+
+    loadComments() {
         let id = this.props.contentId
         let config = {
             headers: {
@@ -105,19 +109,19 @@ class Comments extends Component {
         return (
             <div className="comments">
                 {this.state.comments.map(comment =>
-                    <Comment comment={comment} userId={this.props.userId} key={comment.id} />
-                 )}
-                  <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
-                    <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-                        <button className="add" onClick={(e) => this.handleCloseAddModal()}>X</button>
-                            <h3 className="add-comment-message">Comment: </h3>
-                                <div className="delete">
-                                    <form>
-                                        <input className="new-comment-input" type='text' value={this.state.newComment} onChange={(e) => this.setState({ newComment: e.target.value })} />
-                                    </form>
-                                    <button className="add-comment" onClick={(e) => this.handleAddSubmit()}>Comment</button>
-                                </div>
-                    </ReactModal>
+                    <Comment comment={comment} userId={this.props.userId} key={comment.id} loadComments={() => this.loadComments()} />
+                )}
+                <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
+                <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+                    <button className="add" onClick={(e) => this.handleCloseAddModal()}>X</button>
+                    <h3 className="add-comment-message">Comment: </h3>
+                    <div className="delete">
+                        <form>
+                            <input className="new-comment-input" type='text' value={this.state.newComment} onChange={(e) => this.setState({ newComment: e.target.value })} />
+                        </form>
+                        <button className="add-comment" onClick={(e) => this.handleAddSubmit()}>Comment</button>
+                    </div>
+                </ReactModal>
             </div>
         )
     }

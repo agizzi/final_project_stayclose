@@ -65,8 +65,7 @@ class Post extends Component {
         axios.delete('/api/content/' + this.state.contentId, config, {
         }).then(res => {
             this.setState({ showDeleteModal: false });
-            this.componentDidMount();
-            this.forceUpdate();
+            this.props.loadContent()
         })
     }
 
@@ -82,8 +81,7 @@ class Post extends Component {
         ).then(res => {
             this.setState({ showEditModal: false });
             this.setState({ text: '' });
-            this.componentDidMount();
-            this.forceUpdate();
+            this.props.loadContent()
         })
     }
 
@@ -132,7 +130,7 @@ class Post extends Component {
                                 </div>
                             </ReactModal>
                             {this.props.content.member == this.props.userId &&
-                                <button className="posters" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                                <button className="posters" onClick={(e) => this.handleOpenDeleteModal(this.props.content.id)}>Delete</button>
                             }
                             <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                 <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>

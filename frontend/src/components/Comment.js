@@ -55,19 +55,21 @@ class Comment extends Component {
     }
 
     handleDeleteSubmit(id) {
+        event.preventDefault()
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.delete('/api/comments/' + id + '/', config, {
+        axios.delete('/api/comments/' + this.props.comment.id + '/', config, {
         }).then(res => {
             this.setState({ showDeleteModal: false });
-            this.componentDidMount();
+            this.props.loadComments()
         })
     }
 
     handleEdit(id) {
+        event.preventDefault()
         let config = {
             headers: {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
@@ -78,13 +80,13 @@ class Comment extends Component {
         }, config
         ).then(res => {
             this.setState({ showEditModal: false });
-            this.setState({ comment: '' });
-            this.componentDidMount();
-            this.forceUpdate();
+            this.props.loadComments()
+
         })
     }
 
     componentDidMount() {
+
     }
 
     render() {
@@ -126,7 +128,7 @@ class Comment extends Component {
                                 <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
                                 <h3 className="delete-message">Delete: </h3>
                                 <div className="delete">
-                                    <button className="deleting" onClick={(e) => this.handleDeleteSubmit(comment.id)}>Yes</button>
+                                    <button className="deleting" onClick={(e) => this.handleDeleteSubmit(this.props.comment.id)}>Yes</button>
                                     <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
                                 </div>
                             </ReactModal>
