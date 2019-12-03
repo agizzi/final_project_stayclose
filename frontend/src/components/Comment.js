@@ -57,7 +57,7 @@ class Comment extends Component {
         return (
                     <div className="comment" >
                         <div className="post-comment">
-                            <div className="post-1">
+                            <div className="post-1-pic">
                                 <ProfilePicture userId={this.props.comment.author} />
                             </div>
                             <div className="post-2">

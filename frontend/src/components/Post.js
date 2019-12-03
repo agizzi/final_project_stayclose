@@ -103,7 +103,7 @@ class Post extends Component {
         return (
                     <div className="content-2" key={this.props.content.id}>
                         <div className="post-me">
-                            <div className="post-1">
+                            <div className="post-1-pic">
                                 <ProfilePicture userId={this.props.content.member} />
                             </div>
                             <div className="post-2">
