@@ -105,7 +105,7 @@ class Comment extends Component {
                     <ProfilePicture userId={this.props.comment.author} />
                 </div>
                 <div className="posts-2">
-                        <p className="postings-1">{this.props.comment.author} says, "{this.props.comment.comment}"</p> 
+                        <p className="postings-1">{this.state.author} says, "{this.props.comment.comment}"</p>
                         {this.props.comment.author == this.props.userId &&
                             <button className="posters" onClick={(e) => this.handleOpenEditModal(this.props.comment.comment, this.props.comment.id)}>Edit</button>
                         }
@@ -132,7 +132,7 @@ class Comment extends Component {
                                 </div>
                             </ReactModal>
                         <div className="postings-buttons">
-                            <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{this.props.comment.created_at}</Moment></p>
+                            <p className="posters"><Moment format="LLL">{new Date(this.props.comment.created_at)}</Moment></p>
                             <p className="posters"><CommentLikes likes={this.props.comment.likes.length} commentId={this.props.comment.id} userId={this.props.userId}/></p>
                         </div>
                 </div>
