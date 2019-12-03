@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Circles from './Circles';
 import PendingCircles from './PendingCircles';
-import Greeting from './Greeting';
+
 
 class ProfilePage extends Component {
     constructor(props) {
@@ -55,7 +55,6 @@ class ProfilePage extends Component {
         return (
             <React.Fragment>
                 <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
-                <Greeting username={this.state.username} />
                 <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
                 <Circles username={this.state.username} userId={this.state.userId} circles={this.state.circles} />
             </React.Fragment>

@@ -157,9 +157,9 @@ class Toolbar extends Component {
         <div className="postButton" >
           <h1 className="content-header">{this.props.circleName}</h1>
           <h4 className="you-are-admin">You are the admin of this circle.</h4>
-          <button type="button" className="toolbar"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
-          <button type="button" className="toolbar" onClick={(e) => this.handleDelete()}>Delete Circle</button>
-          <button type="button" className="toolbar" onClick={this.handleOpenAddModal}>Add Member</button>
+          <button type="button" className="add-member"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+          <button type="button" className="add-member" onClick={(e) => this.handleDelete()}>Delete Circle</button>
+          <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseAddModal}>X</button>
             <h2>New Members: </h2>
@@ -191,7 +191,8 @@ class Toolbar extends Component {
     } else {
       return (
         <div className="postButton" >
-          <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+          <h1 className="content-header">{this.props.circleName}</h1>
+          <button type="button" className="add-member"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
           <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseAddModal}>X</button>
@@ -206,7 +207,6 @@ class Toolbar extends Component {
               <button type='submit' value='create'>Add Members</button>
             </form>
           </ReactModal>
-          <div></div>
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
