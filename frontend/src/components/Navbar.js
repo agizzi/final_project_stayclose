@@ -127,67 +127,67 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
-                    <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
-                    <ProfilePicture userId={this.props.userId} />
-                    <ul className="links-2">
-                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
-                        <div>
-                            <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
-                                <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
-                                <h2>Settings: </h2>
-                                <form onSubmit={this.handleSettingsSubmit}>
-                                    <label>
-                                        Username:
-                                        <div></div>
-                                        <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
-                                        <div></div>
-                                    </label>
-                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
-                                        {({ getRootProps, getInputProps, isDragActive }) => (
-                                            <section>
-                                                <div {...getRootProps()}>
-                                                    <input {...getInputProps()} />
-                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                                                </div>
-                                            </section>
-                                        )}
-                                    </Dropzone>
-                                    <button className="profile-submit" type='submit' value='create'>Change Settings</button>
-                                </form>
-                            </ReactModal>
-                        </div>
-                        <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
-                        <div>
-                            <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-                                <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-                                <h2>New Circle: </h2>
-                                <form onSubmit={this.handleAddSubmit}>
-                                    <label>
-                                        Circle Name:
-                                        <div></div>
-                                        <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
-                                        <div></div>
-                                    </label>
-                                    <button type='submit' value='create'>Create a Circle</button>
-                                </form>
-                            </ReactModal>
-                        </div>
-                        <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
+                <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
+                <ProfilePicture userId={this.props.userId} />
+                <ul className="links-2">
+                    <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>{this.props.username}'s Profile Settings </button></li>
+                    <div>
+                        <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
+                            <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
+                            <h2>Settings: </h2>
+                            <form onSubmit={this.handleSettingsSubmit}>
+                                <label>
+                                    Username:
+                                    <div></div>
+                                    <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
+                                    <div></div>
+                                </label>
+                                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
+                                    {({ getRootProps, getInputProps, isDragActive }) => (
+                                        <section>
+                                            <div {...getRootProps()}>
+                                                <input {...getInputProps()} />
+                                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                            </div>
+                                        </section>
+                                    )}
+                                </Dropzone>
+                                <button className="profile-submit" type='submit' value='create'>Change Settings</button>
+                            </form>
+                        </ReactModal>
+                    </div>
+                    <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                    <div>
+                        <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+                            <button className="modal" onClick={this.handleCloseAddModal}>X</button>
+                            <h2>New Circle: </h2>
+                            <form onSubmit={this.handleAddSubmit}>
+                                <label>
+                                    Circle Name:
+                                    <div></div>
+                                    <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+                                    <div></div>
+                                </label>
+                                <button type='submit' value='create'>Create a Circle</button>
+                            </form>
+                        </ReactModal>
+                    </div>
+                    <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
+                </ul>
+            </div>
+        )
+    } else {
+        return (
+            <div className="navbar">
+                <h1 className="nav"> Hi! Welcome to StayClose. </h1>
+                <nav>
+                    <ul>
+                        <li className="nav"> <Link to="/login"> Login </Link> </li>
+                        <li className="nav"> <Link to="/register"> Register </Link> </li>
                     </ul>
-                </div>
-            )
-        } else {
-            return (
-                <div className="navbar">
-                    <h1 className="nav"> Hi! Welcome to StayClose. </h1>
-                    <nav>
-                        <ul>
-                            <li className="nav"> <Link to="/login"> Login </Link> </li>
-                            <li className="nav"> <Link to="/register"> Register </Link> </li>
-                        </ul>
-                    </nav>
-                    <Notification />
-                </div>
+                </nav>
+                <Notification />
+            </div>
             )
         }
     }

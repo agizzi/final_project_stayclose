@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
 class ProfilePicture extends Component {
     constructor(props) {
         super(props);
+
+        static propTypes = {
+            post: PropTypes.object,
+            comment: PropTypes.object,
+        }
 
         this.state = {
             user: ''
@@ -26,14 +32,19 @@ class ProfilePicture extends Component {
 
     render() {
         return (
-            <div>
-            {this.state.user.avatar != null &&
-                <img className='profile-pic' src={this.state.user.avatar}></img>
+            <React.Fragment>
+                {this.state.user.avatar != null &&
+                    <img className='profile-pic' src={this.state.user.avatar}></img>
                 }
-            </div>
+                {this.props.post && 
+                    <img className='post-pic' src={this.state.user.avatar}></img>
+                }
+                {this.props.comment && 
+                    <img className='comment-pic' src={this.state.user.avatar}></img>
+                }
+            </React.Fragment>
         );
     }
-
 }
 
 export default withRouter(ProfilePicture);
