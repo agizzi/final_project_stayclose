@@ -84,6 +84,10 @@ class Content extends Component {
     }
 
     componentDidMount() {
+        this.loadContent()
+    }
+
+    loadContent() {
         let config = {
             headers: {
                 Authorization: localStorage.getItem("access_key")
@@ -104,9 +108,9 @@ class Content extends Component {
         return (
             <div className="contentDetail">
                 {this.state.contents.map(content =>
-                    <Post content={content} userId={this.props.userId} key={content.id}/>
+                    <Post content={content} userId={this.props.userId} key={content.id} loadContent={() => this.loadContent()} />
                 )}
-                </div>
+            </div>
         );
     }
 
