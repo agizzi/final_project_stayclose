@@ -48,7 +48,7 @@ class NewContent extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <p className="postmate">Post: </p>
-                    <div></div>
+                        <div></div>
                         <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                         <div></div>
                     </label>
