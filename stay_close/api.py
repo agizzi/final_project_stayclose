@@ -196,6 +196,17 @@ class UploadUserAvatar(APIView):
 
     return Response(status=201)
 
+class AddImageToContent(APIView):
+  parser_classes = [MultiPartParser,]
+  def put(self, request, format=None, *args, **kwargs):
+    id = kwargs.get('pk')
+    file = request.data['file']
+    print(file)
+
+    content = Content.objects.get(id=id)
+    content.img_post.save(file.name, file, save=True)
+
+    return Response(status=201)
 
 
 

@@ -22,7 +22,7 @@ class Circle(models.Model):
   admin = models.ForeignKey(to="User", related_name="is_admin", on_delete=models.CASCADE)
   members = models.ManyToManyField(to="User", related_name="mates", blank=True)
   pending_members = models.ManyToManyField(to="User", related_name="pending", blank=True)
-  created_at = fields.EncryptedDateField(default = date.today)
+  created_at = fields.EncryptedDateTimeField(default = timezone.now)
 
 
   def __str__(self):
@@ -33,7 +33,7 @@ class Content(models.Model):
   author = models.CharField(max_length=255, blank=True, null=True)
   circle = models.ForeignKey(to="Circle", related_name="posts", on_delete=models.CASCADE)
   text_post = fields.EncryptedTextField(blank=True, null=True)
-  img_post = EncryptedImageField(blank=True, null=True)
+  img_post = models.ImageField(upload_to='images', blank=True, null=True)
   caption = fields.EncryptedCharField(max_length=200, blank=True, null=True)
   likes = models.ManyToManyField(to="User", related_name="content_liker", blank=True)
   created_at = fields.EncryptedDateTimeField(default = timezone.now)

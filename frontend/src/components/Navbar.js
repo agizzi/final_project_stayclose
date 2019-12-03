@@ -82,7 +82,6 @@ class NavBar extends Component {
 
     handleSettingsSubmit = (event) => {
         event.preventDefault();
-        console.log(this.state.picToUpload[0])
         let profilePicture = this.state.picToUpload[0]
         let config = {
             headers: {
@@ -148,7 +147,9 @@ class NavBar extends Component {
                                 </form>
                             </ReactModal>
                         </div>
+                        {this.props.location.pathname == '/profile/' &&
                         <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                        }
                         <div>
                             <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseAddModal}>X</button>

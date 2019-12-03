@@ -86,6 +86,11 @@ class Comment extends Component {
     }
 
     componentDidMount() {
+        let config = {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
+        }
         axios.get('/api/users/' + this.props.comment.author + '/', config, {
         }).then(res => {
             this.setState({ author: res.data.username })
