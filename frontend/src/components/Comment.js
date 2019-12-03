@@ -86,6 +86,11 @@ class Comment extends Component {
     }
 
     componentDidMount() {
+        let config = {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
+        }
         axios.get('/api/users/' + this.props.comment.author + '/', config, {
         }).then(res => {
             this.setState({ author: res.data.username })
@@ -94,17 +99,17 @@ class Comment extends Component {
 
     render() {
         return (
-                    <div className="comment" >
-                        <div className="post-comment">
-                            <div className="post-1">
-                                <ProfilePicture userId={this.props.comment.author} />
-                            </div>
-                            <div className="post-2">
-                                <div>
-                                    <p className="postings-1">{this.state.author} says, </p>
-                                </div>
-                                <div>
-                                    <p className="postings-2"> "{this.props.comment.comment}"</p>
+            <div className="comment" >
+                <div className="post-comment">
+                    <div className="post-1">
+                        <ProfilePicture userId={this.props.comment.author} />
+                    </div>
+                    <div className="post-2">
+                        <div>
+                            <p className="postings-1">{this.state.author} says, </p>
+                        </div>
+                        <div>
+                            <p className="postings-2"> "{this.props.comment.comment}"</p>
                         </div>
                         <div className="postings-buttons">
                             <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{this.props.comment.created_at}</Moment></p>

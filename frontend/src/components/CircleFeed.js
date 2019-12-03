@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import NavBar from './NavBar'
 import Content from './Content'
 import Toolbar from './Toolbar'
+import axios from 'axios';
 
 class CircleFeed extends Component {
     constructor(props) {
@@ -14,13 +15,13 @@ class CircleFeed extends Component {
         const { match: { params } } = this.props;
         return (
             <React.Fragment>
-                <NavBar username={localStorage.getItem('username')} userId={params.userId}/>
+                <NavBar username={localStorage.getItem('username')} userId={params.userId} />
                 <div className="contents">
                     <div className="profile-1">
-                        <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
+                        <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} />
                     </div>
                     <div className="profile-2">
-                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId}/>
+                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} />
                     </div>
                 </div>
             </React.Fragment>
