@@ -65,44 +65,36 @@ class NavBar extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.post('/api/circles/', {
+        const newCircle = {
             name: currName,
             admin: currAdmin,
             pending_members: [],
             members: []
-        }, config
+        }
+        axios.post('/api/circles/', newCircle, config
         ).then(res => {
             this.setState({ showAddModal: false });
-            if (this.props.location.pathname != '/profile/') {
-                this.props.history.push('/profile');
-            } else {
-                window.location.reload(false);
-            }
+            this.props.addCircle(newCircle)
         }).catch(function (error) {
             alert('circle not created, try again')
         })
     }
 
     handleSettingsSubmit = (event) => {
-        let fd = new FormData();
-        fd.append('avatar', this.state.picToUpload.name);
-        console.log(fd)
-        let newUsername = this.state.user
-        let currUser = this.props.userId
         event.preventDefault();
+        console.log(this.state.picToUpload[0])
+        let profilePicture = this.state.picToUpload[0]
         let config = {
             headers: {
-                'content-type': 'multipart/form-data',
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.patch('/api/users/' + currUser + '/', {
-            avatar: fd
-        }, config
+        let data = new FormData()
+        data.append('file', profilePicture)
+        axios.put('/api/upload-user-avatar/', data, config
         ).then(res => {
-            // console.log(res)
+            console.log(res)
             this.setState({ showSettingsModal: false });
-            // localStorage.setItem('username', newUsername);
             if (this.props.location.pathname != '/profile/') {
                 this.props.history.push('/profile');
             } else {

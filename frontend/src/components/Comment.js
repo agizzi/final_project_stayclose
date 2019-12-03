@@ -86,22 +86,25 @@ class Comment extends Component {
     }
 
     componentDidMount() {
-
+        axios.get('/api/users/' + this.props.comment.author + '/', config, {
+        }).then(res => {
+            this.setState({ author: res.data.username })
+        })
     }
 
     render() {
         return (
-            <div className="comment" >
-                <div className="post-comment">
-                    <div className="post-1">
-                        <ProfilePicture userId={this.props.comment.author} />
-                    </div>
-                    <div className="post-2">
-                        <div>
-                            <p className="postings-1">{this.props.comment.author} says, </p>
-                        </div>
-                        <div>
-                            <p className="postings-2"> "{this.props.comment.comment}"</p>
+                    <div className="comment" >
+                        <div className="post-comment">
+                            <div className="post-1">
+                                <ProfilePicture userId={this.props.comment.author} />
+                            </div>
+                            <div className="post-2">
+                                <div>
+                                    <p className="postings-1">{this.state.author} says, </p>
+                                </div>
+                                <div>
+                                    <p className="postings-2"> "{this.props.comment.comment}"</p>
                         </div>
                         <div className="postings-buttons">
                             <p className="posters"><Moment parse="MM-DD-YYYY HH:mm">{this.props.comment.created_at}</Moment></p>
