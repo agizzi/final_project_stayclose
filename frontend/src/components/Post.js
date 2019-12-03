@@ -95,58 +95,58 @@ class Post extends Component {
         }
         axios.get('/api/user/', config, {
         }).then(res => {
-          this.setState({user: res.data})
+            this.setState({ user: res.data })
         })
     }
 
     render() {
         return (
-                    <div className="content-2" key={this.props.content.id}>
-                        <div className="post-me">
-                            <div className="post-1">
-                                <ProfilePicture userId={this.props.content.member} />
-                            </div>
-                            <div className="post-2">
-                                <div>
-                                    <p className="posting-1">{this.props.content.author} says, </p>
-                                </div>
-                                <div>
-                                    <p className="posting-2"> "{this.props.content.text_post}"</p>
-                                </div>
-                                <div></div>
-                                <div className="posting-buttons">
-                                    <p className="posters"> <Moment parse="MM-DD-YYYY HH:mm"> {this.props.content.created_at} </Moment></p>
-                                    <p className="posters"><ContentLikes likes={this.props.content.likes.length} contentId={this.props.content.id} userId={this.props.userId}/></p>
-                                    {this.props.content.member == this.props.userId &&
-                                    <button className="posters" onClick={(e) => this.handleOpenEditModal(this.props.content.text_post, this.props.content.id)}>Edit</button>
-                                    }
-                                    <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
-                                        <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
-                                        <h3>Edit Your Post: </h3>
-                                        <form>
-                                            <input className="editing-input" type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
-                                        </form>
-                                        <div className="edit">
-                                            <button className="editing" onClick={(e) => this.handleEdit()}>Save</button>
-                                            <button className="editing" onClick={(e) => this.handleCloseEditModal()}>Do Not Save</button>
-                                        </div>
-                                    </ReactModal>
-                                    {this.props.content.member == this.props.userId &&
-                                    <button className="posters" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
-                                    }
-                                    <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
-                                        <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
-                                        <h3 className="delete-message">Are you sure you want to delete your post?</h3>
-                                        <div className="delete">
-                                            <button className="deleting" onClick={(e) => this.handleDelete()}>Yes</button>
-                                            <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
-                                        </div>
-                                    </ReactModal>
-                                </div>
-                             </div>
-                        </div>
-                        <Comments contentId={this.props.content.id} userId={this.props.userId}/>
+            <div className="content-2" key={this.props.content.id}>
+                <div className="post-me">
+                    <div className="post-1">
+                        <ProfilePicture userId={this.props.content.member} />
                     </div>
+                    <div className="post-2">
+                        <div>
+                            <p className="posting-1">{this.props.content.author} says, </p>
+                        </div>
+                        <div>
+                            <p className="posting-2"> "{this.props.content.text_post}"</p>
+                        </div>
+                        <div></div>
+                        <div className="posting-buttons">
+                            <p className="posters"> <Moment parse="MM-DD-YYYY HH:mm"> {this.props.content.created_at} </Moment></p>
+                            <p className="posters"><ContentLikes likes={this.props.content.likes.length} contentId={this.props.content.id} userId={this.props.userId} /></p>
+                            {this.props.content.member == this.props.userId &&
+                                <button className="posters" onClick={(e) => this.handleOpenEditModal(this.props.content.text_post, this.props.content.id)}>Edit</button>
+                            }
+                            <ReactModal isOpen={this.state.showEditModal} style={customStyles}>
+                                <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
+                                <h3>Edit Your Post: </h3>
+                                <form>
+                                    <input className="editing-input" type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                                </form>
+                                <div className="edit">
+                                    <button className="editing" onClick={(e) => this.handleEdit()}>Save</button>
+                                    <button className="editing" onClick={(e) => this.handleCloseEditModal()}>Do Not Save</button>
+                                </div>
+                            </ReactModal>
+                            {this.props.content.member == this.props.userId &&
+                                <button className="posters" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                            }
+                            <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
+                                <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
+                                <h3 className="delete-message">Are you sure you want to delete your post?</h3>
+                                <div className="delete">
+                                    <button className="deleting" onClick={(e) => this.handleDelete()}>Yes</button>
+                                    <button className="deleting" onClick={(e) => this.handleCloseDeleteModal()}>No</button>
+                                </div>
+                            </ReactModal>
+                        </div>
+                    </div>
+                </div>
+                <Comments contentId={this.props.content.id} userId={this.props.userId} />
+            </div>
         );
     }
 
