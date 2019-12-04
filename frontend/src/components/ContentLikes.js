@@ -108,3 +108,4 @@ class ContentLikes extends Component {
 }
 
 export default withRouter(ContentLikes);
+

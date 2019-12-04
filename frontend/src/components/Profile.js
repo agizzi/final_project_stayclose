@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Circles from './Circles';
 import PendingCircles from './PendingCircles';
-import Greeting from './Greeting';
+
 
 class ProfilePage extends Component {
     constructor(props) {

@@ -3,8 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-import Circle from './Circle';
 import ReactModal from 'react-modal';
+import Dropzone from 'react-dropzone';
 
 const customStyles = {
   content: {
@@ -22,19 +22,30 @@ class Toolbar extends Component {
     this.state = {
       showAddModal: false,
       showLeaveModal: false,
+      showPostModal: false, 
       members: "",
       memberUsernames: [],
       isAdmin: false,
       circleAdmin: "",
       adminUsername: "",
-      pending_members: ""
+      pending_members: "",
+      post: '',
+      userId: '',
+      contentId: '',
+      picToUpload: [],
+      hasPic: false,
+      username: localStorage.getItem('username'),
     }
+
     this.handleOpenAddModal = this.handleOpenAddModal.bind(this);
     this.handleCloseAddModal = this.handleCloseAddModal.bind(this);
     this.handleOpenLeaveModal = this.handleOpenLeaveModal.bind(this);
     this.handleCloseLeaveModal = this.handleCloseLeaveModal.bind(this);
+    this.handleOpenPostModal = this.handleOpenPostModal.bind(this);
+    this.handleClosePostModal = this.handleClosePostModal.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.handleLeaveSubmit = this.handleLeaveSubmit.bind(this);
+    this.handlePostSubmit = this.handlePostSubmit.bind(this); 
   }
 
   handleOpenAddModal() {
@@ -51,6 +62,14 @@ class Toolbar extends Component {
 
   handleCloseLeaveModal() {
     this.setState({ showLeaveModal: false });
+  }
+
+  handleOpenPostModal() {
+    this.setState({ showPostModal: true });
+  }
+
+  handleClosePostModal() {
+    this.setState({ showPostModal: false });
   }
 
   handleAddSubmit() {
@@ -117,6 +136,50 @@ class Toolbar extends Component {
     })
   }
 
+  handlePostSubmit () {
+    let post_text = this.state.post;
+    let member = this.props.match.params.userId;
+    let circle = this.props.match.params.circleId;
+    event.preventDefault();
+    let config = {
+        headers: {
+            Authorization: `Token ${localStorage.getItem("access_key")}`
+        }
+    }
+    axios.post('/api/content/', {
+        author: this.state.username,
+        text_post: post_text,
+        img_post: null,
+        caption: "",
+        likes: [],
+        member: member,
+        circle: circle,
+        tags: null
+    }, config
+    ).then(res => {
+        return res.data
+    }).then(datum => {
+        if (this.state.hasPic) {
+            let profilePicture = this.state.picToUpload[0]
+            let data = new FormData()
+            data.append('file', profilePicture)
+            let config = {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
+        }
+            axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
+            ).then(res => {
+            this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
+        }).catch(function (error) {
+            alert('username not changed, try again')
+        })
+        } else {
+            this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
+        }
+})
+}
+
   componentDidMount() {
     let config = {
       headers: {
@@ -157,9 +220,31 @@ class Toolbar extends Component {
         <div className="postButton" >
           <h1 className="content-header">{this.props.circleName}</h1>
           <h4 className="you-are-admin">You are the admin of this circle.</h4>
-          <button type="button" className="toolbar"><Link to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
-          <button type="button" className="toolbar" onClick={(e) => this.handleDelete()}>Delete Circle</button>
-          <button type="button" className="toolbar" onClick={this.handleOpenAddModal}>Add Member</button>
+          <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Add Post</button>
+            <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
+              <button className="modal2" onClick={this.handleClosePostModal}>X</button>
+              <h2 className="new-post-header">New Post: </h2>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                    <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                    <div></div>
+                </label>
+                <div></div>
+                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
+                    {({ getRootProps, getInputProps, isDragActive }) => (
+                        <section>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                            </div>
+                        </section>
+                    )}
+                </Dropzone>
+                <button type='submit' value='create' className="dropzone">Create a Post</button>
+              </form>
+            </ReactModal>
+          <button type="button" className="add-member" onClick={(e) => this.handleDelete()}>Delete Circle</button>
+          <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseAddModal}>X</button>
             <h2>New Members: </h2>
@@ -176,7 +261,7 @@ class Toolbar extends Component {
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
-            <h2>Are You Sure You Want to leave? </h2>
+            <h2>Are You Sure You Want to Leave? </h2>
             <div className="leaving">
               <button type='submit' className="left" value='create' onClick={this.handleLeaveSubmit}>Yes</button>
               <button type='submit' className="left" value='create' onClick={this.handleCloseLeaveModal}>No</button>
@@ -192,33 +277,52 @@ class Toolbar extends Component {
       return (
         <div className="postButton" >
           <h1 className="content-header">{this.props.circleName}</h1>
-          <button type="button" className="add-post"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+          <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Add Post</button>
+            <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
+              <button className="modal2" onClick={this.handleClosePostModal}>X</button>
+              <h2 className="new-post-header">New Post: </h2>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                    <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                    <div></div>
+                </label>
+                <div></div>
+                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
+                    {({ getRootProps, getInputProps, isDragActive }) => (
+                        <section>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                            </div>
+                        </section>
+                    )}
+                </Dropzone>
+                <button type='submit' value='create' className="dropzone">Create a Post</button>
+              </form>
+            </ReactModal>
           <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-            <h2>Add Member</h2>
+            <h2>Add Member:</h2>
             <form onSubmit={this.handleAddSubmit}>
-              <label className="adding-members">
-                Add Members:
-              </label>
-              <div></div>
               <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
               <div></div>
               <button type='submit' value='create'>Add Members</button>
             </form>
           </ReactModal>
-          <div></div>
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
             <div></div>
-            <h2>Are You Sure? </h2>
+            <h2>Are You Sure You Want to Leave? </h2>
             <div></div>
             <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
             <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
           </ReactModal>
+          <div className="administration">
           <h4>Admin:</h4>
           {this.state.adminUsername}
+          </div>
           <h4>Members:</h4>
           {this.state.memberUsernames.map(member => <p key={member}>{member}</p>)}
         </div>

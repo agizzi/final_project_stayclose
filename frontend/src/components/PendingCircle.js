@@ -97,7 +97,7 @@ class PendingCircle extends Component {
 
   render() {
     return (
-      <div className="invite-circle">
+      <div>
         <Navbar username={this.state.username} />
         <h3>You have been invited to join {this.state.circleName}, which is owned by {this.state.adminUsername}.</h3>
         <h4> Would you like to join this circle?</h4>

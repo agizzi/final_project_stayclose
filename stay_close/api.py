@@ -1,6 +1,7 @@
 from .models import User, Circle, Content, Comments
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
+from django.utils import timezone
 from rest_framework.parsers import FileUploadParser, MultiPartParser
 from django.http import HttpResponse
 from rest_framework.views import APIView
@@ -44,6 +45,14 @@ class ContentViewSet(viewsets.ModelViewSet):
     permissions.AllowAny
   ]
 
+  def partial_update(self, request, pk):
+    content = Content.objects.get(pk=pk)
+    content.updated_at = timezone.now()
+    content.text_post = request.data['text_post']
+    content.save()
+    return Response(status=200)
+
+
 
 class CommentsViewSet(viewsets.ModelViewSet):
   """
@@ -55,6 +64,13 @@ class CommentsViewSet(viewsets.ModelViewSet):
     permissions.AllowAny
   ]
 
+  def partial_update(self, request, pk):
+    comment = Comments.objects.get(pk=pk)
+    comment.updated_at = timezone.now()
+    comment.comment = request.data['comment']
+    comment.save()
+    return Response(status=200)
+
 class UsersByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
@@ -65,7 +81,7 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(circle=circle).order_by('created_at')
+    content = Content.objects.filter(circle=circle).order_by('updated_at')
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
@@ -122,7 +138,7 @@ class RemoveUserFromCircle(APIView):
 class CommentsByContent(APIView):
   def get(self, request, format=None):
     contentId = request.query_params.get('contentId')
-    comments = Comments.objects.filter(content=contentId).order_by('created_at')
+    comments = Comments.objects.filter(content=contentId).order_by('-updated_at')
     serializer = CommentsSerializer(comments, many=True)
     return Response(serializer.data)
 
@@ -208,6 +224,7 @@ class AddImageToContent(APIView):
 
     content = Content.objects.get(id=id)
     content.img_post.save(file.name, file, save=True)
+    content.updated_at.save(timezone.now)
 
     return Response(status=201)
 

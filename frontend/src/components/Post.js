@@ -65,8 +65,7 @@ class Post extends Component {
         axios.delete('/api/content/' + this.state.contentId, config, {
         }).then(res => {
             this.setState({ showDeleteModal: false });
-            this.componentDidMount();
-            this.forceUpdate();
+            this.props.loadContent()
         })
     }
 
@@ -81,9 +80,7 @@ class Post extends Component {
         }, config
         ).then(res => {
             this.setState({ showEditModal: false });
-            this.setState({ text: '' });
-            this.componentDidMount();
-            this.forceUpdate();
+            this.props.loadContent()
         })
     }
 
@@ -104,7 +101,7 @@ class Post extends Component {
             <div className="content-2" key={this.props.content.id}>
             <div className="post-me">
                 <div className="post-1-pic">
-                    <ProfilePicture userId={this.props.content.member} />
+                    <ProfilePicture userId={this.props.content.member} size='large' />
                 </div>
                 <div className="post-2">
                     <div>
@@ -125,7 +122,7 @@ class Post extends Component {
                                 </div>
                             </ReactModal>
                             {this.props.content.member == this.props.userId &&
-                            <button className="posters" onClick={(e) => this.handleOpenDeleteModal(content.id)}>Delete</button>
+                            <button className="posters" onClick={(e) => this.handleOpenDeleteModal(this.props.content.id)}>Delete</button>
                             }
                             <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
                                 <button className="exiter" onClick={(e) => this.handleCloseDeleteModal()}>X</button>
@@ -147,13 +144,13 @@ class Post extends Component {
                     }
                     <div></div>
                     <div className="posting-user">
-                        <p className="posters"><Moment format="LLL">{new Date(this.props.content.created_at)}</Moment></p>
+                        <p className="posters"><Moment format="LLL">{new Date(this.props.content.updated_at)}</Moment></p>
                         <p className="posters"><ContentLikes likes={this.props.content.likes.length} contentId={this.props.content.id} userId={this.props.userId}/></p>
                     </div>
                  </div>
             </div>
-            <Comments contentId={this.props.content.id} userId={this.props.userId}/>
-        </div>
+            <Comments contentId={this.props.content.id} userId={this.props.userId} size='large' />
+        </div> 
         );
     }
 
