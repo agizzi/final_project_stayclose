@@ -19,7 +19,6 @@ class Content extends Component {
         super(props);
 
         this.state = {
-            contents: [],
             user: '',
             contentId: '',
             post: '',
@@ -52,54 +51,25 @@ class Content extends Component {
         this.setState({ showEditModal: false });
     }
 
-    handleEdit() {
-        let config = {
-            headers: {
-                Authorization: `Token ${localStorage.getItem("access_key")}`
-            }
-        }
-        axios.patch('/api/content/' + this.state.contentId + '/', {
-            text_post: this.state.post
-        }, config
-        ).then(res => {
-            this.setState({ showEditModal: false });
-            this.setState({ text: '' });
-            this.componentDidMount();
-            this.forceUpdate();
-        })
-    }
-
-    componentDidMount() {
-        this.loadContent()
-    }
-
-    loadContent() {
-        let config = {
-            headers: {
-                Authorization: localStorage.getItem("access_key")
-            }
-        }
-        axios.get('/api/content-by-circle/', {
-            params: {
-                id: this.props.circleId
-            }
-        }, config
-        ).then(res => {
-            let content = res.data
-            this.setState({ contents: content })
-        })
-    }
-
     render() {
-        return (
-            <div className="contentDetail">
-                {this.state.contents.map(content =>
-                    <Post content={content} userId={this.props.userId} key={content.id} loadContent={() => this.loadContent()} />
-                )}
-            </div>
-        );
+        if (this.props.contents.length != 0) {
+            return (
+                <div className="contentDetail">
+                    {this.props.contents.map(content =>
+                        <Post content={content} userId={this.props.userId} key={content.id} loadContent={() => this.props.loadContent()} />
+                    )}
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <h3 className="empty">This circle has not posts yet, Use add a post to add a post!</h3>
+                </div>
+            );
+        }
     }
-
 }
+
+
 
 export default withRouter(Content);

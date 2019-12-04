@@ -23,8 +23,12 @@ class Toolbar extends Component {
     this.state = {
       showAddModal: false,
       showLeaveModal: false,
+<<<<<<< HEAD
       showPostModal: false, 
       showDeleteModal: false, 
+=======
+      showPostModal: false,
+>>>>>>> master
       members: "",
       memberUsernames: [],
       isAdmin: false,
@@ -151,8 +155,8 @@ class Toolbar extends Component {
 
   handlePostSubmit () {
     let post_text = this.state.post;
-    let member = this.props.match.params.userId;
-    let circle = this.props.match.params.circleId;
+    let member = this.props.userId;
+    let circle = this.props.circleId;
     event.preventDefault();
     let config = {
         headers: {
@@ -183,12 +187,14 @@ class Toolbar extends Component {
         }
             axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
             ).then(res => {
-            this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
+            this.handleClosePostModal()
+            this.props.loadContent()
         }).catch(function (error) {
             alert('username not changed, try again')
         })
         } else {
-            this.props.history.push('/circle/' + this.props.match.params.circleId + '/' + this.props.match.params.circleName + '/' + this.props.match.params.userId)
+          this.handleClosePostModal()
+          this.props.loadContent()
         }
 })
 }
@@ -237,7 +243,7 @@ class Toolbar extends Component {
             <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
               <button className="modal2" onClick={this.handleClosePostModal}>X</button>
               <h2 className="new-post-header">New Post: </h2>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={(e) => this.handlePostSubmit()}>
                 <label>
                     <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                     <div></div>

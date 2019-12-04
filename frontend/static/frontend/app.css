@@ -89,6 +89,23 @@ h2 {
     margin-bottom: 10%; 
 }
 
+.gold-star {
+    position: relative;
+    width: 2vw;
+}
+
+
+.empty {
+    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+
+.hidden {
+    display: none;
+}
+
 .signin {
     border-style: solid;
     border-color: rgb(174, 175, 175); 
