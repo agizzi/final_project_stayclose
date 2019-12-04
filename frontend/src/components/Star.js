@@ -19,12 +19,12 @@ class Star extends Component {
     if (this.props.userHasLiked == true) {
       return (
         <div className="star-outline">
-          <SVG className="gold-star" src={goldStar} /></div>
+          <SVG className="star-gold" src={goldStar} /></div>
       )
     } else {
       return (
         <div className="star-outline">
-          <SVG className="star" src={star} /> </div>
+          <SVG className="star-gold" src={star} /> </div>
 
       );
     }

@@ -97,7 +97,8 @@ class Post extends Component {
     }
 
     render() {
-        return (
+      
+            return (
             <div className="content-2" key={this.props.content.id}>
             <div className="post-me">
                 <div className="post-1-pic">
@@ -139,7 +140,7 @@ class Post extends Component {
                     </div>
                     {this.props.content.img_post != null &&
                         <div>
-                            <img src={this.props.content.img_post} />
+                            <img className="post-photo" src={this.props.content.img_post} />
                         </div>
                     }
                     <div></div>

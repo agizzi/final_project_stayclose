@@ -66,8 +66,9 @@ class ProfilePage extends Component {
                 <React.Fragment>
                     <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
                     <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
-                    <div>
-                        <h3 className="empty">You do not yet have any circles. Click +Circle to create one!</h3>
+                    <div className="no-circles">
+                        <h3 className="empty-profile">You do not have any circles.</h3>
+                        <h3 className="empty-profile">Click '<i>+ Circle</i> ' to create one!</h3>
                     </div>
                 </React.Fragment>
 
