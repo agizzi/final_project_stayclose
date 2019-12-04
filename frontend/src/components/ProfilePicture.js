@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import user from './StaticAssets/user.svg';
+import SVG from 'react-inlinesvg';
 
 
 class ProfilePicture extends Component {
@@ -18,10 +20,12 @@ class ProfilePicture extends Component {
                 Authorization: localStorage.getItem("access_key")
             }
         }
+        console.log(this.props.userId)
         axios.get('/api/users/' + this.props.userId + '/', {
         }, config
         ).then(res => {
             this.setState({ user: res.data })
+            console.log(res.data)
         })
     }
 
@@ -31,6 +35,7 @@ class ProfilePicture extends Component {
                 {this.state.user.avatar != null &&
                     <img className={`profile-pic ${this.props.size && 'profile-pic-' + this.props.size}`} src={this.state.user.avatar}></img>
                 }
+
             </div>
         );
     }

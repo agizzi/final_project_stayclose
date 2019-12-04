@@ -118,7 +118,7 @@ class Content extends Component {
     
 
     render() {
-        if (this.props.contents.length != 0) {
+        if (this.props.contents.length > 0 && this.props.contentFetched) {
             return (
                 <div className="contentDetail">
                     {this.props.contents.map(content =>
@@ -126,7 +126,7 @@ class Content extends Component {
                     )}
                 </div>
             );
-        } else if (this.props.contents.length == 0){
+        } else if (this.props.contents.length == 0 && this.props.contentFetched) {
             return (
                 <div className="empty">
                     <h3>This circle has no posts yet.</h3> 
@@ -155,7 +155,7 @@ class Content extends Component {
                         </ReactModal>
                 </div>
             );
-        } else if (this.props.contents.length != 0 && !this.props.contentFetched){
+        } else {
             return (
                 <div>
                     <h3 className="empty">Loading Content...</h3>
