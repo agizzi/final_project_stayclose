@@ -140,7 +140,7 @@ class Post extends Component {
                     </div>
                     {this.props.content.img_post != null &&
                         <div>
-                            <img src={this.props.content.img_post} />
+                            <img className="post-photo" src={this.props.content.img_post} />
                         </div>
                     }
                     <div></div>

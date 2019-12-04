@@ -262,7 +262,7 @@ class Toolbar extends Component {
           <button type="button" className="add-member" onClick={this.handleOpenDeleteModal}>Delete Circle</button>
             <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
               <button className="modal" onClick={this.handleCloseDeleteModal}>X</button>
-              <h2>Are You Sure You Want to Delete "{this.props.circleName}"?</h2>
+              <h2 className="modal-head">Are You Sure You Want to Delete "{this.props.circleName}"?</h2>
               <div className="leaving">
                 <button type='submit' className="left" value='create' onClick={this.handleDelete}>Yes</button>
                 <button type='submit' className="left" value='create' onClick={this.handleCloseDeleteModal}>No</button>
@@ -287,7 +287,7 @@ class Toolbar extends Component {
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
-            <h2>Are You Sure You Want to Leave? </h2>
+            <h2 className="modal-head">Are You Sure You Want to Leave "{this.props.circleName}"? </h2>
             <div className="leaving">
               <button type='submit' className="left" value='create' onClick={this.handleLeaveSubmit}>Yes</button>
               <button type='submit' className="left" value='create' onClick={this.handleCloseLeaveModal}>No</button>
@@ -305,7 +305,7 @@ class Toolbar extends Component {
             <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
               <button className="modal2" onClick={this.handleClosePostModal}>X</button>
               <h2 className="new-post-header">New Post: </h2>
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={(e) => this.handlePostSubmit()}>
                 <label>
                     <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                     <div></div>

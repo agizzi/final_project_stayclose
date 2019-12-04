@@ -86,21 +86,13 @@ button:hover {
 h2 {
     color: #79BFC0; 
     font-size: 30pt; 
-    margin-bottom: 10%; 
+    margin-bottom: 30px; 
 }
 
 .gold-star {
     position: relative;
     width: 2vw;
 }
-
-
-.empty {
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
 
 .hidden {
     display: none;
@@ -596,4 +588,33 @@ h4 {
 
 .drag:hover {
     color: rgb(10, 151, 153);
+}
+
+.empty {
+    width: 600px; 
+    text-align: center;
+    margin-top: 80px; 
+    font-size: 25pt; 
+    margin-left: 15%; 
+}
+
+.empty-profile {
+    width: 650px; 
+    text-align: center;
+    margin: 0 auto; 
+    font-size: 30pt; 
+}
+
+.no-circles {
+    margin-top: 200px; 
+}
+
+.modal-head {
+    width: 450px; 
+    text-align: center; 
+}
+
+.post-photo {
+    width: 550px; 
+    height: 350px; 
 }
