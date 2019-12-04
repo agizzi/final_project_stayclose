@@ -149,8 +149,8 @@ class Post extends Component {
                     </div>
                  </div>
             </div>
-            <Comments contentId={this.props.content.id} userId={this.props.userId}/>
-        </div>
+            <Comments contentId={this.props.content.id} userId={this.props.userId} size='large' />
+        </div> 
         );
     }
 
