@@ -23,12 +23,8 @@ class Toolbar extends Component {
     this.state = {
       showAddModal: false,
       showLeaveModal: false,
-<<<<<<< HEAD
       showPostModal: false, 
       showDeleteModal: false, 
-=======
-      showPostModal: false,
->>>>>>> master
       members: "",
       memberUsernames: [],
       isAdmin: false,
