@@ -89,10 +89,7 @@ h2 {
     margin-bottom: 10%; 
 }
 
-.star {
-    position: relative;
-    width: 2vw;
-}
+
 
 
 /* .star-outline::before {
@@ -361,8 +358,8 @@ h3 {
 .post-comment {
     display: flex; 
     justify-content: space-between;
-    margin-left: 30px; 
     height: 50px; 
+    margin-left: 25px; 
 }
 
 .postings-1 {
@@ -392,14 +389,14 @@ h3 {
 }
 
 .posting-2 {
-    margin-bottom: 30px; 
+    margin-bottom: 40px; 
     text-align: center;
 }
 
 .posting-user {
     display: flex; 
     justify-content: end; 
-    margin-left: 54%; 
+    margin-left: 57.5%; 
 }
 
 .postings-2 {
@@ -409,7 +406,7 @@ h3 {
 .postings-buttons {
     display: flex; 
     justify-content: end; 
-    margin-left: 68%; 
+    margin-left: 71%; 
 }
 
 .posters {
@@ -425,20 +422,23 @@ h3 {
     color: rgb(134, 134, 134);
 }
 
+.profile-2 {
+    display: grid;
+    grid-auto-columns: 1fr;
+    border-style: solid;
+    border-color: rgb(7, 142, 144);
+    border-radius: 15px;
+    border-width: 5px; 
+    width: 330px; 
+    height: 100%; 
+}
+
 /* Toolbar buttons */
 .postButton {
     display: grid;
     grid-auto-columns: 1fr;
-    padding: 10px; 
-    border-style: solid;
-    border-color: rgb(7, 142, 144);
-    border-radius: 15px;
     padding: 30px;  
-    border-width: 5px; 
     text-align: center;
-    margin-right: 20px; 
-    width: 330px; 
-    height: 100%; 
 }
 
 .add-comment {
@@ -547,9 +547,16 @@ h4 {
     color: rgb(7, 90, 92);
 }
 
-.star {
-    padding: 10px 10px;
+.star-large {
+    position: absolute;
+    width: 15px; 
 }
+
+.star-small {
+    position: relative; 
+    width: 10px; 
+}
+
 
 .invite-circle {
     border-style: solid; 
