@@ -97,14 +97,19 @@ class PendingCircle extends Component {
 
   render() {
     return (
-      <div>
+        <div>
         <Navbar username={this.state.username} />
-        <h3>You have been invited to join {this.state.circleName}, which is owned by {this.state.adminUsername}.</h3>
-        <h4> Would you like to join this circle?</h4>
-        <button type="button" onClick={this.handleAccept}>Yes</button>
-        <button type="button" onClick={this.handleDecline}>No</button>
-      </div >
-
+        <div className="invite-circle">
+          <div className="pending">
+            <h3>You have been invited to join {this.state.circleName}, which is owned by {this.state.adminUsername}.</h3>
+            <h4> Would you like to join this circle?</h4>
+            </div >
+            <div className="pending-buttons">
+              <button type="button" onClick={this.handleAccept}>Yes</button>
+              <button type="button" onClick={this.handleDecline}>No</button>
+            </div>
+        </div>
+      </div>
     );
   }
 
