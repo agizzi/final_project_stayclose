@@ -25,6 +25,8 @@ class NavBar extends Component {
         super(props);
         this.state = {
             user: '',
+            userFetched: false,
+            userId: '',
             name: '',
             members: '',
             addedMember: '',
@@ -111,18 +113,30 @@ class NavBar extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
+        let config = {
+            headers: {
+                Authorization: `Token ${this.state.authtoken}`
+            }
+        }
+        axios.get('/api/user/', config, {
+        }).then(res => {
+            // let userId = res.data.id
+            console.log(res)
+            this.setState({ userId: res.data.id })
+            this.setState({ userFetched: true })
+
+        })
     }
 
     render() {
-        if (localStorage.getItem('access_key')) {
+        if (localStorage.getItem('access_key') && this.state.userFetched) {
             return (
                 <div className="navbar">
                     <div className="links-1">
                         <h1 className="logo-1"><Link className="header" to="/profile"> StayClose</Link></h1>
                     </div>
                     <ul className="links-2">
-                        <ProfilePicture userId={this.props.userId} className="add"/>
+                        <ProfilePicture userId={this.state.userId} className="add" />
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
@@ -149,11 +163,71 @@ class NavBar extends Component {
                                 </form>
                             </ReactModal>
                         </div>
-                        { this.props.location.pathname == '/profile' &&
-                        <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                        {this.props.location.pathname == '/profile' &&
+                            <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
                         }
-                        { this.props.location.pathname == '/profile/' &&
-                        <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                        {this.props.location.pathname == '/profile/' &&
+                            <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                        }
+                        <div>
+                            <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
+                                <button className="modal" onClick={this.handleCloseAddModal}>X</button>
+                                <h2>New Circle: </h2>
+                                <form onSubmit={this.handleAddSubmit}>
+                                    <label>
+                                        Circle Name:
+                                        <div></div>
+                                        <input type='text' value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
+                                        <div></div>
+                                    </label>
+                                    <button type='submit' value='create'>Create a Circle</button>
+                                </form>
+                            </ReactModal>
+                        </div>
+                        <li><button type="button" onClick={this.handleCloseModal} className="add"><a className="nav" onClick={() => this.handleLogout()}>Logout </a></button></li>
+                    </ul>
+                </div>
+            )
+        }
+        else if (localStorage.getItem('access_key') && !this.state.userFetched) {
+            return (
+                <div className="navbar">
+                    <div className="links-1">
+                        <h1 className="logo-1"><Link className="header" to="/profile"> StayClose</Link></h1>
+                    </div>
+                    <ul className="links-2">
+
+                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
+                        <div>
+                            <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
+                                <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
+                                <h2>Settings: </h2>
+                                <form onSubmit={this.handleSettingsSubmit}>
+                                    <label>
+                                        Username:
+                                        <div></div>
+                                        <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
+                                        <div></div>
+                                    </label>
+                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
+                                        {({ getRootProps, getInputProps, isDragActive }) => (
+                                            <section>
+                                                <div {...getRootProps()} className="drag">
+                                                    <input {...getInputProps()} />
+                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                                </div>
+                                            </section>
+                                        )}
+                                    </Dropzone>
+                                    <button className="profile-submit" type='submit' value='create'>Change Settings</button>
+                                </form>
+                            </ReactModal>
+                        </div>
+                        {this.props.location.pathname == '/profile' &&
+                            <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
+                        }
+                        {this.props.location.pathname == '/profile/' &&
+                            <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
                         }
                         <div>
                             <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
@@ -184,7 +258,6 @@ class NavBar extends Component {
                             <li className="nav"> <Link to="/register"> Register </Link> </li>
                         </ul>
                     </nav>
-                    <Notification />
                 </div>
             )
         }
