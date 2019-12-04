@@ -52,7 +52,7 @@ class Content extends Component {
     }
 
     render() {
-        if (this.props.contents.length != 0) {
+        if (this.props.contents.length > 0 && this.props.contentFetched) {
             return (
                 <div className="contentDetail">
                     {this.props.contents.map(content =>
@@ -60,13 +60,13 @@ class Content extends Component {
                     )}
                 </div>
             );
-        } else if (this.props.contents.length == 0){
+        } else if (this.props.contents.length == 0 && this.props.contentFetched) {
             return (
                 <div className="empty">
                     <h3>This circle has not posts yet. Click '<i>Add Post</i> ' to begin.</h3>
                 </div>
             );
-        } else if (this.props.contents.length != 0 && !this.props.contentFetched){
+        } else {
             return (
                 <div>
                     <h3 className="empty">Loading Content...</h3>
