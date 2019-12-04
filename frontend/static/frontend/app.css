@@ -55,8 +55,11 @@ button:hover {
 .header  {
     color: rgb(10, 195, 198); 
     font-size: 50pt; 
-    margin-right: 80%; 
     text-decoration: none;
+}
+
+.logo-1 {
+    margin-right: 15px; 
 }
 
 .greeting {
@@ -89,10 +92,7 @@ h2 {
     margin-bottom: 30px; 
 }
 
-.gold-star {
-    position: relative;
-    width: 2vw;
-}
+
 
 .hidden {
     display: none;
@@ -120,12 +120,7 @@ h2 {
     margin: 16px 30px 25px; 
 }
 
-.links-2 {
-    margin-top: 20px; 
-    display: flex;
-    margin-left: 29%;
-    justify-content: space-evenly;
-}
+
 
 ul {
     list-style-type: none;
@@ -262,6 +257,18 @@ input {
     color: rgb(63, 64, 64); 
 }
 
+.links-1 {
+    display: flex; 
+}
+
+
+.links-2 {
+    margin-top: 20px; 
+    display: flex;
+    margin-left: 29%;
+    justify-content: space-evenly;
+}
+
 .registration {
     display: flex; 
     justify-content: space-evenly;
@@ -387,6 +394,7 @@ h3 {
     display: flex; 
     justify-content: end; 
     margin-left: 57.5%; 
+    margin-top: 15px; 
 }
 
 .postings-2 {
@@ -480,10 +488,12 @@ h3 {
 }
 
 .profile-pic {
-    height: 100px;
-    width: 100px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%; 
     object-fit: cover; 
+    margin-right: 10px; 
+    margin-top: 15px; 
 }
 
 .profile-pic-small {
@@ -535,16 +545,6 @@ p {
 
 h4 {
     color: rgb(7, 90, 92);
-}
-
-.star-large {
-    position: absolute;
-    width: 15px; 
-}
-
-.star-small {
-    position: relative; 
-    width: 10px; 
 }
 
 
@@ -617,4 +617,20 @@ h4 {
 .post-photo {
     width: 550px; 
     height: 350px; 
+}
+
+.star-gold {
+    width: 10px; 
+}
+
+.star-outline {
+    margin-left: 2px; 
+    display: flex; 
+    justify-content: space-evenly;
+    width: 10px; 
+}
+
+
+.star {
+    margin-left: 5px; 
 }

@@ -118,9 +118,11 @@ class NavBar extends Component {
         if (localStorage.getItem('access_key')) {
             return (
                 <div className="navbar">
-                    <h1 className="links"><Link className="header" to="/profile"> StayClose</Link></h1>
-                    <ProfilePicture userId={this.props.userId} />
+                    <div className="links-1">
+                        <h1 className="logo-1"><Link className="header" to="/profile"> StayClose</Link></h1>
+                    </div>
                     <ul className="links-2">
+                        <ProfilePicture userId={this.props.userId} className="add"/>
                         <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
