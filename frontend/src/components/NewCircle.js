@@ -44,8 +44,6 @@ class NewCircle extends Component {
         }).catch(function (error) {
             alert('circle not created, try again')
         })
-
-
     }
 
     render() {
@@ -63,12 +61,9 @@ class NewCircle extends Component {
                     <div></div>
                     <button value='create' onClick={this.handleCloseModal}>Create a Circle</button>
                 </form>
-
-
             </div >
         )
     }
 }
-
 
 export default withRouter(NewCircle);

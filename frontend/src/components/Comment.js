@@ -133,7 +133,7 @@ class Comment extends Component {
                             </ReactModal>
                         <div className="postings-buttons">
                             <p className="posters"><Moment format="LLL">{new Date(this.props.comment.updated_at)}</Moment></p>
-                            <p className="posters"><CommentLikes likes={this.props.comment.likes.length} commentId={this.props.comment.id} userId={this.props.userId}/></p>
+                            <p className="posters"><CommentLikes likes={this.props.comment.likes.length} commentId={this.props.comment.id} userId={this.props.userId} size='small' /></p>
                         </div>
                 </div>
             </div>

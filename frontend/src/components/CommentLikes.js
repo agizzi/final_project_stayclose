@@ -43,7 +43,7 @@ class CommentLikes extends Component {
       <div className="likes">
         <div onClick={this.handleLikeSubmit}>
           <div className="star-outline">
-            <SVG className="star" src={star} /> {this.state.likes}</div>
+            <SVG className={`star ${this.props.size && 'star-' + this.props.size}`} src={star} /> {this.state.likes}</div>
         </div>
       </div>
 
@@ -52,3 +52,4 @@ class CommentLikes extends Component {
 }
 
 export default withRouter(CommentLikes);
+
