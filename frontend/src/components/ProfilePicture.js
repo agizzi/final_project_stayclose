@@ -20,10 +20,12 @@ class ProfilePicture extends Component {
                 Authorization: localStorage.getItem("access_key")
             }
         }
+        console.log(this.props.userId)
         axios.get('/api/users/' + this.props.userId + '/', {
         }, config
         ).then(res => {
             this.setState({ user: res.data })
+            console.log(res.data)
         })
     }
 

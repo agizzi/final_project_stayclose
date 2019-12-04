@@ -13,7 +13,7 @@ class ProfilePage extends Component {
         this.state = {
             username: localStorage.getItem("username"),
             authtoken: localStorage.getItem("access_key"),
-            userId: 0,
+            userId: "",
             circles: [],
             pending_circles: [],
             userFetched: false,
@@ -38,22 +38,23 @@ class ProfilePage extends Component {
         axios.get('/api/user/', config, {
         }).then(res => {
             let userId = res.data.id
+            console.log(res)
             this.setState({ userId: userId })
-            this.setState({userFetched: true})
+            this.setState({ userFetched: true })
         })
 
         axios.get('/api/circles-by-user', config, {
         }).then(res => {
             let circles = res.data
             this.setState({ circles: circles })
-            this.setState({circlesFetched: true})
+            this.setState({ circlesFetched: true })
         })
 
         axios.get('/api/pending-circles-by-user/', config, {
         }).then(res => {
             let pending_circles = res.data
             this.setState({ pending_circles: pending_circles })
-            this.setState({ pendingCirclesFetched: true})
+            this.setState({ pendingCirclesFetched: true })
         })
     }
 
@@ -67,7 +68,7 @@ class ProfilePage extends Component {
                 </React.Fragment>
             )
         }
-        else if (this.state.circles.length == 0 && this.state.userFetched && this.state.circlesFetched && this.state.pendingCirclesFetched){
+        else if (this.state.circles.length == 0 && this.state.userFetched && this.state.circlesFetched && this.state.pendingCirclesFetched) {
             return (
                 <React.Fragment>
                     <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
