@@ -50,19 +50,6 @@ class Comments extends Component {
         this.setState({ showDeleteModal: false });
     }
 
-    handleDeleteSubmit(id) {
-        let config = {
-            headers: {
-                Authorization: `Token ${localStorage.getItem("access_key")}`
-            }
-        }
-        axios.delete('/api/comments/' + id + '/', config, {
-        }).then(res => {
-            this.setState({ showDeleteModal: false });
-            this.componentDidMount();
-        })
-    }
-
     handleAddSubmit() {
         let author = this.props.userId
         let content = this.props.contentId
@@ -78,8 +65,9 @@ class Comments extends Component {
             content: content
         }, config
         ).then(res => {
-            this.setState({ showAddModal: false })
-            this.componentDidMount();
+            this.setState({ showAddModal: false });
+            this.setState({ newComment: "" });
+            this.loadComments();
         })
     }
 

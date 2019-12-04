@@ -52,20 +52,6 @@ class Content extends Component {
         this.setState({ showEditModal: false });
     }
 
-    handleDelete() {
-        let config = {
-            headers: {
-                Authorization: `Token ${localStorage.getItem("access_key")}`
-            }
-        }
-        axios.delete('/api/content/' + this.state.contentId, config, {
-        }).then(res => {
-            this.setState({ showDeleteModal: false });
-            this.componentDidMount();
-            this.forceUpdate();
-        })
-    }
-
     handleEdit() {
         let config = {
             headers: {

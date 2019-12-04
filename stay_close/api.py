@@ -138,7 +138,7 @@ class RemoveUserFromCircle(APIView):
 class CommentsByContent(APIView):
   def get(self, request, format=None):
     contentId = request.query_params.get('contentId')
-    comments = Comments.objects.filter(content=contentId).order_by('updated_at')
+    comments = Comments.objects.filter(content=contentId).order_by('-updated_at')
     serializer = CommentsSerializer(comments, many=True)
     return Response(serializer.data)
 
