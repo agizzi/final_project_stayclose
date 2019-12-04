@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import star from './StaticAssets/star.svg';
-import SVG from 'react-inlinesvg';
-import goldStar from './StaticAssets/goldStar.svg';
+import Star from './Star';
+import { timingSafeEqual } from 'crypto';
 
 
 
@@ -17,6 +16,7 @@ class ContentLikes extends Component {
       userHasLiked: "",
     };
     this.handleLikeSubmit = this.handleLikeSubmit.bind(this);
+    this.changeStar = this.changeStar.bind(this);
   }
 
   handleLikeSubmit() {
@@ -36,17 +36,16 @@ class ContentLikes extends Component {
     }, config
     ).then(res => {
       this.setState({ likes: res.data['likes'].length })
-      this.setState({ likers: res.data.likes })
-
+      this.changeStar()
     })
+  }
 
-
-    // let star = document.querySelector('.star')
-    // let goldStar = document.querySelector('.gold-star')
-    // star.classList.toggle('hidden')
-    // goldStar.classList.toggle('hidden')
-
-
+  changeStar() {
+    if (this.state.userHasLiked == false) {
+      this.setState({ userHasLiked: true })
+    } else {
+      this.setState({ userHasLiked: false })
+    }
   }
 
   componentDidMount() {
@@ -57,20 +56,11 @@ class ContentLikes extends Component {
         Authorization: `Token ${localStorage.getItem("access_key")}`
       }
     }
-    axios.get('/api/content/' + this.props.contentId, {
+    axios.get('/api/content/' + this.props.contentId + "/", {
     }, config).then(res => {
       let likes = res.data.likes
-      let star = document.querySelector('star')
-      let goldStar = document.querySelector('gold-star')
       for (let like of likes) {
-        if (!like) {
-          goldStar.classList.add('hidden')
-          star.classList.remove('hidden')
-          this.setState({ userHasLiked: false })
-        }
-        else if (like == this.props.userId) {
-          goldStar.classList.remove('hidden')
-          star.classList.add('hidden')
+        if (like == this.props.userId) {
           this.setState({ userHasLiked: true })
         }
       }
@@ -83,29 +73,18 @@ class ContentLikes extends Component {
   }
 
   render() {
-    if (this.state.userHasLiked == true) {
-      return (
-        <div className="likes" >
-          <div onClick={this.handleLikeSubmit}>
-            <div className="star-outline">
-              <SVG className="gold-star" src={goldStar} /><SVG className="star hidden" src={star} />{this.state.likes}
-            </div>
+
+    return (
+      <div className="likes" >
+        <div onClick={this.handleLikeSubmit} >
+          <div className="star-outline">
+            <Star userHasLiked={this.state.userHasLiked} />{this.state.likes}
           </div>
         </div>
-      )
-    } else {
-      return (
-        <div className="likes">
-          <div onClick={this.handleLikeSubmit}>
-            <div className="star-outline">
-              <SVG className="star" src={star} /><SVG className="gold-star hidden" src={goldStar} />{this.state.likes}</div>
-          </div>
-        </div >
-      );
-    }
+      </div>
+    )
 
   }
 }
 
 export default withRouter(ContentLikes);
-
