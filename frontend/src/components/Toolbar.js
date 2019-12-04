@@ -200,11 +200,6 @@ class Toolbar extends Component {
     })
   }
 
-  readImg(file){
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-  }
-
   componentDidMount() {
     let config = {
       headers: {
