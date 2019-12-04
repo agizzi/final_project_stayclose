@@ -52,14 +52,27 @@ class ProfilePage extends Component {
     }
 
     render() {
-        return (
-            <React.Fragment>
-                <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
-                <Greeting username={this.state.username} />
-                <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
-                <Circles username={this.state.username} userId={this.state.userId} circles={this.state.circles} />
-            </React.Fragment>
-        )
+        if (this.state.circles.length > 0) {
+            return (
+                <React.Fragment>
+                    <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
+                    <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
+                    <Circles username={this.state.username} userId={this.state.userId} circles={this.state.circles} />
+                </React.Fragment>
+            )
+        }
+        else {
+            return (
+                <React.Fragment>
+                    <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
+                    <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
+                    <div>
+                        <h3 className="empty">You do not yet have any circles. Click +Circle to create one!</h3>
+                    </div>
+                </React.Fragment>
+
+            )
+        }
     }
 }
 
