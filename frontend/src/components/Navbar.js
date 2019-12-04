@@ -51,10 +51,12 @@ class NavBar extends Component {
     }
 
     handleOpenSettingsModal() {
+        this.setState({ picToUpload: [] })
         this.setState({ showSettingsModal: true });
     }
 
     handleCloseSettingsModal() {
+        this.setState({ picToUpload: [] })
         this.setState({ showSettingsModal: false });
     }
 
@@ -143,16 +145,23 @@ class NavBar extends Component {
                                 <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
                                 <h2>Change Avatar: </h2>
                                 <form onSubmit={this.handleSettingsSubmit}>
-                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
-                                        {({ getRootProps, getInputProps, isDragActive }) => (
-                                            <section>
-                                                <button {...getRootProps()} className="drag">
-                                                    <input {...getInputProps()} />
-                                                    {isDragActive ? "Drop it like it's hot!" : 'Click Me to Upload an Avatar'}
-                                                </button>
-                                            </section>
-                                        )}
-                                    </Dropzone>
+                                {this.state.picToUpload.length == 0 &&
+              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles})}>
+                {({ getRootProps, getInputProps, isDragActive }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+              }
+              {this.state.picToUpload.length > 0 &&
+                <div>
+                  <h3>File is Added! Click to Submit</h3>
+                </div>
+              }
                                     <button className="profile-submit" type='submit' value='create'>Save</button>
                                 </form>
                             </ReactModal>
@@ -203,16 +212,23 @@ class NavBar extends Component {
                                         <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
                                         <div></div>
                                     </label>
-                                    <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
-                                        {({ getRootProps, getInputProps, isDragActive }) => (
-                                            <section>
-                                                <div {...getRootProps()} className="drag">
-                                                    <input {...getInputProps()} />
-                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                                                </div>
-                                            </section>
-                                        )}
-                                    </Dropzone>
+                                    {this.state.picToUpload.length == 0 &&
+              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles})}>
+                {({ getRootProps, getInputProps, isDragActive }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+              }
+              {this.state.picToUpload.length > 0 &&
+                <div>
+                  <h3>File is Added! Click to Submit</h3>
+                </div>
+              }
                                     <button className="profile-submit" type='submit' value='create'>Change Settings</button>
                                 </form>
                             </ReactModal>
