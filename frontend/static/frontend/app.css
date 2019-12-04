@@ -183,11 +183,12 @@ li {
     height: 200px;
     border-radius: 50%;
     font-size: 15pt;
-    background-color: rgb(72, 179, 181);
+    background-color: rgb(246, 233, 111);
+    /* background-color: rgb(72, 179, 181); */
     line-height: 180px;
     text-align: center;
     margin: 50px; 
-    color: white; 
+    color: gray; 
     text-decoration: none;
     font-weight: 900; 
     box-shadow: 10px 5px 8px rgba(193, 188, 188, 0.765);
@@ -199,6 +200,7 @@ li {
     height: 220px;
     line-height: 220px;
     background-color: rgb(7, 142, 144);
+    color: white;
 }
 
 .pending-circle-name {
