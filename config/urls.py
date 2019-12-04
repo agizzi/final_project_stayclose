@@ -44,4 +44,4 @@ urlpatterns = [
     path('new-circle/', include('frontend.urls')),
     path('circle/<int:pk>/<str:circleName>/<int:id>/', include('frontend.urls')),
     path('post/<int:circleId>/<str:circleName>/<int:userId>/<str:memberName>', include('frontend.urls'))
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
