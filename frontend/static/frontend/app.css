@@ -55,8 +55,11 @@ button:hover {
 .header  {
     color: rgb(10, 195, 198); 
     font-size: 50pt; 
-    margin-right: 80%; 
     text-decoration: none;
+}
+
+.logo-1 {
+    margin-right: 15px; 
 }
 
 .greeting {
@@ -86,22 +89,9 @@ button:hover {
 h2 {
     color: #79BFC0; 
     font-size: 30pt; 
-    margin-bottom: 10%; 
+    margin-bottom: 30px; 
 }
 
-
-
-.gold-star {
-    position: relative;
-    width: 2vw;
-}
-
-
-.empty {
-    margin-top: 5%;
-    margin-left: 5%;
-    margin-right: 5%;
-}
 
 
 .hidden {
@@ -130,12 +120,7 @@ h2 {
     margin: 16px 30px 25px; 
 }
 
-.links-2 {
-    margin-top: 20px; 
-    display: flex;
-    margin-left: 29%;
-    justify-content: space-evenly;
-}
+
 
 ul {
     list-style-type: none;
@@ -272,6 +257,18 @@ input {
     color: rgb(63, 64, 64); 
 }
 
+.links-1 {
+    display: flex; 
+}
+
+
+.links-2 {
+    margin-top: 20px; 
+    display: flex;
+    margin-left: 29%;
+    justify-content: space-evenly;
+}
+
 .registration {
     display: flex; 
     justify-content: space-evenly;
@@ -397,6 +394,7 @@ h3 {
     display: flex; 
     justify-content: end; 
     margin-left: 57.5%; 
+    margin-top: 15px; 
 }
 
 .postings-2 {
@@ -490,10 +488,12 @@ h3 {
 }
 
 .profile-pic {
-    height: 100px;
-    width: 100px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%; 
     object-fit: cover; 
+    margin-right: 10px; 
+    margin-top: 15px; 
 }
 
 .profile-pic-small {
@@ -547,16 +547,6 @@ h4 {
     color: rgb(7, 90, 92);
 }
 
-.star-large {
-    position: absolute;
-    width: 15px; 
-}
-
-.star-small {
-    position: relative; 
-    width: 10px; 
-}
-
 
 .invite-circle {
     border-style: solid; 
@@ -589,4 +579,58 @@ h4 {
 .administration {
     margin-bottom: 10px; 
     color: rgb(7, 90, 92);
+}
+
+.drag {
+    outline-style: none;
+    color: rgb(7, 90, 92);
+}
+
+.drag:hover {
+    color: rgb(10, 151, 153);
+}
+
+.empty {
+    width: 600px; 
+    text-align: center;
+    margin-top: 80px; 
+    font-size: 25pt; 
+    margin-left: 15%; 
+}
+
+.empty-profile {
+    width: 650px; 
+    text-align: center;
+    margin: 0 auto; 
+    font-size: 30pt; 
+}
+
+.no-circles {
+    margin-top: 200px; 
+}
+
+.modal-head {
+    width: 450px; 
+    text-align: center; 
+}
+
+.post-photo {
+    width: 550px; 
+    height: 350px; 
+}
+
+.star-gold {
+    width: 10px; 
+}
+
+.star-outline {
+    margin-left: 2px; 
+    display: flex; 
+    justify-content: space-evenly;
+    width: 10px; 
+}
+
+
+.star {
+    margin-left: 5px; 
 }

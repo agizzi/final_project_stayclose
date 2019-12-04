@@ -78,7 +78,7 @@ class ContentLikes extends Component {
       <div className="likes" >
         <div onClick={this.handleLikeSubmit} >
           <div className="star-outline">
-            <Star userHasLiked={this.state.userHasLiked} />{this.state.likes}
+            <Star userHasLiked={this.state.userHasLiked} /> <p className="star">{this.state.likes} </p>
           </div>
         </div>
       </div>

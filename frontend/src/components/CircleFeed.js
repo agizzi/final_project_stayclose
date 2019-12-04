@@ -45,10 +45,10 @@ class CircleFeed extends Component {
                 <NavBar username={localStorage.getItem('username')} userId={params.userId} />
                 <div className="contents">
                     <div className="profile-1">
-                        <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} contents={this.state.contents} loadContent={() => this.loadContent()}/>
+                        <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} contents={this.state.contents} loadContent={() => this.loadContent()} />
                     </div>
                     <div className="profile-2">
-                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} loadContent={() => this.loadContent()}/>
+                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} loadContent={() => this.loadContent()} />
                     </div>
                 </div>
             </React.Fragment>

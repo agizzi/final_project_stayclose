@@ -62,8 +62,8 @@ class Content extends Component {
             );
         } else if (this.props.contents.length == 0){
             return (
-                <div>
-                    <h3 className="empty">This circle has not posts yet, Use add a post to add a post!</h3>
+                <div className="empty">
+                    <h3>This circle has not posts yet. Click '<i>Add Post</i> ' to begin.</h3>
                 </div>
             );
         } else if (this.props.contents.length != 0 && !this.props.contentFetched){
