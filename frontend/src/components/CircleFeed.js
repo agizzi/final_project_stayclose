@@ -10,7 +10,7 @@ class CircleFeed extends Component {
         super(props);
 
         this.state ={
-            contents: []
+            contents: [],
         }
 
     }
@@ -33,6 +33,7 @@ class CircleFeed extends Component {
         ).then(res => {
             let content = res.data
             this.setState({ contents: content })
+            this.setState({ contentFetched: true})
         })
     }
 

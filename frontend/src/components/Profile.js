@@ -15,7 +15,10 @@ class ProfilePage extends Component {
             authtoken: localStorage.getItem("access_key"),
             userId: 0,
             circles: [],
-            pending_circles: []
+            pending_circles: [],
+            userFetched: false,
+            circlesFetched: false,
+            pendingCirclesFetched: false,
         };
     }
 
@@ -36,23 +39,26 @@ class ProfilePage extends Component {
         }).then(res => {
             let userId = res.data.id
             this.setState({ userId: userId })
+            this.setState({userFetched: true})
         })
 
         axios.get('/api/circles-by-user', config, {
         }).then(res => {
             let circles = res.data
             this.setState({ circles: circles })
+            this.setState({circlesFetched: true})
         })
 
         axios.get('/api/pending-circles-by-user/', config, {
         }).then(res => {
             let pending_circles = res.data
             this.setState({ pending_circles: pending_circles })
+            this.setState({ pendingCirclesFetched: true})
         })
     }
 
     render() {
-        if (this.state.circles.length > 0) {
+        if (this.state.circles.length > 0 && this.state.userFetched && this.state.circlesFetched && this.state.pendingCirclesFetched) {
             return (
                 <React.Fragment>
                     <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
@@ -61,7 +67,7 @@ class ProfilePage extends Component {
                 </React.Fragment>
             )
         }
-        else {
+        else if (this.state.circles.length == 0 && this.state.userFetched && this.state.circlesFetched && this.state.pendingCirclesFetched){
             return (
                 <React.Fragment>
                     <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
@@ -71,6 +77,17 @@ class ProfilePage extends Component {
                     </div>
                 </React.Fragment>
 
+            )
+        }
+        else {
+            return (
+                <React.Fragment>
+                    <NavBar username={this.state.username} userId={this.state.userId} addCircle={(circle) => this.addCircle(circle)} />
+                    <PendingCircles username={this.state.username} userId={this.state.userId} pendingCircles={this.state.pending_circles} />
+                    <div>
+                        <h3 className="empty">Loading Profile...</h3>
+                    </div>
+                </React.Fragment>
             )
         }
     }
