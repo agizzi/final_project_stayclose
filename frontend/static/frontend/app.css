@@ -251,7 +251,7 @@ input {
     padding: 10px; 
     width: 250px; 
     margin-bottom: 20px; 
-    outline: none;
+    outline-style: none;
     font-weight: bold; 
     font-size: 14pt; 
     color: rgb(63, 64, 64); 
@@ -386,7 +386,7 @@ h3 {
 }
 
 .posting-2 {
-    margin-bottom: 40px; 
+    margin-bottom: 60px; 
     text-align: center;
 }
 
@@ -515,7 +515,7 @@ h3 {
 
 
 .profile-submit{
-    margin-top: 15px; 
+    margin-left: 85%; 
 }
 
 .leaving {
@@ -526,14 +526,6 @@ h3 {
 .invites-header {
     text-align: center; 
     margin-bottom: 30px; 
-}
-
-hr {
-    border: 3px dashed rgb(163, 147, 147);
-    width: 100%;
-    margin: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
 }
 
 p {
@@ -573,22 +565,13 @@ h4 {
     margin-bottom: 15px; 
 }
 
-.dropzone {
+/* .dropzone {
     margin-top: 10px; 
-}
+} */
 
 .administration {
     margin-bottom: 10px; 
     color: rgb(7, 90, 92);
-}
-
-.drag {
-    outline-style: none;
-    color: rgb(7, 90, 92);
-}
-
-.drag:hover {
-    color: rgb(10, 151, 153);
 }
 
 .empty {
@@ -600,14 +583,14 @@ h4 {
 }
 
 .empty-profile {
-    width: 650px; 
     text-align: center;
     margin: 0 auto; 
     font-size: 30pt; 
 }
 
 .no-circles {
-    margin-top: 200px; 
+    width: 600px; 
+    margin: 90px auto; 
 }
 
 .modal-head {
@@ -634,4 +617,13 @@ h4 {
 
 .star {
     margin-left: 5px; 
+}
+
+.avatar-button {
+    margin-left: 60px; 
+    margin-bottom: 30px; 
+}
+
+.creative {
+    margin-left: 32%; 
 }

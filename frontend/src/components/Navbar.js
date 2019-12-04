@@ -31,7 +31,7 @@ class NavBar extends Component {
             picToUpload: [],
             showAddModal: false,
             showSettingsModal: false
-        };
+        }
         this.handleOpenAddModal = this.handleOpenAddModal.bind(this);
         this.handleCloseAddModal = this.handleCloseAddModal.bind(this);
         this.handleOpenSettingsModal = this.handleOpenSettingsModal.bind(this);
@@ -74,6 +74,7 @@ class NavBar extends Component {
         axios.post('/api/circles/', newCircle, config
         ).then(res => {
             this.setState({ showAddModal: false });
+            this.setState({ name: '' })
             this.props.addCircle(newCircle)
         }).catch(function (error) {
             alert('circle not created, try again')
@@ -123,32 +124,24 @@ class NavBar extends Component {
                     </div>
                     <ul className="links-2">
                         <ProfilePicture userId={this.props.userId} className="add"/>
-                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
-                        <div>
+                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Change Avatar</button></li>
                             <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
-                                <h2>Settings: </h2>
+                                <h2>Change Avatar: </h2>
                                 <form onSubmit={this.handleSettingsSubmit}>
-                                    <label>
-                                        Username:
-                                        <div></div>
-                                        <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
-                                        <div></div>
-                                    </label>
                                     <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
                                         {({ getRootProps, getInputProps, isDragActive }) => (
                                             <section>
-                                                <div {...getRootProps()} className="drag">
+                                                <div {...getRootProps()}>
                                                     <input {...getInputProps()} />
-                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                                    <button className="avatar-button">{isDragActive ? "Drop it like it's hot!" : 'Click here to upload avatar'}</button>
                                                 </div>
                                             </section>
                                         )}
                                     </Dropzone>
-                                    <button className="profile-submit" type='submit' value='create'>Change Settings</button>
+                                    <button className="profile-submit" type='submit' value='create'>Save</button>
                                 </form>
                             </ReactModal>
-                        </div>
                         { this.props.location.pathname == '/profile' &&
                         <li><button className="add" onClick={this.handleOpenAddModal}>+ Circle </button></li>
                         }

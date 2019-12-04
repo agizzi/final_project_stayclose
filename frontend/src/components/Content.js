@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
 import Post from './Post'
+import ReactModal from 'react-modal';
+import Dropzone from 'react-dropzone';
 
 const customStyles = {
     content: {
@@ -24,11 +26,16 @@ class Content extends Component {
             post: '',
             showDeleteModal: false,
             showEditModal: false,
+            showPostModal: false, 
+            
         }
         this.handleOpenDeleteModal = this.handleOpenDeleteModal.bind(this);
         this.handleCloseDeleteModal = this.handleCloseDeleteModal.bind(this);
         this.handleOpenEditModal = this.handleOpenEditModal.bind(this);
-        this.handleClosEditModal = this.handleCloseEditModal.bind(this);
+        this.handleCloseEditModal = this.handleCloseEditModal.bind(this);
+        this.handleOpenPostModal = this.handleOpenPostModal.bind(this);
+        this.handleClosePostModal = this.handleClosePostModal.bind(this);
+        
     }
 
     handleOpenDeleteModal(id) {
@@ -51,6 +58,65 @@ class Content extends Component {
         this.setState({ showEditModal: false });
     }
 
+    handleOpenPostModal() {
+        this.setState({ showPostModal: true });
+    }
+
+    handleClosePostModal() {
+    this.setState({ showPostModal: false });
+    }
+
+    handlePostSubmit () {
+        let post_text = this.state.post;
+        let member = this.props.userId;
+        let circle = this.props.circleId;
+        event.preventDefault();
+        let config = {
+            headers: {
+                Authorization: `Token ${localStorage.getItem("access_key")}`
+            }
+        }
+        axios.post('/api/content/', {
+            author: this.state.username,
+            text_post: post_text,
+            img_post: null,
+            caption: "",
+            likes: [],
+            member: member,
+            circle: circle,
+            tags: null
+        }, config
+        ).then(res => {
+            return res.data
+        }).then(datum => {
+            if (this.state.hasPic) {
+                let profilePicture = this.state.picToUpload[0]
+                let data = new FormData()
+                data.append('file', profilePicture)
+                let config = {
+                headers: {
+                    Authorization: `Token ${localStorage.getItem("access_key")}`
+                }
+            }
+                axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
+                ).then(res => {
+                this.handleClosePostModal()
+                this.setState({ post: "" })
+                this.props.loadContent()
+            }).catch(function (error) {
+                alert('username not changed, try again')
+            })
+            } else {
+              this.handleClosePostModal()
+              this.setState({ post: "" })
+              this.props.loadContent()
+            }
+    })
+    }
+    
+    
+    
+
     render() {
         if (this.props.contents.length != 0) {
             return (
@@ -63,7 +129,30 @@ class Content extends Component {
         } else if (this.props.contents.length == 0){
             return (
                 <div className="empty">
-                    <h3>This circle has not posts yet. Click '<i>Add Post</i> ' to begin.</h3>
+                    <h3>This circle has no posts yet.</h3> 
+                    <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Click here to create a post for your feed</button>
+                        <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
+                        <button className="modal2" onClick={this.handleClosePostModal}>X</button>
+                        <h2 className="new-post-header">New Post: </h2>
+                        <form onSubmit={(e) => this.handlePostSubmit()}>
+                            <label>
+                                <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                                <div></div>
+                            </label>
+                            <div></div>
+                            <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
+                                {({ getRootProps, getInputProps, isDragActive }) => (
+                                    <section>
+                                        <div {...getRootProps()}>
+                                            <input {...getInputProps()} />
+                                            {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                                        </div>
+                                    </section>
+                                )}
+                            </Dropzone>
+                            <button type='submit' value='create' className="dropzone">Create a Post</button>
+                        </form>
+                        </ReactModal>
                 </div>
             );
         } else if (this.props.contents.length != 0 && !this.props.contentFetched){
