@@ -301,8 +301,6 @@ input {
     margin-left: 95%; 
 }
 
-
-
 h3 {
     color: rgb(134, 134, 134); 
     margin-top: 15px; 
@@ -488,7 +486,7 @@ h3 {
     margin-right: 8%; 
 }
 
-.profile-pic {
+.profile-pic-default {
     height: 40px;
     width: 40px;
     border-radius: 50%; 
@@ -518,6 +516,7 @@ h3 {
 
 .profile-submit{
     margin-top: 15px; 
+    margin-left: 85%; 
 }
 
 .leaving {
@@ -585,12 +584,13 @@ h4 {
 }
 
 .drag {
+    margin-left: 17%; 
     outline-style: none;
-    color: rgb(7, 90, 92);
+    color: rgb(10, 151, 153);
 }
 
 .drag:hover {
-    color: rgb(10, 151, 153);
+    color: white; 
 }
 
 .empty {
@@ -636,4 +636,13 @@ h4 {
 
 .star {
     margin-left: 5px; 
+}
+
+.creative {
+    margin-left: 42%; 
+}
+
+.drags {
+    display: flex; 
+    justify-content: space-evenly;
 }

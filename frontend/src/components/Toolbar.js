@@ -247,13 +247,14 @@ class Toolbar extends Component {
                 <div></div>
               </label>
               <div></div>
+              <div className="drags">
               <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
                 {({ getRootProps, getInputProps, isDragActive }) => (
                   <section>
-                    <div {...getRootProps()}>
+                    <button {...getRootProps()} className="dragpic">
                       <input {...getInputProps()} />
-                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                    </div>
+                      {isDragActive ? "Drop it like it's hot!" : 'Click me to upload a Photo'}
+                    </button>
                   </section>
                 )}
               </Dropzone>
@@ -263,7 +264,8 @@ class Toolbar extends Component {
                   <img className="post-photo" src={this.state.picToUpload[0].preview} ></img>
                 </div>
               }
-              <button type='submit' value='create' className="dropzone">Create a Post</button>
+              <button type='submit' value='create' className="dragpic">Create a Post</button>
+              </div>
             </form>
           </ReactModal>
 

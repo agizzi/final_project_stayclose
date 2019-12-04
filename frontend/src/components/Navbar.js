@@ -136,30 +136,24 @@ class NavBar extends Component {
                         <h1 className="logo-1"><Link className="header" to="/profile"> StayClose</Link></h1>
                     </div>
                     <ul className="links-2">
-                        <ProfilePicture userId={this.state.userId} className="add" />
-                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Settings </button></li>
+                        <ProfilePicture userId={this.state.userId} size='default' />
+                        <li><button type="button" className="add" onClick={this.handleOpenSettingsModal}>Change Avatar </button></li>
                         <div>
                             <ReactModal isOpen={this.state.showSettingsModal} style={customStyles}>
                                 <button className="modal" onClick={this.handleCloseSettingsModal}>X</button>
-                                <h2>Settings: </h2>
+                                <h2>Change Avatar: </h2>
                                 <form onSubmit={this.handleSettingsSubmit}>
-                                    <label>
-                                        Username:
-                                        <div></div>
-                                        <input type='text' defaultValue={this.state.user.username} onChange={(e) => this.setState({ user: e.target.value })} />
-                                        <div></div>
-                                    </label>
                                     <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
                                         {({ getRootProps, getInputProps, isDragActive }) => (
                                             <section>
-                                                <div {...getRootProps()} className="drag">
+                                                <button {...getRootProps()} className="drag">
                                                     <input {...getInputProps()} />
-                                                    {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                                                </div>
+                                                    {isDragActive ? "Drop it like it's hot!" : 'Click Me to Upload an Avatar'}
+                                                </button>
                                             </section>
                                         )}
                                     </Dropzone>
-                                    <button className="profile-submit" type='submit' value='create'>Change Settings</button>
+                                    <button className="profile-submit" type='submit' value='create'>Save</button>
                                 </form>
                             </ReactModal>
                         </div>
