@@ -9,7 +9,33 @@ class CircleFeed extends Component {
     constructor(props) {
         super(props);
 
+        this.state ={
+            contents: []
+        }
+
     }
+
+    componentDidMount() {
+        this.loadContent()
+    }
+
+    loadContent() {
+        let config = {
+            headers: {
+                Authorization: localStorage.getItem("access_key")
+            }
+        }
+        axios.get('/api/content-by-circle/', {
+            params: {
+                id: this.props.match.params.circleId
+            }
+        }, config
+        ).then(res => {
+            let content = res.data
+            this.setState({ contents: content })
+        })
+    }
+
 
     render() {
         const { match: { params } } = this.props;
@@ -18,10 +44,10 @@ class CircleFeed extends Component {
                 <NavBar username={localStorage.getItem('username')} userId={params.userId} />
                 <div className="contents">
                     <div className="profile-1">
-                        <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} />
+                        <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} contents={this.state.contents} loadContent={() => this.loadContent()}/>
                     </div>
                     <div className="profile-2">
-                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} />
+                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} loadContent={() => this.loadContent()}/>
                     </div>
                 </div>
             </React.Fragment>
