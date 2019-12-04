@@ -224,10 +224,7 @@ class AddImageToContent(APIView):
 
     content = Content.objects.get(id=id)
     content.img_post.save(file.name, file, save=True)
-    content.updated_at.save(timezone.now)
 
     return Response(status=201)
 
-
-    
 

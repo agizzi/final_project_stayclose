@@ -184,12 +184,14 @@ class Toolbar extends Component {
             axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
             ).then(res => {
             this.handleClosePostModal()
+            this.setState({ post: "" })
             this.props.loadContent()
         }).catch(function (error) {
             alert('username not changed, try again')
         })
         } else {
           this.handleClosePostModal()
+          this.setState({ post: "" })
           this.props.loadContent()
         }
 })

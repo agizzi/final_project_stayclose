@@ -8,8 +8,9 @@ import axios from 'axios';
 class CircleFeed extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            contents: []
+
+        this.state ={
+            contents: [],
         }
 
     }
@@ -32,6 +33,7 @@ class CircleFeed extends Component {
         ).then(res => {
             let content = res.data
             this.setState({ contents: content })
+            this.setState({ contentFetched: true})
         })
     }
 
