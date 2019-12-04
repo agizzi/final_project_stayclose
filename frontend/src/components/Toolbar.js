@@ -74,6 +74,7 @@ class Toolbar extends Component {
   }
 
   handleClosePostModal() {
+    this.setState({ picToUpload: [] })
     this.setState({ showPostModal: false });
   }
 
@@ -184,6 +185,7 @@ class Toolbar extends Component {
         axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
         ).then(res => {
           this.handleClosePostModal()
+          this.setState({ picToUpload: [] })
           this.setState({ post: "" })
           this.props.loadContent()
         }).catch(function (error) {
@@ -191,10 +193,16 @@ class Toolbar extends Component {
         })
       } else {
         this.handleClosePostModal()
+        this.setState({ picToUpload: [] })
         this.setState({ post: "" })
         this.props.loadContent()
       }
     })
+  }
+
+  readImg(file){
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
   }
 
   componentDidMount() {
@@ -247,6 +255,7 @@ class Toolbar extends Component {
                 <div></div>
               </label>
               <div></div>
+              {this.state.picToUpload.length == 0 &&
               <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
                 {({ getRootProps, getInputProps, isDragActive }) => (
                   <section>
@@ -257,10 +266,10 @@ class Toolbar extends Component {
                   </section>
                 )}
               </Dropzone>
+              }
               {this.state.picToUpload.length > 0 &&
                 <div>
-                  <h3>File to Upload...</h3>
-                  <img className="post-photo" src={this.state.picToUpload[0].preview} ></img>
+                  <h3>File is Added! Click to Submit</h3>
                 </div>
               }
               <button type='submit' value='create' className="dropzone">Create a Post</button>
@@ -319,6 +328,7 @@ class Toolbar extends Component {
                 <div></div>
               </label>
               <div></div>
+              {this.state.picToUpload.length == 0 &&
               <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
                 {({ getRootProps, getInputProps, isDragActive }) => (
                   <section>
@@ -329,10 +339,10 @@ class Toolbar extends Component {
                   </section>
                 )}
               </Dropzone>
+              }
               {this.state.picToUpload.length > 0 &&
                 <div>
-                  <h3>File to Upload...</h3>
-                  <img className="post-photo" src={this.state.picToUpload[0].preview}></img>
+                  <h3>File is Added! Click to Submit</h3>
                 </div>
               }
               <button type='submit' value='create' className="dropzone">Create a Post</button>
