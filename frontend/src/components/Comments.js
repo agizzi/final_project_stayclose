@@ -101,13 +101,14 @@ class Comments extends Component {
                 )}
                 <button className="add-comment" onClick={(e) => this.handleOpenAddModal()}>Add Comment</button>
                 <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
-                    <button className="add" onClick={(e) => this.handleCloseAddModal()}>X</button>
-                    <h3 className="add-comment-message">Comment: </h3>
+                    <button className="modal"  onClick={(e) => this.handleCloseAddModal()}>X</button>
+                    <h2 className="add-comment-message">Comment: </h2>
                     <div className="delete">
                         <form>
                             <input className="new-comment-input" type='text' value={this.state.newComment} onChange={(e) => this.setState({ newComment: e.target.value })} />
+                            <div></div>
+                            <button onClick={(e) => this.handleAddSubmit()}>Comment</button>
                         </form>
-                        <button className="add-comment" onClick={(e) => this.handleAddSubmit()}>Comment</button>
                     </div>
                 </ReactModal>
             </div>

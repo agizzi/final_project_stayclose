@@ -97,7 +97,8 @@ class Post extends Component {
     }
 
     render() {
-        return (
+      
+            return (
             <div className="content-2" key={this.props.content.id}>
             <div className="post-me">
                 <div className="post-1-pic">

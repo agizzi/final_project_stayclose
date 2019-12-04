@@ -89,28 +89,6 @@ h2 {
     margin-bottom: 10%; 
 }
 
-
-
-
-/* .star-outline::before {
-    content: url('/src/components/StaticAssets/star.svg');
-} */
-
-/* .star-inner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-}
-
-.star-inner::after {
-    content: url('/src/components/StaticAssets/goldStar.svg');
-} */
-
-
 .signin {
     border-style: solid;
     border-color: rgb(174, 175, 175); 
@@ -592,4 +570,13 @@ h4 {
 .administration {
     margin-bottom: 10px; 
     color: rgb(7, 90, 92);
+}
+
+.drag {
+    outline-style: none;
+    color: rgb(7, 90, 92);
+}
+
+.drag:hover {
+    color: rgb(10, 151, 153);
 }

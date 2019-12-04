@@ -136,7 +136,7 @@ class NavBar extends Component {
                                     <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles })}>
                                         {({ getRootProps, getInputProps, isDragActive }) => (
                                             <section>
-                                                <div {...getRootProps()}>
+                                                <div {...getRootProps()} className="drag">
                                                     <input {...getInputProps()} />
                                                     {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
                                                 </div>
