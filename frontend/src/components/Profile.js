@@ -25,7 +25,7 @@ class ProfilePage extends Component {
         this.state = {
             username: localStorage.getItem("username"),
             authtoken: localStorage.getItem("access_key"),
-            userId: 0,
+            userId: "",
             name: '',
             circles: [],
             pending_circles: [],
