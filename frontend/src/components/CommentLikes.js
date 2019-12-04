@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import star from './StaticAssets/star.svg';
-import SVG from 'react-inlinesvg';
+import Star from './Star';
 
 class CommentLikes extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      likes: 0
+      likes: 0,
+      userHasLiked: ""
     };
     this.handleLikeSubmit = this.handleLikeSubmit.bind(this);
+    this.changeStar = this.changeStar.bind(this);
   }
 
   handleLikeSubmit() {
@@ -31,11 +32,38 @@ class CommentLikes extends Component {
     }, config
     ).then(res => {
       this.setState({ likes: res.data['likes'].length })
+      this.changeStar()
     })
+  }
+
+  changeStar() {
+    if (this.state.userHasLiked == false) {
+      this.setState({ userHasLiked: true })
+    } else {
+      this.setState({ userHasLiked: false })
+    }
   }
 
   componentDidMount() {
     this.setState({ likes: this.props.likes })
+
+    let config = {
+      headers: {
+        Authorization: `Token ${localStorage.getItem("access_key")}`
+      }
+    }
+    axios.get('/api/comments/' + this.props.commentId + "/", {
+    }, config).then(res => {
+      let likes = res.data.likes
+      for (let like of likes) {
+        if (like == this.props.userId) {
+          this.setState({ userHasLiked: true })
+        }
+      }
+      console.log(this.state.userHasLiked)
+
+
+    })
   }
 
   render() {
@@ -43,7 +71,8 @@ class CommentLikes extends Component {
       <div className="likes">
         <div onClick={this.handleLikeSubmit}>
           <div className="star-outline">
-            <SVG className={`star ${this.props.size && 'star-' + this.props.size}`} src={star} /> {this.state.likes}</div>
+            <Star userHasLiked={this.state.userHasLiked} />{this.state.likes}
+          </div>
         </div>
       </div>
 
