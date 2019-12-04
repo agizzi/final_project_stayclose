@@ -222,12 +222,10 @@ class Toolbar extends Component {
           <h4 className="you-are-admin">You are the admin of this circle.</h4>
           <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Add Post</button>
             <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
-              <button className="modal" onClick={this.handleClosePostModal}>X</button>
+              <button className="modal2" onClick={this.handleClosePostModal}>X</button>
               <h2 className="new-post-header">New Post: </h2>
               <form onSubmit={this.handleSubmit}>
                 <label>
-                    <p className="postmate">Post: </p>
-                    <div></div>
                     <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                     <div></div>
                 </label>
@@ -242,7 +240,7 @@ class Toolbar extends Component {
                         </section>
                     )}
                 </Dropzone>
-                <button type='submit' value='create'>Create a Post</button>
+                <button type='submit' value='create' className="dropzone">Create a Post</button>
               </form>
             </ReactModal>
           <button type="button" className="add-member" onClick={(e) => this.handleDelete()}>Delete Circle</button>
@@ -263,7 +261,7 @@ class Toolbar extends Component {
           <button type="button" className="add-member" onClick={this.handleOpenLeaveModal}>Leave Circle</button>
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
-            <h2>Are You Sure You Want to leave? </h2>
+            <h2>Are You Sure You Want to Leave? </h2>
             <div className="leaving">
               <button type='submit' className="left" value='create' onClick={this.handleLeaveSubmit}>Yes</button>
               <button type='submit' className="left" value='create' onClick={this.handleCloseLeaveModal}>No</button>
@@ -279,16 +277,34 @@ class Toolbar extends Component {
       return (
         <div className="postButton" >
           <h1 className="content-header">{this.props.circleName}</h1>
-          <button type="button" className="add-member"><Link className="nav" to={'/post/' + this.props.circleId + '/' + this.props.circleName + '/' + this.props.match.params.userId + '/' + localStorage.getItem('username')}>Add Post</Link></button>
+          <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Add Post</button>
+            <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
+              <button className="modal2" onClick={this.handleClosePostModal}>X</button>
+              <h2 className="new-post-header">New Post: </h2>
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                    <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                    <div></div>
+                </label>
+                <div></div>
+                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
+                    {({ getRootProps, getInputProps, isDragActive }) => (
+                        <section>
+                            <div {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                            </div>
+                        </section>
+                    )}
+                </Dropzone>
+                <button type='submit' value='create' className="dropzone">Create a Post</button>
+              </form>
+            </ReactModal>
           <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseAddModal}>X</button>
-            <h2>Add Member</h2>
+            <h2>Add Member:</h2>
             <form onSubmit={this.handleAddSubmit}>
-              <label className="adding-members">
-                Add Members:
-              </label>
-              <div></div>
               <input type='text' onChange={(e) => this.setState({ members: e.target.value })} />
               <div></div>
               <button type='submit' value='create'>Add Members</button>
@@ -298,13 +314,15 @@ class Toolbar extends Component {
           <ReactModal isOpen={this.state.showLeaveModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseLeaveModal}>X</button>
             <div></div>
-            <h2>Are You Sure? </h2>
+            <h2>Are You Sure You Want to Leave? </h2>
             <div></div>
             <button type='submit' value='create' onClick={this.handleLeaveSubmit}>Yes</button>
             <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
           </ReactModal>
+          <div className="administration">
           <h4>Admin:</h4>
           {this.state.adminUsername}
+          </div>
           <h4>Members:</h4>
           {this.state.memberUsernames.map(member => <p key={member}>{member}</p>)}
         </div>

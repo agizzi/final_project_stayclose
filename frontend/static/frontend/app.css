@@ -302,6 +302,9 @@ input {
     margin-left: 93%; 
 }
 
+.modal2 {
+    margin-left: 95%; 
+}
 
 
 
@@ -477,8 +480,8 @@ h3 {
 }
 
 .posting-input {
-    width: 650px; 
-    height: 100px; 
+    min-width: 440px; 
+    height: 100%; 
     text-align: center; 
 }
 
@@ -580,4 +583,13 @@ h4 {
 
 .you-are-admin {
     margin-bottom: 15px; 
+}
+
+.dropzone {
+    margin-top: 10px; 
+}
+
+.administration {
+    margin-bottom: 10px; 
+    color: rgb(7, 90, 92);
 }
