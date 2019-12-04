@@ -23,8 +23,8 @@ class Toolbar extends Component {
     this.state = {
       showAddModal: false,
       showLeaveModal: false,
-      showPostModal: false, 
-      showDeleteModal: false, 
+      showPostModal: false,
+      showDeleteModal: false,
       members: "",
       memberUsernames: [],
       isAdmin: false,
@@ -49,8 +49,8 @@ class Toolbar extends Component {
     this.handleCloseDeleteModal = this.handleCloseDeleteModal.bind(this);
     this.handleAddSubmit = this.handleAddSubmit.bind(this);
     this.handleLeaveSubmit = this.handleLeaveSubmit.bind(this);
-    this.handlePostSubmit = this.handlePostSubmit.bind(this); 
-    this.handleDelete = this.handleDelete.bind(this); 
+    this.handlePostSubmit = this.handlePostSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleOpenAddModal() {
@@ -149,53 +149,53 @@ class Toolbar extends Component {
     })
   }
 
-  handlePostSubmit () {
+  handlePostSubmit() {
     let post_text = this.state.post;
     let member = this.props.userId;
     let circle = this.props.circleId;
     event.preventDefault();
     let config = {
-        headers: {
-            Authorization: `Token ${localStorage.getItem("access_key")}`
-        }
+      headers: {
+        Authorization: `Token ${localStorage.getItem("access_key")}`
+      }
     }
     axios.post('/api/content/', {
-        author: this.state.username,
-        text_post: post_text,
-        img_post: null,
-        caption: "",
-        likes: [],
-        member: member,
-        circle: circle,
-        tags: null
+      author: this.state.username,
+      text_post: post_text,
+      img_post: null,
+      caption: "",
+      likes: [],
+      member: member,
+      circle: circle,
+      tags: null
     }, config
     ).then(res => {
-        return res.data
+      return res.data
     }).then(datum => {
-        if (this.state.hasPic) {
-            let profilePicture = this.state.picToUpload[0]
-            let data = new FormData()
-            data.append('file', profilePicture)
-            let config = {
-            headers: {
-                Authorization: `Token ${localStorage.getItem("access_key")}`
-            }
+      if (this.state.hasPic) {
+        let profilePicture = this.state.picToUpload[0]
+        let data = new FormData()
+        data.append('file', profilePicture)
+        let config = {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("access_key")}`
+          }
         }
-            axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
-            ).then(res => {
-            this.handleClosePostModal()
-            this.setState({ post: "" })
-            this.props.loadContent()
-        }).catch(function (error) {
-            alert('username not changed, try again')
-        })
-        } else {
+        axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
+        ).then(res => {
           this.handleClosePostModal()
           this.setState({ post: "" })
           this.props.loadContent()
-        }
-})
-}
+        }).catch(function (error) {
+          alert('username not changed, try again')
+        })
+      } else {
+        this.handleClosePostModal()
+        this.setState({ post: "" })
+        this.props.loadContent()
+      }
+    })
+  }
 
   componentDidMount() {
     let config = {
@@ -238,38 +238,44 @@ class Toolbar extends Component {
           <h1 className="content-header">{this.props.circleName}</h1>
           <h4 className="you-are-admin">You are the admin of this circle.</h4>
           <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Add Post</button>
-            <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
-              <button className="modal2" onClick={this.handleClosePostModal}>X</button>
-              <h2 className="new-post-header">New Post: </h2>
-              <form onSubmit={(e) => this.handlePostSubmit()}>
-                <label>
-                    <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
-                    <div></div>
-                </label>
+          <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
+            <button className="modal2" onClick={this.handleClosePostModal}>X</button>
+            <h2 className="new-post-header">New Post: </h2>
+            <form onSubmit={(e) => this.handlePostSubmit()}>
+              <label>
+                <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                 <div></div>
-                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
-                    {({ getRootProps, getInputProps, isDragActive }) => (
-                        <section>
-                            <div {...getRootProps()}>
-                                <input {...getInputProps()} />
-                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                            </div>
-                        </section>
-                    )}
-                </Dropzone>
-                <button type='submit' value='create' className="dropzone">Create a Post</button>
-              </form>
-            </ReactModal>
+              </label>
+              <div></div>
+              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
+                {({ getRootProps, getInputProps, isDragActive }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+              {this.state.picToUpload.length > 0 &&
+                <div>
+                  <h3>File to Upload...</h3>
+                  <img className="post-photo" src={this.state.picToUpload[0].preview} ></img>
+                </div>
+              }
+              <button type='submit' value='create' className="dropzone">Create a Post</button>
+            </form>
+          </ReactModal>
 
           <button type="button" className="add-member" onClick={this.handleOpenDeleteModal}>Delete Circle</button>
-            <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
-              <button className="modal" onClick={this.handleCloseDeleteModal}>X</button>
-              <h2 className="modal-head">Are You Sure You Want to Delete "{this.props.circleName}"?</h2>
-              <div className="leaving">
-                <button type='submit' className="left" value='create' onClick={this.handleDelete}>Yes</button>
-                <button type='submit' className="left" value='create' onClick={this.handleCloseDeleteModal}>No</button>
-              </div>
-            </ReactModal>
+          <ReactModal isOpen={this.state.showDeleteModal} style={customStyles}>
+            <button className="modal" onClick={this.handleCloseDeleteModal}>X</button>
+            <h2 className="modal-head">Are You Sure You Want to Delete "{this.props.circleName}"?</h2>
+            <div className="leaving">
+              <button type='submit' className="left" value='create' onClick={this.handleDelete}>Yes</button>
+              <button type='submit' className="left" value='create' onClick={this.handleCloseDeleteModal}>No</button>
+            </div>
+          </ReactModal>
 
           <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
@@ -304,28 +310,34 @@ class Toolbar extends Component {
         <div className="postButton" >
           <h1 className="content-header">{this.props.circleName}</h1>
           <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Add Post</button>
-            <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
-              <button className="modal2" onClick={this.handleClosePostModal}>X</button>
-              <h2 className="new-post-header">New Post: </h2>
-              <form onSubmit={(e) => this.handlePostSubmit()}>
-                <label>
-                    <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
-                    <div></div>
-                </label>
+          <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
+            <button className="modal2" onClick={this.handleClosePostModal}>X</button>
+            <h2 className="new-post-header">New Post: </h2>
+            <form onSubmit={(e) => this.handlePostSubmit()}>
+              <label>
+                <input className="posting-input" type='text' value={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
                 <div></div>
-                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
-                    {({ getRootProps, getInputProps, isDragActive }) => (
-                        <section>
-                            <div {...getRootProps()}>
-                                <input {...getInputProps()} />
-                                {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                            </div>
-                        </section>
-                    )}
-                </Dropzone>
-                <button type='submit' value='create' className="dropzone">Create a Post</button>
-              </form>
-            </ReactModal>
+              </label>
+              <div></div>
+              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
+                {({ getRootProps, getInputProps, isDragActive }) => (
+                  <section>
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+              {this.state.picToUpload.length > 0 &&
+                <div>
+                  <h3>File to Upload...</h3>
+                  <img className="post-photo" src={this.state.picToUpload[0].preview}></img>
+                </div>
+              }
+              <button type='submit' value='create' className="dropzone">Create a Post</button>
+            </form>
+          </ReactModal>
           <button type="button" className="add-member" onClick={this.handleOpenAddModal}>Add Member</button>
           <ReactModal isOpen={this.state.showAddModal} style={customStyles}>
             <button className="modal" onClick={this.handleCloseAddModal}>X</button>
@@ -346,8 +358,8 @@ class Toolbar extends Component {
             <button type='submit' value='create' onClick={this.handleCloseLeaveModal}>No</button>
           </ReactModal>
           <div className="administration">
-          <h4>Admin:</h4>
-          {this.state.adminUsername}
+            <h4>Admin:</h4>
+            {this.state.adminUsername}
           </div>
           <h4>Members:</h4>
           {this.state.memberUsernames.map(member => <p key={member}>{member}</p>)}

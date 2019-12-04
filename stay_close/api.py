@@ -81,7 +81,7 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(circle=circle).order_by('updated_at')
+    content = Content.objects.filter(circle=circle).order_by('-created_at')
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
