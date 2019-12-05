@@ -482,8 +482,8 @@ h3 {
 .contents {
     display: flex; 
     justify-content: space-between; 
-    margin-left: 8%; 
-    margin-right: 8%; 
+    margin-left: 150px; 
+    margin-right: 150px; 
 }
 
 .profile-pic-default {
@@ -667,9 +667,18 @@ h4 {
     text-align: center;
     margin-bottom: 10px; 
     color: rgb(7, 90, 92);
-    outline-style: none;
+    outline: none;
 }
 
 .dragdrop:hover {
+  color: rgb(9, 163, 165);
+}
+
+.dragpic {
+    color: rgb(7, 90, 92);
+    outline: none;
+}
+
+.dragpic:hover {
   color: rgb(9, 163, 165);
 }

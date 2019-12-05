@@ -105,7 +105,7 @@ class Comment extends Component {
                     <ProfilePicture userId={this.props.comment.author} size='small' />
                 </div>
                 <div className="posts-2">
-                        <p className="postings-1">{this.state.author}: "{this.props.comment.comment}"</p>
+                        <p className="postings-1">{this.state.author} says, "{this.props.comment.comment}"</p>
                         {this.props.comment.author == this.props.userId &&
                             <button className="posters-delete" onClick={(e) => this.handleOpenEditModal(this.props.comment.comment, this.props.comment.id)}>Edit</button>
                         }
