@@ -77,41 +77,43 @@ class Content extends Component {
                 Authorization: `Token ${localStorage.getItem("access_key")}`
             }
         }
-        axios.post('/api/content/', {
-            author: this.state.username,
-            text_post: post_text,
-            img_post: null,
-            caption: "",
-            likes: [],
-            member: member,
-            circle: circle,
-            tags: null
-        }, config
+    axios.post('/api/content/', {
+      author: this.state.username,
+      text_post: post_text,
+      img_post: null,
+      caption: "",
+      likes: [],
+      member: member,
+      circle: circle,
+      tags: null
+    }, config
+    ).then(res => {
+      return res.data
+    }).then(datum => {
+      if (this.state.hasPic) {
+        let profilePicture = this.state.picToUpload[0]
+        let data = new FormData()
+        data.append('file', profilePicture)
+        let config = {
+          headers: {
+            Authorization: `Token ${localStorage.getItem("access_key")}`
+          }
+        }
+        axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
         ).then(res => {
-            return res.data
-        }).then(datum => {
-            if (this.state.hasPic) {
-                let profilePicture = this.state.picToUpload[0]
-                let data = new FormData()
-                data.append('file', profilePicture)
-                let config = {
-                headers: {
-                    Authorization: `Token ${localStorage.getItem("access_key")}`
-                }
-            }
-                axios.put('/api/add-image-to-content/' + datum.id + '/', data, config
-                ).then(res => {
-                this.handleClosePostModal()
-                this.setState({ post: "" })
-                this.props.loadContent()
-            }).catch(function (error) {
-                alert('username not changed, try again')
-            })
-            } else {
-              this.handleClosePostModal()
-              this.setState({ post: "" })
-              this.props.loadContent()
-            }
+          this.handleClosePostModal()
+          this.setState({ picToUpload: [] })
+          this.setState({ post: "" })
+          this.props.loadContent()
+        }).catch(function (error) {
+          alert('username not changed, try again')
+        })
+      } else {
+        this.handleClosePostModal()
+        this.setState({ picToUpload: [] })
+        this.setState({ post: "" })
+        this.props.loadContent()
+      }
     })
     }
     
@@ -130,7 +132,7 @@ class Content extends Component {
         } else if (this.props.contents.length == 0 && this.props.contentFetched) {
             return (
                 <div className="empty">
-                    <h3>This circle has no posts yet.</h3> 
+                    <h3>This circle has no posts yet.</h3>
                     <button type="button" className="add-member" onClick={this.handleOpenPostModal}>Click here to create a post for your feed</button>
                         <ReactModal isOpen={this.state.showPostModal} style={customStyles}>
                         <button className="modal2" onClick={this.handleClosePostModal}>X</button>
@@ -145,10 +147,10 @@ class Content extends Component {
                             <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
                                 {({ getRootProps, getInputProps, isDragActive }) => (
                                     <section>
-                                        <button  {...getRootProps()} className="dragpic">
+                                        <div clasName="dragdrop"  {...getRootProps()} className="dragpic">
                                             <input {...getInputProps()} />
                                             {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
-                                        </button>
+                                        </div>
                                     </section>
                                 )}
                             </Dropzone>
@@ -158,7 +160,7 @@ class Content extends Component {
                         </ReactModal>
                 </div>
             );
-        } else {
+        } else if (!this.props.contentFetched){
             return (
                 <div>
                     <h3 className="empty">Loading Content...</h3>
