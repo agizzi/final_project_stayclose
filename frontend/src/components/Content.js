@@ -145,10 +145,10 @@ class Content extends Component {
                             <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
                                 {({ getRootProps, getInputProps, isDragActive }) => (
                                     <section>
-                                        <div className="dragdrop" {...getRootProps()} className="dragpic">
+                                        <button  {...getRootProps()} className="dragpic">
                                             <input {...getInputProps()} />
                                             {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
-                                        </div>
+                                        </button>
                                     </section>
                                 )}
                             </Dropzone>
