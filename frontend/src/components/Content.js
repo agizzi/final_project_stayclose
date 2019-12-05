@@ -24,6 +24,8 @@ class Content extends Component {
             user: '',
             contentId: '',
             post: '',
+            picToUpload: [],
+            hasPic: false,
             showDeleteModal: false,
             showEditModal: false,
             showPostModal: false, 
@@ -144,16 +146,23 @@ class Content extends Component {
                             </label>
                             <div></div>
                             <div className="drags">
-                            <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true})}>
-                                {({ getRootProps, getInputProps, isDragActive }) => (
-                                    <section>
-                                        <div clasName="dragdrop"  {...getRootProps()} className="dragpic">
-                                            <input {...getInputProps()} />
-                                            {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
-                                        </div>
-                                    </section>
-                                )}
-                            </Dropzone>
+                            {this.state.picToUpload.length == 0 &&
+              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
+                {({ getRootProps, getInputProps, isDragActive }) => (
+                  <section>
+                    <div className="dragdrop" {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
+                    </div>
+                  </section>
+                )}
+              </Dropzone>
+              }
+              {this.state.picToUpload.length > 0 &&
+                <div>
+                  <h3>File is Added! Click to Submit</h3>
+                </div>
+              }
                             <button type='submit' value='create' className="dragpic">Create a Post</button>
                             </div>
                         </form>
