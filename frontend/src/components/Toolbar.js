@@ -254,9 +254,9 @@ class Toolbar extends Component {
               <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
                 {({ getRootProps, getInputProps, isDragActive }) => (
                   <section>
-                    <div {...getRootProps()}>
+                    <div className="dragdrop" {...getRootProps()}>
                       <input {...getInputProps()} />
-                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                      {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
                     </div>
                   </section>
                 )}
