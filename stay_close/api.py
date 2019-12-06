@@ -81,7 +81,7 @@ class UsersByCircle(APIView):
 class ContentByCircle(APIView):
   def get(self, request, format=None):
     circle = request.query_params.get('id')
-    content = Content.objects.filter(circle=circle).order_by('-created_at')
+    content = Content.objects.filter(circle=circle).order_by('created_at')
     serializer = ContentSerializer(content, many=True)
     return Response(serializer.data)
 
@@ -138,7 +138,7 @@ class RemoveUserFromCircle(APIView):
 class CommentsByContent(APIView):
   def get(self, request, format=None):
     contentId = request.query_params.get('contentId')
-    comments = Comments.objects.filter(content=contentId).order_by('-updated_at')
+    comments = Comments.objects.filter(content=contentId).order_by('-created_at')
     serializer = CommentsSerializer(comments, many=True)
     return Response(serializer.data)
 

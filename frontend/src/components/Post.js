@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import ContentLikes from './ContentLikes';
-import Circle from './Circle';
 import Comments from './Comments';
 import ReactModal from 'react-modal';
 import Moment from 'react-moment';
 import ProfilePicture from './ProfilePicture';
+import PostText from './PostText';
 
 const customStyles = {
     content: {
@@ -26,6 +26,7 @@ class Post extends Component {
         this.state = {
             user: '',
             contentId: '',
+            newPost: '',
             post: '',
             showDeleteModal: false,
             showEditModal: false,
@@ -76,11 +77,11 @@ class Post extends Component {
             }
         }
         axios.patch('/api/content/' + this.state.contentId + '/', {
-            text_post: this.state.post
+            text_post: this.state.newPost
         }, config
         ).then(res => {
             this.setState({ showEditModal: false });
-            this.props.loadContent()
+            this.setState({post: this.state.newPost})
         })
     }
 
@@ -94,6 +95,7 @@ class Post extends Component {
         }).then(res => {
           this.setState({user: res.data})
         })
+        this.setState({post: this.props.content.text_post})
     }
 
     render() {
@@ -115,7 +117,7 @@ class Post extends Component {
                                 <button className="exit" onClick={(e) => this.handleCloseEditModal()}>X</button>
                                 <h3>Edit Your Post: </h3>
                                 <form>
-                                    <input className="editing-input" type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ post: e.target.value })} />
+                                    <input className="editing-input" type='text' defaultValue={this.state.post} onChange={(e) => this.setState({ newPost: e.target.value })} />
                                 </form>
                                 <div className="edit">
                                     <button className="editing" onClick={(e) => this.handleEdit()}>Save</button>
@@ -135,9 +137,7 @@ class Post extends Component {
                             </ReactModal>
                         </div>
                     </div>
-                    <div>
-                        <p className="posting-2"> "{this.props.content.text_post}"</p>
-                    </div>
+                        <PostText postText = {this.state.post} />
                     {this.props.content.img_post != null &&
                         <div>
                             <img className="post-photo" src={this.props.content.img_post} />

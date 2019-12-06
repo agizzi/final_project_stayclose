@@ -49,7 +49,7 @@ class CircleFeed extends Component {
                         <Content circleId={params.circleId} circleName={params.circleName} userId={params.userId} contents={this.state.contents} contentFetched={this.state.contentFetched} loadContent={() => this.loadContent()} contentFetched={this.state.contentFetched} />
                     </div>
                     <div className="profile-2">
-                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} loadContent={() => this.loadContent()} />
+                        <Toolbar circleId={params.circleId} circleName={params.circleName} userId={params.userId} loadContent={() => this.loadContent()}/>
                     </div>
                 </div>
             </React.Fragment>
