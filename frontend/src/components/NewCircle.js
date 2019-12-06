@@ -20,7 +20,6 @@ class NewCircle extends Component {
 
 
     handleSubmit = (event) => {
-        // console.log(this.props.user)
         event.preventDefault();
         let config = {
             headers: {
@@ -39,7 +38,6 @@ class NewCircle extends Component {
             ]
         }, config
         ).then(res => {
-            // console.log(res)
             this.props.history.push("/profile");
         }).catch(function (error) {
             alert('circle not created, try again')
