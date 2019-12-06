@@ -5,7 +5,7 @@ import Axios from 'axios';
 export const getCircles = () => dispatch => {
     axios
         .get("/api/circles")
-        .then( res => {
+        .then(res => {
             dispatch({
                 type: GET_CIRCLES,
                 payload: res.data

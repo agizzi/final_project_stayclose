@@ -118,6 +118,7 @@ h2 {
     display: flex; 
     justify-content: space-evenly;
     margin: 16px 30px 25px; 
+    width: 100vw;
 }
 
 
@@ -129,12 +130,7 @@ li {
     margin-right: 10px; 
 }
 
-.sandwich {
-    width: 35px;
-    height: 5px;
-    background-color: rgb(7, 142, 144); 
-    margin: 6px 0 0 6px;
-}
+
 
 .add {
     border-style: solid; 
@@ -681,4 +677,12 @@ h4 {
 
 .dragpic:hover {
   color: rgb(9, 163, 165);
+}
+
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding-right: 50%;
+    }
 }

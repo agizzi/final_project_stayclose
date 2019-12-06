@@ -60,9 +60,6 @@ class CommentLikes extends Component {
           this.setState({ userHasLiked: true })
         }
       }
-      console.log(this.state.userHasLiked)
-
-
     })
   }
 
@@ -71,7 +68,7 @@ class CommentLikes extends Component {
       <div className="likes">
         <div onClick={this.handleLikeSubmit}>
           <div className="star-outline">
-          <Star userHasLiked={this.state.userHasLiked} /> <p className="star">{this.state.likes} </p>
+            <Star userHasLiked={this.state.userHasLiked} /> <p className="star">{this.state.likes} </p>
           </div>
         </div>
       </div>

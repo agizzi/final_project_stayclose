@@ -87,7 +87,6 @@ class ProfilePage extends Component {
         axios.get('/api/user/', config, {
         }).then(res => {
             let userId = res.data.id
-            console.log(res)
             this.setState({ userId: userId })
             this.setState({ userFetched: true })
         })
