@@ -118,9 +118,6 @@ class Content extends Component {
       }
     })
     }
-    
-    
-    
 
     render() {
         if (this.props.contents.length > 0 && this.props.contentFetched) {

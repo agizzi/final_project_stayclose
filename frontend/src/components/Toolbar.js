@@ -188,7 +188,7 @@ class Toolbar extends Component {
           this.setState({ post: "" })
           this.props.loadContent()
         }).catch(function (error) {
-          alert('username not changed, try again')
+          alert('Image not saved, try again')
         })
       } else {
         this.handleClosePostModal()
