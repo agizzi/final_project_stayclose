@@ -64,9 +64,6 @@ class ContentLikes extends Component {
           this.setState({ userHasLiked: true })
         }
       }
-      console.log(this.state.userHasLiked)
-
-
     })
 
 

@@ -34,7 +34,6 @@ class PendingCircle extends Component {
       }
     }, config
     ).then(res => {
-      console.log(res)
       this.props.history.push('/profile')
     })
   }
@@ -54,7 +53,6 @@ class PendingCircle extends Component {
       }
     }, config
     ).then(res => {
-      console.log(res)
       this.props.history.push('/profile')
     })
   }
@@ -71,28 +69,20 @@ class PendingCircle extends Component {
     }).then(res => {
       this.setState({ userId: res.data.id })
       this.setState({ username: res.data.username })
-      // console.log(res)
     })
 
 
     axios.get('/api/circles/' + this.props.match.params.pendingCircleId, {
     }, config
     ).then(res => {
-      console.log(res)
       this.setState({ circleId: res.data.id })
       this.setState({ circleAdmin: res.data.admin })
       this.setState({ circleName: res.data.name })
-      console.log(this.state.circleAdmin)
       axios.get('/api/users/' + this.state.circleAdmin, config, {
       }).then(res => {
         this.setState({ adminUsername: res.data.username })
-        console.log(res)
-        // console.log(this.state.adminUsername)
       })
     })
-
-
-
   }
 
   render() {

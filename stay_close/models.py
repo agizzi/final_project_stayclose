@@ -11,7 +11,7 @@ from django_encrypted_filefield.fields import EncryptedFileField, EncryptedImage
 # Create your models here.
 class User(AbstractUser):
   joined_on = models.DateField(default = datetime.date.today)
-  avatar = models.ImageField(upload_to='images', default='stay_close/static/user.svg')
+  avatar = models.ImageField(upload_to='images', default="/images/user.svg", max_length=300)
   birthday = fields.EncryptedDateField(blank=True, null=True)
 
   def __str__(self):

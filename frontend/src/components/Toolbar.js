@@ -110,7 +110,6 @@ class Toolbar extends Component {
               circleId: circleId
             }, config,
           }).then(res => {
-            console.log(res)
           })
         }
 
@@ -221,13 +220,10 @@ class Toolbar extends Component {
           membersUser.push(res.data.username)
         })
       }
-      // console.log(membersUser)
       this.setState({ memberUsernames: membersUser })
-      console.log(membersUser)
       axios.get('/api/users/' + this.state.circleAdmin + '/', config, {
       }).then(res => {
         this.setState({ adminUsername: res.data.username })
-        console.log(this.state.adminUsername)
       })
     })
   }
@@ -251,16 +247,16 @@ class Toolbar extends Component {
               </label>
               <div></div>
               {this.state.picToUpload.length == 0 &&
-              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
-                {({ getRootProps, getInputProps, isDragActive }) => (
-                  <section>
-                    <div className="dragdrop" {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
-                    </div>
-                  </section>
-                )}
-              </Dropzone>
+                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
+                  {({ getRootProps, getInputProps, isDragActive }) => (
+                    <section>
+                      <div className="dragdrop" {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        {isDragActive ? "Drop it like it's hot!" : 'Click Here To Upload A Photo'}
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
               }
               {this.state.picToUpload.length > 0 &&
                 <div>
@@ -324,16 +320,16 @@ class Toolbar extends Component {
               </label>
               <div></div>
               {this.state.picToUpload.length == 0 &&
-              <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
-                {({ getRootProps, getInputProps, isDragActive }) => (
-                  <section>
-                    <div {...getRootProps()}>
-                      <input {...getInputProps()} />
-                      {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
-                    </div>
-                  </section>
-                )}
-              </Dropzone>
+                <Dropzone className="dropzone" onDrop={acceptedFiles => this.setState({ picToUpload: acceptedFiles, hasPic: true })}>
+                  {({ getRootProps, getInputProps, isDragActive }) => (
+                    <section>
+                      <div {...getRootProps()}>
+                        <input {...getInputProps()} />
+                        {isDragActive ? "Drop it like it's hot!" : 'Click me or drag a file to upload!'}
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
               }
               {this.state.picToUpload.length > 0 &&
                 <div>
