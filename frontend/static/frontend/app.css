@@ -683,6 +683,6 @@ h4 {
 @media only screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
-        padding-right: 50%;
+        padding-right: 35%;
     }
 }
