@@ -708,7 +708,7 @@ h4 {
     .postings-buttons {
        display: flex;
        flex-direction: row;
-       justify-content: flex-start;
+       justify-content: flex-end;
        margin: 0;
        
     }
@@ -723,9 +723,4 @@ h4 {
     margin: 0px; 
 
     }
-
-    /* .star-gold {
-    padding-bottom: 50px;
-    width: 10px;
-    } */
 }
