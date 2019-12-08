@@ -700,14 +700,14 @@ h4 {
     .posting-user {
        display: flex;
        flex-direction: row;
-       justify-content: space-evenly;
-       text-align: left;
+       justify-content: flex-start;
+       
     }
 
-    .posting-buttons {
+    .postings-buttons {
        display: flex;
        flex-direction: row;
-       justify-content: space-evenly;
-       text-align: left;
+       justify-content: flex-start;
+       
     }
 }
