@@ -700,7 +700,7 @@ h4 {
     .posting-user {
        display: flex;
        flex-direction: row;
-       justify-content: flex-start;
+       justify-content: flex-end;
        margin: 0;
        
     }
