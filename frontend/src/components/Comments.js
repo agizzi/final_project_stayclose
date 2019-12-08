@@ -4,8 +4,6 @@ import CommentLikes from './CommentLikes';
 import Comment from './Comment';
 import axios from 'axios';
 import ReactModal from 'react-modal';
-import ProfilePicture from './ProfilePicture';
-import Moment from 'react-moment';
 
 const customStyles = {
     content: {
@@ -73,6 +71,16 @@ class Comments extends Component {
 
     componentDidMount() {
         this.loadComments()
+        this.timer = setInterval(()=> this.loadComments(), 4000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    commentSort(a, b){
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
     }
 
     loadComments() {
@@ -89,6 +97,7 @@ class Comments extends Component {
         }, config
         ).then(res => {
             let comments = res.data
+            comments.sort(this.commentSort)
             this.setState({ comments: comments })
         })
     }

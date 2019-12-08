@@ -18,6 +18,16 @@ class CircleFeed extends Component {
 
     componentDidMount() {
         this.loadContent()
+        this.timer = setInterval(()=> this.loadContent(), 4000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    contentSort(b, a){
+        return new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
     }
 
     loadContent() {
@@ -33,6 +43,7 @@ class CircleFeed extends Component {
         }, config
         ).then(res => {
             let content = res.data
+            content.sort(this.contentSort)
             this.setState({ contents: content })
             this.setState({ contentFetched: true })
         })
