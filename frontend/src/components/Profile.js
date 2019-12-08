@@ -127,7 +127,7 @@ class ProfilePage extends Component {
 
     componentDidMount() {
         this.getInfo()
-        this.timer = setInterval(()=> this.getInfo(), 4000);
+        this.timer = setInterval(()=> this.getInfo(), 2000);
     }
 
     componentWillUnmount() {
