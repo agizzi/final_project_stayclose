@@ -701,11 +701,13 @@ h4 {
        display: flex;
        flex-direction: row;
        justify-content: space-evenly;
+       text-align: left;
     }
 
     .posting-buttons {
        display: flex;
        flex-direction: row;
        justify-content: space-evenly;
+       text-align: left;
     }
 }
