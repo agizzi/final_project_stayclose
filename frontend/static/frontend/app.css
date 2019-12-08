@@ -713,7 +713,7 @@ h4 {
        
     }
     .star-outline {
-    margin-left: 0px; 
+    margin: 0px; 
     display: flex; 
     justify-content: space-evenly;
     width: 10px; 
