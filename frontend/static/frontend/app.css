@@ -624,12 +624,12 @@ h4 {
     width: 10px; 
 }
 
-/* .star-outline {
+.star-outline {
     margin-left: 2px; 
     display: flex; 
     justify-content: space-evenly;
     width: 10px; 
-} */
+}
 
 
 .star {
@@ -712,4 +712,13 @@ h4 {
        margin: 0;
        
     }
+    .star-outline {
+    margin-left: 0px; 
+    width: 0px; 
+}
+
+
+.star {
+    margin-left: 0px; 
+}
 }
