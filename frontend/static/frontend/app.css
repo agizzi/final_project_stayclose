@@ -717,10 +717,15 @@ h4 {
     display: flex; 
     justify-content: space-evenly;
     width: 10px; 
-}
+    }
 
 
-.star .star-gold {
+    .star {
     margin: 0px; 
-}
+
+    }
+
+    .star-gold {
+    margin-bottom: 10px;
+    }
 }
