@@ -15,7 +15,7 @@ class ProfilePicture extends Component {
         }
     }
 
-    componentDidMount() {
+    getUser(){
         let config = {
             headers: {
                 Authorization: localStorage.getItem("access_key")
@@ -26,6 +26,16 @@ class ProfilePicture extends Component {
         ).then(res => {
             this.setState({ user: res.data })
         })
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+        this.timer = null;
+    }
+
+    componentDidMount() {
+        this.getUser()
+        this.timer = setInterval(()=> this.getUser(), 4000);
     }
 
     render() {

@@ -18,7 +18,7 @@ class CircleFeed extends Component {
 
     componentDidMount() {
         this.loadContent()
-        this.timer = setInterval(()=> this.loadContent(), 4000);
+        this.timer = setInterval(()=> this.loadContent(), 2000);
     }
 
     componentWillUnmount() {

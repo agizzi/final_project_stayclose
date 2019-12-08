@@ -69,7 +69,7 @@ class ContentLikes extends Component {
 
   componentDidMount() {
     this.checkLikes()
-    this.timer = setInterval(()=> this.checkLikes(), 4000);
+    this.timer = setInterval(()=> this.checkLikes(), 2000);
   }
 
   componentWillUnmount() {
