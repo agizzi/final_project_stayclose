@@ -699,6 +699,7 @@ h4 {
     }
     .posting-user {
         display: flex;
+        flex-direction: row;
         margin-right: 30%;
     }
 }
