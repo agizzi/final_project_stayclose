@@ -77,33 +77,62 @@ class ProfilePage extends Component {
         })
     }
 
-    componentDidMount() {
+    getCircles(){
         let config = {
             headers: {
                 Authorization: `Token ${this.state.authtoken}`
             }
         }
-
-        axios.get('/api/user/', config, {
-        }).then(res => {
-            let userId = res.data.id
-            this.setState({ userId: userId })
-            this.setState({ userFetched: true })
-        })
-
         axios.get('/api/circles-by-user', config, {
         }).then(res => {
             let circles = res.data
             this.setState({ circles: circles })
             this.setState({ circlesFetched: true })
         })
+    }
 
+    getUser(){
+        let config = {
+            headers: {
+                Authorization: `Token ${this.state.authtoken}`
+            }
+        }
+        axios.get('/api/user/', config, {
+        }).then(res => {
+            let userId = res.data.id
+            this.setState({ userId: userId })
+            this.setState({ userFetched: true })
+        })
+    }
+
+    getPendingCircles(){
+        let config = {
+            headers: {
+                Authorization: `Token ${this.state.authtoken}`
+            }
+        }
         axios.get('/api/pending-circles-by-user/', config, {
         }).then(res => {
             let pending_circles = res.data
             this.setState({ pending_circles: pending_circles })
             this.setState({ pendingCirclesFetched: true })
         })
+    }
+
+    getInfo(){
+        this.getCircles()
+        this.getUser()
+        this.getPendingCircles()
+    }
+
+    componentDidMount() {
+        this.getInfo()
+        this.timer = setInterval(()=> this.getInfo(), 4000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer);
+        this.timer = null;
     }
 
     render() {

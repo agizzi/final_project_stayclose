@@ -44,7 +44,7 @@ class CommentLikes extends Component {
     }
   }
 
-  componentDidMount() {
+  checkLikes(){
     this.setState({ likes: this.props.likes })
 
     let config = {
@@ -61,6 +61,16 @@ class CommentLikes extends Component {
         }
       }
     })
+  }
+
+  componentDidMount() {
+    this.checkLikes()
+    this.timer = setInterval(()=> this.checkLikes(), 4000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+    this.timer = null;
   }
 
   render() {
