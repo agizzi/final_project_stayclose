@@ -715,6 +715,7 @@ h4 {
     .star-outline {
     margin: 0px; 
     width: 10px; 
+    height: 10px;
     }
 
 
@@ -723,7 +724,8 @@ h4 {
 
     }
 
-    .star-gold {
+    /* .star-gold {
     padding-bottom: 50px;
-    }
+    width: 10px;
+    } */
 }
