@@ -71,7 +71,7 @@ class Comments extends Component {
 
     componentDidMount() {
         this.loadComments()
-        this.timer = setInterval(()=> this.loadComments(), 4000);
+        this.timer = setInterval(()=> this.loadComments(), 2000);
     }
 
     componentWillUnmount() {
